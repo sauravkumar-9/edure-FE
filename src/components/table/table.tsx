@@ -1,6 +1,5 @@
 import { useState } from "react";
 import {
-  ColumnDef,
   ColumnFiltersState,
   RowData,
   SortingState,
@@ -22,7 +21,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { User } from "./schema";
 import { DataTablePagination } from "./data-table-pagination";
 import { DataTableToolbar } from "./data-table-toolbar";
 

@@ -3,24 +3,9 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 
-import { companyListMock } from "@/mockData/placement";
 import DataListingHeader from "@/components/cards/dataListingHeader";
 import { sampleJobs } from "@/components/final/data";
 import { JobCard } from "@/components/final/hobCard";
-
-const companyList = companyListMock;
-
-const getFilteredCompanies = (filter: string) => {
-  const today = new Date();
-
-  return companyList.filter((company) => {
-    const driveDate = new Date(company.driveDate); // Make sure your mock dates are valid
-
-    if (filter === "past") return driveDate < today;
-    if (filter === "future") return driveDate > today;
-    return driveDate.toDateString() === today.toDateString(); // "live"
-  });
-};
 
 export default function CurrentCoursesTab() {
   const [filter, setFilter] = useState("live");

@@ -1,25 +1,11 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { BarChart, LineChart, PieChart, DonutChart } from "@/components/charts"; // You'll need to implement these
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Icons } from "@/components/icons";
-import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+
 import { useState } from "react";
 import { StatCard } from "@/components/final/statCard";
 import { DollarSign, Users, CreditCard, Activity } from "lucide-react"; // or use any preferred icon set
 import { PieChartDonut } from "@/components/charts/pieChartDonut";
-import { FilterHeader } from "@/components/cards/bannerWithFilter";
 import { CustomLineChart } from "@/components/charts/lineChart";
 import { CustomBarChart } from "@/components/charts/barChart";
-import SearchableSelect from "@/components/final/dropDown";
 import { ReportHeader } from "@/components/final/reportHeader";
 
 // Mock data - replace with your actual data

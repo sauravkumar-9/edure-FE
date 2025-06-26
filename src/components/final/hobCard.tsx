@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { CheckCircle, XCircle, MapPin, Calendar, Users } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
