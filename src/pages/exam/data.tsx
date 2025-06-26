@@ -1,14 +1,5 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { Badge } from "@/components/ui/badge";
-import {
-  Calendar,
-  Clock,
-  CheckCircle,
-  AlertCircle,
-  XCircle,
-  Check,
-  CircleCheck,
-} from "lucide-react";
+import { Calendar, Clock, AlertCircle, CircleCheck } from "lucide-react";
 
 export type Exam = {
   id: string;

@@ -1,17 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import {
-  Calendar,
-  Clock,
-  AlertTriangle,
-  BookOpen,
-  Briefcase,
-  Bell,
-  PlusIcon,
-  MapPin,
-  Badge,
-} from "lucide-react";
-import { AnnouncementCard } from "@/components/final/announcementCard";
+import { Calendar, AlertTriangle, Briefcase } from "lucide-react";
 import { SectionHeading } from "@/components/final/sectionHeading";
 import { CalendarSidebar } from "@/components/layout/calenderSidebar";
 import { WelcomeBanner } from "@/components/final/welcomeBanner";
@@ -55,39 +44,6 @@ export default function StudentCatchUp() {
     { subject: "Computer Networks", percentage: 68, threshold: 75 },
     { subject: "Data Structures", percentage: 72, threshold: 75 },
   ];
-
-  const importantAnnouncements = [
-    {
-      id: 1,
-      title: "Campus Recruitment Drive",
-      date: "2023-11-05",
-      content: "TCS will be conducting campus interviews on Nov 20th",
-    },
-    {
-      id: 2,
-      title: "Semester Project Submission",
-      date: "2023-11-08",
-      content: "Final project submission deadline extended to Nov 25th",
-    },
-    {
-      id: 2,
-      title: "Semester Project Submission",
-      date: "2023-11-08",
-      content: "Final project submission deadline extended to Nov 25th",
-    },
-  ];
-
-  // utils/exam-utils.ts
-  // utils/exam-utils.ts
-  function calculateDaysLeft(startDate: string): number {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const examDate = new Date(startDate);
-    examDate.setHours(0, 0, 0, 0);
-    return Math.ceil(
-      (examDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)
-    );
-  }
 
   function formatDateRange(startDate: string, endDate: string): string {
     const start = new Date(startDate);
@@ -145,10 +101,6 @@ export default function StudentCatchUp() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {upcomingExams.map((exam) => {
-                const daysLeft = calculateDaysLeft(exam.startDate);
-                const isToday = daysLeft === 0;
-                const isTomorrow = daysLeft === 1;
-
                 return (
                   <Card key={exam.id} className="hover:shadow-md p-0">
                     <CardContent className="p-4">
