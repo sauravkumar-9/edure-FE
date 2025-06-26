@@ -4,13 +4,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
 import {
-  UserIcon,
   CalendarIcon,
   PhoneIcon,
   MailIcon,
   IdCardIcon,
   GraduationCapIcon,
-  BadgeCheckIcon,
 } from "lucide-react"; // Add more icons if needed
 
 const infoCards = [

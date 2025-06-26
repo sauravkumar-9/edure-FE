@@ -1,11 +1,5 @@
 "use client";
 
-import {
-  IconAdjustmentsHorizontal,
-  IconSortAscendingLetters,
-  IconSortDescendingLetters,
-  IconPlugConnected,
-} from "@tabler/icons-react";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -14,7 +8,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Separator } from "@/components/ui/separator";
 import { useState } from "react";
 
 const appText = new Map<string, string>([
@@ -24,7 +17,6 @@ const appText = new Map<string, string>([
 ]);
 
 export default function DataListingHeader() {
-  const [sort, setSort] = useState("ascending");
   const [appType, setAppType] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
 

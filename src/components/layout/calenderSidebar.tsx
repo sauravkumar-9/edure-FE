@@ -3,7 +3,6 @@ import { format, addDays, isToday, isSameDay } from "date-fns";
 import {
   ChevronLeft,
   ChevronRight,
-  Calendar as CalendarIcon,
   X,
   Megaphone,
   MegaphoneOff,

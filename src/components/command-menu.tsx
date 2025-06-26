@@ -1,11 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router";
-import {
-  IconArrowRightDashed,
-  IconDeviceLaptop,
-  IconMoon,
-  IconSun,
-} from "@tabler/icons-react";
+import { IconDeviceLaptop, IconMoon, IconSun } from "@tabler/icons-react";
 import { useSearch } from "@/context/search-context";
 import { useTheme } from "@/context/theme-context";
 import {
@@ -21,7 +15,6 @@ import {
 import { ScrollArea } from "./ui/scroll-area";
 
 export function CommandMenu() {
-  const navigate = useNavigate();
   const { setTheme } = useTheme();
   const { open, setOpen } = useSearch();
 

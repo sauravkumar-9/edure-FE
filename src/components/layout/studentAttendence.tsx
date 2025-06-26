@@ -1,8 +1,4 @@
-import { CustomBarChart } from "../charts/barChart";
-import { GaugeMeter } from "../charts/gageMeter";
 import { Clock, AlertCircle, CheckCircle2, Calendar, User } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "../ui/button";
 import TableView from "../table/table";
 import { attendanceColumns, attendanceData } from "./data";
 import { ChartRadialStacked } from "../cards/radialChart";
@@ -33,11 +29,6 @@ interface StudentAttendanceProps {
 
 export default function StudentAttendance({
   rightContent,
-  gauges = {
-    first: { value: 65, label: "Overall Attendance" },
-    second: { value: 78, label: "Recent Month" },
-  },
-  chartData,
 }: StudentAttendanceProps) {
   const recentActivities: ActivityItem[] = [
     {

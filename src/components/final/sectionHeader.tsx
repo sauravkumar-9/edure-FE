@@ -18,7 +18,6 @@ interface SectionHeaderProps {
 
 export function SectionHeader({
   title = "Institutional Reports",
-  description = "Access all reports and analytics in one place",
   features = [
     {
       icon: <Search className="h-4 w-4 text-blue-600" />,

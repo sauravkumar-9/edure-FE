@@ -96,32 +96,9 @@ export const statCardsData = [
 export default function AdmissionInsights() {
   // State for filters
   const [department, setDepartment] = useState(departments[0]);
-  const [selectedYear, setSelectedYear] = useState(academicYears[0]);
+  const [selectedYear] = useState(academicYears[0]);
   const [timeRange, setTimeRange] = useState("current_year");
-
-  // Mock data - replace with API calls
-  const admissionStats = {
-    totalApplications: 1245,
-    accepted: 842,
-    rejected: 203,
-    pending: 200,
-    enrolled: 720,
-    conversionRate: 68.2,
-    topDepartments: [
-      { name: "Computer Science", value: 420 },
-      { name: "Electrical", value: 315 },
-      { name: "Mechanical", value: 280 },
-      { name: "MBA", value: 230 },
-    ],
-    trendData: [
-      { month: "Jan", applications: 120 },
-      { month: "Feb", applications: 180 },
-      { month: "Mar", applications: 210 },
-      { month: "Apr", applications: 250 },
-      { month: "May", applications: 300 },
-      { month: "Jun", applications: 185 },
-    ],
-  };
+  console.log(timeRange);
 
   return (
     <div className="space-y-6">

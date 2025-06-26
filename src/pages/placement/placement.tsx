@@ -25,8 +25,6 @@ const getFilteredCompanies = (filter: string) => {
 export default function CurrentCoursesTab() {
   const [filter, setFilter] = useState("live");
 
-  const filteredCompanies = getFilteredCompanies(filter);
-
   const handleSave = (jobId: string) => {
     console.log("Saving job:", jobId);
     // Here you would typically update the job's saved status in your state management

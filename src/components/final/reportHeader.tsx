@@ -1,11 +1,6 @@
 import { ReactNode } from "react";
 import SearchableSelect from "./dropDown";
 
-interface SelectOption {
-  label: string;
-  value: string;
-}
-
 interface DashboardHeaderProps {
   title: string;
   description: string;

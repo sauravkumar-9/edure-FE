@@ -14,7 +14,6 @@ import {
   Cell,
   Legend,
 } from "recharts";
-import { Card } from "@/components/ui/card";
 
 const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff7f50", "#a4de6c"];
 

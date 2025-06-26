@@ -1,30 +1,4 @@
-import {
-  IconBarrierBlock,
-  IconBrowserCheck,
-  IconBug,
-  IconChecklist,
-  IconError404,
-  IconHelp,
-  IconLayoutDashboard,
-  IconLock,
-  IconLockAccess,
-  IconMessages,
-  IconNotification,
-  IconPackages,
-  IconPalette,
-  IconServerOff,
-  IconSettings,
-  IconTool,
-  IconUserCog,
-  IconUserOff,
-  IconUsers,
-} from "@tabler/icons-react";
-import {
-  AudioWaveform,
-  Command,
-  GalleryVerticalEnd,
-  PencilRuler,
-} from "lucide-react";
+import { Command, PencilRuler } from "lucide-react";
 import { type SidebarData } from "../types";
 import {
   LayoutDashboard,
@@ -32,15 +6,10 @@ import {
   BookOpenCheck,
   Briefcase,
   User,
-  FileText,
-  BarChart,
   GraduationCap,
   ClipboardList,
-  Users,
   Building2,
   FileBarChart,
-  UserCircle2,
-  Settings2,
 } from "lucide-react";
 
 export const sidebarData: SidebarData = {

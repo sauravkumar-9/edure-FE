@@ -2,7 +2,6 @@ import { ColumnDef } from "@tanstack/react-table";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
-import LongText from "@/components/table/long-text";
 import { DataTableColumnHeader } from "@/components/table/data-table-column-header";
 import { z } from "zod";
 

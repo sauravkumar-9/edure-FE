@@ -29,7 +29,6 @@ interface ProfileHoverCardProps {
 }
 
 export function ProfileHoverCard({
-  id,
   firstName,
   lastName,
   department,

@@ -1,14 +1,7 @@
 "use client";
 
 import { TrendingUp, TrendingDown } from "lucide-react";
-import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  LabelList,
-  XAxis,
-  YAxis,
-} from "recharts";
+import { Bar, BarChart, CartesianGrid, LabelList, XAxis } from "recharts";
 import {
   Card,
   CardContent,
@@ -17,12 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  type ChartConfig,
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-} from "@/components/ui/chart";
+import { type ChartConfig, ChartContainer } from "@/components/ui/chart";
 
 interface BarChartData {
   name: string;
@@ -50,7 +38,6 @@ export function CustomBarChart({
   peakValue,
   peakMonth,
   trendPercentage = 0,
-  className,
 }: SubjectBarChartProps) {
   // Calculate peak if not provided
   const calculatedPeak =
@@ -157,19 +144,6 @@ export function CustomBarChart({
       </CardFooter>
     </Card>
   );
-}
-
-// Helper functions for color manipulation
-function lightenColor(color: string, percent: number): string {
-  // Implementation depends on your color format
-  // This is a simplified version for hex colors
-  return color; // Replace with actual lightening logic
-}
-
-function darkenColor(color: string, percent: number): string {
-  // Implementation depends on your color format
-  // This is a simplified version for hex colors
-  return color; // Replace with actual darkening logic
 }
 
 function cn(...classes: string[]) {

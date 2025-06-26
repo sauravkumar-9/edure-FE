@@ -4,7 +4,6 @@ import {
   SidebarFooter,
   SidebarHeader,
   SidebarRail,
-  SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { NavGroup } from "@/components/navigation/nav-group";
 import { NavUser } from "@/components/navigation/nav-user";
