@@ -3,20 +3,14 @@ import { WelcomeBanner } from "@/components/final/welcomeBanner";
 import { CalendarSidebar } from "@/components/layout/calenderSidebar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
+import { Card } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import {
-  AlertCircleIcon,
   AlertTriangle,
-  BellIcon,
   Calendar,
-  CalendarDaysIcon,
   CalendarIcon,
   ClockIcon,
   MapPinIcon,
-  SearchIcon,
-  TrendingDown,
   UsersIcon,
 } from "lucide-react";
 import welcomeImage from "@/assets/vector/placementWelcome.png";

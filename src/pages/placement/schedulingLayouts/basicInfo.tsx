@@ -34,6 +34,7 @@ export default function BasicInfo() {
   const [driveDate, setDriveDate] = useState<Date>();
   const [location, setLocation] = useState("");
   const [messageToStudents, setMessageToStudents] = useState("");
+  console.log({ location, selectedCompany });
 
   return (
     <div className="grid gap-6">

@@ -1,11 +1,8 @@
 "use client";
-
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 
-import { Main } from "@/components/task/main";
-import PlacementListCard from "@/components/cards/placementListCard";
 import { companyListMock } from "@/mockData/placement";
 import DataListingHeader from "@/components/cards/dataListingHeader";
 import { sampleJobs } from "@/components/final/data";

@@ -1,17 +1,8 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
 import { DataTableColumnHeader } from "@/components/table/data-table-column-header";
 import { faker } from "@faker-js/faker";
-
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from "@/components/ui/hover-card";
-import { Button } from "@/components/ui/button";
 import { ProfileHoverCard } from "@/components/cards/profileHoverCard";
 
 // 1. Define Student Performance Type

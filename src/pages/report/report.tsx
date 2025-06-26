@@ -83,8 +83,9 @@ function Report() {
   const reportData: any = id ? getReportById(id) : undefined;
 
   const [department, setDepartment] = useState(departments[0]);
-  const [selectedYear, setSelectedYear] = useState(academicYears[0]);
+  const [selectedYear] = useState(academicYears[0]);
   const [timeRange, setTimeRange] = useState("current_year");
+  console.log(timeRange);
   return (
     <React.Fragment>
       <ReportHeader

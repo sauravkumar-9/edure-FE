@@ -1,16 +1,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { Badge } from "@/components/ui/badge";
 import { DataTableColumnHeader } from "@/components/table/data-table-column-header";
-import {
-  Building2,
-  IndianRupee,
-  ArrowUpRight,
-  ArrowDownRight,
-  Users,
-  CheckCircle2,
-  Clock,
-  Star,
-} from "lucide-react";
+import { Building2, IndianRupee } from "lucide-react";
 
 // 1. Type
 interface CompanyPlacement {

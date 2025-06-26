@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import { ReportListCard } from "@/components/cards/reportListCard";
 import { roleBasedReports } from "@/pages/report/data/report";
-import { IconPlugConnected } from "@tabler/icons-react";
-import { PageBanner } from "@/components/final/pageBanner";
 import { SearchFilterBar } from "@/components/final/searchFilterBar";
 import { Link } from "react-router-dom";
 import { useRole } from "@/app/navigation";
-import { WelcomeBanner } from "@/components/final/welcomeBanner";
 import welcomeImage from "@/assets/vector/reportIntro.png";
 import { SectionHeader } from "@/components/final/sectionHeader";
 
