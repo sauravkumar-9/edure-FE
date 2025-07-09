@@ -21,6 +21,8 @@ import PlacementDashboard from "./pages/placement/placementDashboard";
 import { CompaniesList } from "./pages/placement/companiesList";
 import { PlacementCatchupDashboard } from "./pages/placement/catchup";
 import ExamsPage from "./pages/exam/examDetails";
+import CounsellerCatchUp from "./pages/counseller/counsellerCatchup";
+import CounsellerDashboard from "./pages/counseller/counsellerDashboard";
 
 export const router = createBrowserRouter(
   [
@@ -40,6 +42,17 @@ export const router = createBrowserRouter(
               element: <Navigate to="catchup" replace />,
             },
             { path: "catchup", element: <ManagementDashboard /> },
+          ],
+        },
+        {
+          path: "counseller",
+          children: [
+            {
+              index: true,
+              element: <Navigate to="catchup" replace />,
+            },
+            { path: "catchup", element: <CounsellerCatchUp /> },
+            { path: "dashboard", element: <CounsellerDashboard /> },
           ],
         },
         {

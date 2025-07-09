@@ -187,5 +187,23 @@ export const sidebarData: SidebarData = {
         },
       ],
     },
+    {
+      title: "Counseller",
+      hideTitle: true,
+      items: [
+        {
+          title: "Catchup",
+          url: "/counseller/catchup",
+          icon: LayoutDashboard,
+          className: "text-indigo-500",
+        },
+        {
+          title: "Dashboard",
+          url: "/counseller/dashboard",
+          icon: Briefcase,
+          className: "text-indigo-500",
+        },
+      ],
+    },
   ],
 };

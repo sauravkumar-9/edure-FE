@@ -41,7 +41,7 @@ type RoleContextType = {
   setRole: (role: string) => void;
 };
 
-const roles = ["Student", "Teacher", "Placement", "Management"];
+const roles = ["Student", "Teacher", "Placement", "Management", "Counseller"];
 const defaultRole = "Student";
 
 const RoleContext = createContext<RoleContextType>({
