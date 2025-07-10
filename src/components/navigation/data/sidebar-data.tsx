@@ -203,6 +203,12 @@ export const sidebarData: SidebarData = {
           icon: Briefcase,
           className: "text-indigo-500",
         },
+        {
+          title: "Leads",
+          url: "/leads/list",
+          icon: FileBarChart,
+          className: "text-indigo-500",
+        },
       ],
     },
   ],
