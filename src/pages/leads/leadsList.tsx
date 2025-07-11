@@ -18,9 +18,9 @@ export default function LeadList() {
   const filteredData = leadListMock.filter((lead) => {
     switch (tabValue) {
       case "verified":
-        return lead.lead_verified === "Yes";
+        return lead.verificationStatus === "Yes";
       case "unverified":
-        return lead.lead_verified === "No";
+        return lead.verificationStatus === "No";
       default:
         return true; // "all" case
     }
@@ -34,7 +34,7 @@ export default function LeadList() {
             <TabsTrigger value="all">
               All Leads ({leadListMock.length})
             </TabsTrigger>
-            <TabsTrigger value="Yes">
+            <TabsTrigger value="verified">
               Verified (
               {
                 leadListMock.filter((lead) => lead.verificationStatus === "Yes")
@@ -42,7 +42,7 @@ export default function LeadList() {
               }
               )
             </TabsTrigger>
-            <TabsTrigger value="No">
+            <TabsTrigger value="unverified">
               Unverified (
               {
                 leadListMock.filter((lead) => lead.verificationStatus === "No")
