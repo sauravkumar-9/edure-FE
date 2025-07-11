@@ -57,7 +57,6 @@ export default function TableView({
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [sorting, setSorting] = useState<SortingState>([]);
-  const [advancedFilters, setAdvancedFilters] = useState<any[]>([]);
 
   const table = useReactTable({
     data,
