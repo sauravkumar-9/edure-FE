@@ -25,11 +25,20 @@ import { DataTablePagination } from "./data-table-pagination";
 import { DataTableToolbar } from "./data-table-toolbar";
 
 declare module "@tanstack/react-table" {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   interface ColumnMeta<TData extends RowData, TValue> {
-    className: string;
+    className?: string;
+    label?: string;
+    type?: "string" | "number" | "date" | "enum" | "none";
+    enum?: string[];
+    filterData?: {
+      isBasic?: boolean;
+      isAdvanced?: boolean;
+      enableSorting?: boolean;
+      enableHiding?: boolean;
+    };
   }
 }
+
 
 interface DataTableProps {
   columns: any;
@@ -48,6 +57,7 @@ export default function TableView({
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [sorting, setSorting] = useState<SortingState>([]);
+  const [advancedFilters, setAdvancedFilters] = useState<any[]>([]);
 
   const table = useReactTable({
     data,
