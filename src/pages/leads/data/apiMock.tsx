@@ -4,6 +4,15 @@ export const response = {
   page: 1,
   limit: 10,
   total: 20,
+  insights: {
+    verified: 10,
+    unverified: 10,
+    cold: 5,
+    warm: 5,
+    hot: 5,
+    converted: 5,
+    lost: 5,
+  },
   headerConfig: [
     {
       label: "Lead Name",
