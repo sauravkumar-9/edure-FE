@@ -11,7 +11,7 @@ export const response = {
       dataType: "string",
       filterData: {
         isBasic: false,
-        isAdvanced: true,
+        isAdvanced: false,
         enableSorting: true,
         enableHiding: false,
       },
@@ -24,7 +24,7 @@ export const response = {
         isBasic: false,
         isAdvanced: true,
         enableSorting: true,
-        enableHiding: false,
+        enableHiding: true,
       },
     },
     {

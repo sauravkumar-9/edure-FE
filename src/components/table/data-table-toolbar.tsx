@@ -4,6 +4,7 @@ import {
   MixerHorizontalIcon,
   DownloadIcon,
   EyeOpenIcon,
+  Cross2Icon,
 } from "@radix-ui/react-icons";
 import { DataTableAdvancedFilter } from "./data-table-advanced-filter";
 import { Input } from "@/components/ui/input";
@@ -13,13 +14,6 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import {
   Command,
   CommandEmpty,
@@ -38,38 +32,37 @@ import { Check, ChevronsUpDown } from "lucide-react";
 export function DataTableToolbar({ table }: { table: any }) {
   const [showAdvancedFilter, setShowAdvancedFilter] = useState(false);
 
-  // Get all filterable columns
-  const allColumns = table.getAllColumns();
-
-  console.log(allColumns);
-
-  // Columns for basic filter dropdown (only those marked as isBasic)
-  const basicFilterColumns = allColumns.filter(
-    (column: any) => column.columnDef.meta?.filterData?.isBasic
-  );
-
-  // Columns for advanced filter (only those marked as isAdvanced)
-  const advancedFilterColumns = allColumns.filter(
-    (column: any) => column.columnDef.meta?.filterData?.isAdvanced
-  );
-
-  // State for basic filter
-  const [basicFilter, setBasicFilter] = useState({
-    column: basicFilterColumns[0]?.id || "",
-    value: "",
-  });
-
-  // Check if any columns are hidden
-  const hasHiddenColumns = table
+  // Get the single basic filter column (first one marked with isBasic)
+  const basicFilterColumn = table
     .getAllColumns()
-    .some((column: any) => !column.getIsVisible());
+    .find((column: any) => column.columnDef.meta?.filterData?.isBasic);
 
-  const handleBasicFilterChange = (columnId: string, value: string) => {
-    setBasicFilter({ column: columnId, value });
+  // Columns for advanced filter (marked with isAdvanced)
+  const advancedFilterColumns = table
+    .getAllColumns()
+    .filter((column: any) => column.columnDef.meta?.filterData?.isAdvanced);
+
+  // State for basic filter value
+  const [basicFilterValue, setBasicFilterValue] = useState("");
+
+  // Only show columns that can be hidden (enableHiding: true)
+  const hideableColumns = table
+    .getAllColumns()
+    .filter((column: any) => column.columnDef.meta?.filterData?.enableHiding);
+
+  // Check if any hideable columns are currently hidden
+  const hasHiddenColumns = hideableColumns.some(
+    (column: any) => !column.getIsVisible()
+  );
+
+  const handleBasicFilterChange = (value: string) => {
+    setBasicFilterValue(value);
+
+    if (!basicFilterColumn) return;
 
     // Apply filter immediately when changed
     if (value) {
-      table.setColumnFilters([{ id: columnId, value }]);
+      table.setColumnFilters([{ id: basicFilterColumn.id, value }]);
     } else {
       table.setColumnFilters([]);
     }
@@ -89,7 +82,7 @@ export function DataTableToolbar({ table }: { table: any }) {
 
   const handleResetFilters = () => {
     table.setColumnFilters([]);
-    setBasicFilter({ column: basicFilter.column, value: "" });
+    setBasicFilterValue("");
     setShowAdvancedFilter(false);
   };
 
@@ -102,23 +95,13 @@ export function DataTableToolbar({ table }: { table: any }) {
     console.log("Download data");
   };
 
-  const getColumnType = (columnId: string) => {
-    const column = basicFilterColumns.find((col: any) => col.id === columnId);
-    return column?.columnDef.meta?.type || "string";
-  };
+  const renderBasicFilter = () => {
+    if (!basicFilterColumn) return null;
 
-  const getEnumValues = (columnId: string) => {
-    const column = basicFilterColumns.find((col: any) => col.id === columnId);
-    return column?.columnDef.meta?.enum || [];
-  };
+    const columnType = basicFilterColumn.columnDef.meta?.type || "string";
+    const enumValues = basicFilterColumn.columnDef.meta?.enum || [];
 
-  const renderBasicFilterInput = () => {
-    if (!basicFilter.column) return null;
-
-    const type = getColumnType(basicFilter.column);
-    const enumValues = getEnumValues(basicFilter.column);
-
-    if (type === "enum" && enumValues.length > 0) {
+    if (columnType === "enum" && enumValues.length > 0) {
       return (
         <Popover>
           <PopoverTrigger asChild>
@@ -126,11 +109,16 @@ export function DataTableToolbar({ table }: { table: any }) {
               variant="outline"
               role="combobox"
               className={cn(
-                "w-[150px] justify-between",
-                !basicFilter.value && "text-muted-foreground"
+                "w-[180px] justify-between",
+                !basicFilterValue && "text-muted-foreground"
               )}
             >
-              {basicFilter.value || "Select value"}
+              {basicFilterValue ||
+                `Filter ${
+                  basicFilterColumn.columnDef.meta?.label ||
+                  basicFilterColumn.id
+                }`}
+              <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
             </Button>
           </PopoverTrigger>
           <PopoverContent className="w-[200px] p-0">
@@ -143,16 +131,14 @@ export function DataTableToolbar({ table }: { table: any }) {
                     key={value}
                     value={value}
                     onSelect={() => {
-                      const newValue = basicFilter.value === value ? "" : value;
-                      handleBasicFilterChange(basicFilter.column, newValue);
+                      const newValue = basicFilterValue === value ? "" : value;
+                      handleBasicFilterChange(newValue);
                     }}
                   >
                     <Check
                       className={cn(
                         "mr-2 h-4 w-4",
-                        basicFilter.value === value
-                          ? "opacity-100"
-                          : "opacity-0"
+                        basicFilterValue === value ? "opacity-100" : "opacity-0"
                       )}
                     />
                     {value}
@@ -166,14 +152,26 @@ export function DataTableToolbar({ table }: { table: any }) {
     }
 
     return (
-      <Input
-        placeholder="Filter value..."
-        value={basicFilter.value}
-        onChange={(e) =>
-          handleBasicFilterChange(basicFilter.column, e.target.value)
-        }
-        className="h-8 w-[150px]"
-      />
+      <div className="relative">
+        <Input
+          placeholder={`Filter ${
+            basicFilterColumn.columnDef.meta?.label || basicFilterColumn.id
+          }`}
+          value={basicFilterValue}
+          onChange={(e) => handleBasicFilterChange(e.target.value)}
+          className="h-8 w-[180px] pr-8"
+        />
+        {basicFilterValue && (
+          <Button
+            variant="ghost"
+            size="icon"
+            className="absolute right-0 top-0 h-8 w-8"
+            onClick={() => handleBasicFilterChange("")}
+          >
+            <Cross2Icon className="h-4 w-4" />
+          </Button>
+        )}
+      </div>
     );
   };
 
@@ -182,111 +180,29 @@ export function DataTableToolbar({ table }: { table: any }) {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2 flex-1">
           {/* Search Input */}
-          <Input
-            placeholder="Search all columns..."
-            value={table.getState().globalFilter ?? ""}
-            onChange={(e) => table.setGlobalFilter(e.target.value)}
-            className="h-8 w-[150px] lg:w-[250px]"
-          />
+          <div className="relative">
+            <Input
+              placeholder="Search all columns..."
+              value={table.getState().globalFilter ?? ""}
+              onChange={(e) => table.setGlobalFilter(e.target.value)}
+              className="h-8 w-[150px] lg:w-[250px] pr-8"
+            />
+            {table.getState().globalFilter && (
+              <Button
+                variant="ghost"
+                size="icon"
+                className="absolute right-0 top-0 h-8 w-8"
+                onClick={() => table.setGlobalFilter("")}
+              >
+                <Cross2Icon className="h-4 w-4" />
+              </Button>
+            )}
+          </div>
 
-          {/* Basic Filter - Simplified when only one column */}
-          {basicFilterColumns.length > 0 && (
-            <div className="flex items-center gap-2">
-              {basicFilterColumns.length > 1 ? (
-                <>
-                  <Select
-                    value={basicFilter.column}
-                    onValueChange={(columnId) =>
-                      handleBasicFilterChange(columnId, "")
-                    }
-                  >
-                    <SelectTrigger className="w-[150px]">
-                      <SelectValue placeholder="Select column" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {basicFilterColumns.map((column: any) => (
-                        <SelectItem key={column.id} value={column.id}>
-                          {column.columnDef.meta?.label || column.id}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  {renderBasicFilterInput()}
-                </>
-              ) : // When only one basic filter column exists
-              getColumnType(basicFilterColumns[0].id) === "enum" ? (
-                // Multi-select dropdown for enum values
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <Button
-                      variant="outline"
-                      role="combobox"
-                      className={cn(
-                        "w-[200px] justify-between",
-                        !basicFilter.value?.length && "text-muted-foreground"
-                      )}
-                    >
-                      {basicFilter.value?.length
-                        ? `${basicFilter.value.length} selected`
-                        : `Select ${
-                            basicFilterColumns[0].columnDef.meta?.label ||
-                            basicFilterColumns[0].id
-                          }`}
-                      <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                    </Button>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-[250px] p-0">
-                    <Command>
-                      <CommandInput placeholder="Search values..." />
-                      <CommandEmpty>No values found</CommandEmpty>
-                      <CommandGroup>
-                        {getEnumValues(basicFilterColumns[0].id).map(
-                          (value: string) => {
-                            const isSelected =
-                              basicFilter.value?.includes(value);
-                            return (
-                              <CommandItem
-                                key={value}
-                                onSelect={() => {
-                                  const currentValues = Array.isArray(
-                                    basicFilter.value
-                                  )
-                                    ? [...basicFilter.value]
-                                    : [];
+          {/* Basic Filter (single filter) */}
+          {basicFilterColumn && renderBasicFilter()}
 
-                                  const newValues: any = isSelected
-                                    ? currentValues.filter((v) => v !== value)
-                                    : [...currentValues, value];
-
-                                  handleBasicFilterChange(
-                                    basicFilterColumns[0].id,
-                                    newValues.length ? newValues : undefined
-                                  );
-                                }}
-                              >
-                                <Check
-                                  className={cn(
-                                    "mr-2 h-4 w-4",
-                                    isSelected ? "opacity-100" : "opacity-0"
-                                  )}
-                                />
-                                {value}
-                              </CommandItem>
-                            );
-                          }
-                        )}
-                      </CommandGroup>
-                    </Command>
-                  </PopoverContent>
-                </Popover>
-              ) : (
-                // For non-enum single columns, show regular input
-                renderBasicFilterInput()
-              )}
-            </div>
-          )}
-
-          {/* Advanced Filter Button - Moved to left */}
+          {/* Advanced Filter Button */}
           {advancedFilterColumns.length > 0 && (
             <Button
               variant={showAdvancedFilter ? "default" : "outline"}
@@ -311,21 +227,19 @@ export function DataTableToolbar({ table }: { table: any }) {
             Download
           </Button>
 
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button
-                variant={hasHiddenColumns ? "default" : "outline"}
-                size="sm"
-              >
-                <EyeOpenIcon className="h-4 w-4 mr-2" />
-                View
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              {table
-                .getAllColumns()
-                .filter((column: any) => column.getCanHide())
-                .map((column: any) => (
+          {hideableColumns.length > 0 && (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant={hasHiddenColumns ? "default" : "outline"}
+                  size="sm"
+                >
+                  <EyeOpenIcon className="h-4 w-4 mr-2" />
+                  View
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                {hideableColumns.map((column: any) => (
                   <DropdownMenuCheckboxItem
                     key={column.id}
                     className="capitalize"
@@ -337,8 +251,9 @@ export function DataTableToolbar({ table }: { table: any }) {
                     {column.columnDef.meta?.label || column.id}
                   </DropdownMenuCheckboxItem>
                 ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )}
         </div>
       </div>
 
