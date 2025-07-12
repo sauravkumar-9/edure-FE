@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import {
   MixerHorizontalIcon,
   DownloadIcon,
-  EyeOpenIcon,
   Cross2Icon,
 } from "@radix-ui/react-icons";
 import { DataTableAdvancedFilter } from "./data-table-advanced-filter";

@@ -106,7 +106,7 @@ export const response = {
       },
     },
   ],
-  rows: Array.from({ length: 10 }, (_, i) => {
+  rows: Array.from({ length: 10 }, () => {
     const firstName = faker.person.firstName();
     const lastName = faker.person.lastName();
     const fullName = `${firstName} ${lastName}`;

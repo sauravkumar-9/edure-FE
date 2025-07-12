@@ -54,9 +54,9 @@ export function DataTableAdvancedFilter({
 
   const getDefaultOperator = (columnId: string) => {
     if (!columnId) return "";
-    const column = columns.find(col => col.id === columnId);
+    const column = columns.find((col) => col.id === columnId);
     const type = column?.columnDef.meta?.type || "string";
-    
+
     if (type === "enum") return "equals";
     if (type === "number") return "equals";
     return "contains";
@@ -64,9 +64,9 @@ export function DataTableAdvancedFilter({
 
   const getOperatorsForColumn = (columnId: string) => {
     if (!columnId) return [];
-    const column = columns.find(col => col.id === columnId);
+    const column = columns.find((col) => col.id === columnId);
     const type = column?.columnDef.meta?.type || "string";
-    const enumValues = column?.columnDef.meta?.enum || [];
+    // const enumValues = column?.columnDef.meta?.enum || [];
 
     if (type === "enum") {
       return [
@@ -99,10 +99,14 @@ export function DataTableAdvancedFilter({
 
   const addCondition = () => {
     const lastCondition = conditions[conditions.length - 1];
-    if (!lastCondition.column || !lastCondition.operator || !lastCondition.value) {
+    if (
+      !lastCondition.column ||
+      !lastCondition.operator ||
+      !lastCondition.value
+    ) {
       return;
     }
-    
+
     setConditions([
       ...conditions,
       {
@@ -130,11 +134,11 @@ export function DataTableAdvancedFilter({
         if (cond.id === id) {
           // When column changes, reset operator and value
           if (field === "column") {
-            return { 
-              ...cond, 
+            return {
+              ...cond,
               column: value,
               operator: getDefaultOperator(value),
-              value: "" 
+              value: "",
             };
           }
           return { ...cond, [field]: value };
@@ -145,27 +149,32 @@ export function DataTableAdvancedFilter({
   };
 
   const applyFilters = () => {
-    const validConditions = conditions.filter(cond => 
-      cond.column && cond.operator && (Array.isArray(cond.value) ? cond.value.length > 0 : cond.value.toString().trim() !== "")
+    const validConditions = conditions.filter(
+      (cond) =>
+        cond.column &&
+        cond.operator &&
+        (Array.isArray(cond.value)
+          ? cond.value.length > 0
+          : cond.value.toString().trim() !== "")
     );
-    
+
     if (validConditions.length === conditions.length) {
       onApply(validConditions);
     }
   };
 
-  const resetFilters = () => {
-    setConditions([
-      {
-        id: crypto.randomUUID(),
-        column: "",
-        operator: "",
-        value: "",
-        logicalOperator: "AND",
-      },
-    ]);
-    onReset();
-  };
+  // const resetFilters = () => {
+  //   setConditions([
+  //     {
+  //       id: crypto.randomUUID(),
+  //       column: "",
+  //       operator: "",
+  //       value: "",
+  //       logicalOperator: "AND",
+  //     },
+  //   ]);
+  //   onReset();
+  // };
 
   const handleRemoveAll = () => {
     setConditions([
@@ -181,13 +190,13 @@ export function DataTableAdvancedFilter({
 
   const getColumnType = (columnId: string) => {
     if (!columnId) return "string";
-    const column = columns.find(col => col.id === columnId);
+    const column = columns.find((col) => col.id === columnId);
     return column?.columnDef.meta?.type || "string";
   };
 
   const getEnumValues = (columnId: string) => {
     if (!columnId) return [];
-    const column = columns.find(col => col.id === columnId);
+    const column = columns.find((col) => col.id === columnId);
     return column?.columnDef.meta?.enum || [];
   };
 
@@ -235,18 +244,18 @@ export function DataTableAdvancedFilter({
                       const currentValue = condition.value || [];
                       const newValue = Array.isArray(currentValue)
                         ? currentValue.includes(value)
-                          ? currentValue.filter(v => v !== value)
+                          ? currentValue.filter((v) => v !== value)
                           : [...currentValue, value]
                         : [value];
-                      
+
                       updateCondition(condition.id, "value", newValue);
                     }}
                   >
                     <Check
                       className={cn(
                         "mr-2 h-4 w-4",
-                        Array.isArray(condition.value) && 
-                        condition.value.includes(value)
+                        Array.isArray(condition.value) &&
+                          condition.value.includes(value)
                           ? "opacity-100"
                           : "opacity-0"
                       )}
@@ -264,9 +273,7 @@ export function DataTableAdvancedFilter({
     return (
       <Input
         value={condition.value as string}
-        onChange={(e) =>
-          updateCondition(condition.id, "value", e.target.value)
-        }
+        onChange={(e) => updateCondition(condition.id, "value", e.target.value)}
         placeholder="Value"
         className="w-[150px]"
         type={type === "number" ? "number" : "text"}
@@ -275,12 +282,18 @@ export function DataTableAdvancedFilter({
   };
 
   const isConditionComplete = (condition: FilterCondition) => {
-    return condition.column && condition.operator && 
-      (Array.isArray(condition.value) ? condition.value.length > 0 : condition.value.toString().trim() !== "");
+    return (
+      condition.column &&
+      condition.operator &&
+      (Array.isArray(condition.value)
+        ? condition.value.length > 0
+        : condition.value.toString().trim() !== "")
+    );
   };
 
   const canAddCondition = conditions.every(isConditionComplete);
-  const canApplyFilters = conditions.length > 0 && conditions.every(isConditionComplete);
+  const canApplyFilters =
+    conditions.length > 0 && conditions.every(isConditionComplete);
 
   return (
     <div className="space-y-3 p-4 border rounded-lg bg-background">
@@ -314,7 +327,13 @@ export function DataTableAdvancedFilter({
                 disabled={!condition.column}
               >
                 <SelectTrigger className="w-[120px]">
-                  <SelectValue placeholder={condition.column ? "Select operator" : "Select column first"} />
+                  <SelectValue
+                    placeholder={
+                      condition.column
+                        ? "Select operator"
+                        : "Select column first"
+                    }
+                  />
                 </SelectTrigger>
                 <SelectContent>
                   {getOperatorsForColumn(condition.column).map((op) => (
@@ -382,9 +401,9 @@ export function DataTableAdvancedFilter({
 
       <div className="flex justify-between items-center">
         <div className="flex gap-2">
-          <Button 
-            variant="outline" 
-            size="sm" 
+          <Button
+            variant="outline"
+            size="sm"
             onClick={addCondition}
             disabled={!canAddCondition}
           >
@@ -399,11 +418,7 @@ export function DataTableAdvancedFilter({
           )}
         </div>
         <div className="flex gap-2">
-          <Button 
-            size="sm" 
-            onClick={applyFilters}
-            disabled={!canApplyFilters}
-          >
+          <Button size="sm" onClick={applyFilters} disabled={!canApplyFilters}>
             Apply Filters
           </Button>
         </div>
