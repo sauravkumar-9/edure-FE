@@ -54,7 +54,7 @@ export function generateColumnsFromResponse(response: any): ColumnDef<Lead>[] {
     },
   ];
 
-  response.headers.forEach((config: any) => {
+  response.columns.forEach((config: any) => {
     const column: ColumnDef<Lead> = {
       accessorKey: config.key,
       header: ({ column }) => (

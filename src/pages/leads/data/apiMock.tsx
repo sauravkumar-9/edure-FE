@@ -13,7 +13,7 @@ export const response = {
     converted: 5,
     lost: 5,
   },
-  headers: [
+  columns: [
     {
       label: "Lead Name",
       key: "fullName",
@@ -106,7 +106,7 @@ export const response = {
       },
     },
   ],
-  data: Array.from({ length: 10 }, (_, i) => {
+  rows: Array.from({ length: 10 }, (_, i) => {
     const firstName = faker.person.firstName();
     const lastName = faker.person.lastName();
     const fullName = `${firstName} ${lastName}`;

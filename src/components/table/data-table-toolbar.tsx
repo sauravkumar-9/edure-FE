@@ -29,7 +29,15 @@ import {
 import { cn } from "@/lib/utils";
 import { Check, ChevronsUpDown, TableIcon } from "lucide-react";
 
-export function DataTableToolbar({ table }: { table: any }) {
+export function DataTableToolbar({
+  table,
+  metaData,
+}: {
+  table: any;
+  metaData?: {
+    searchPlaceholder?: string;
+  };
+}) {
   const [showAdvancedFilter, setShowAdvancedFilter] = useState(false);
   const [basicFilterValue, setBasicFilterValue] = useState("");
 
@@ -180,10 +188,10 @@ export function DataTableToolbar({ table }: { table: any }) {
           {/* Search Input */}
           <div className="relative">
             <Input
-              placeholder="Search all columns..."
+              placeholder={metaData?.searchPlaceholder}
               value={table.getState().globalFilter ?? ""}
               onChange={(e) => table.setGlobalFilter(e.target.value)}
-              className="h-8 w-[150px] lg:w-[250px] pr-8 bg-white"
+              className="h-8 w-[200px] lg:w-[300px] pr-8 bg-white"
             />
             {table.getState().globalFilter && (
               <Button

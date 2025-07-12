@@ -6,7 +6,7 @@ import { response } from "./data/apiMock";
 
 export default function LeadList() {
   useEffect(() => {
-    setLeadListMock(response.data);
+    setLeadListMock(response.rows);
     const columns = generateColumnsFromResponse(response);
     setLeadReportColumns(columns);
   }, []);
@@ -66,6 +66,7 @@ export default function LeadList() {
         columns={leadReportColumns}
         onViewUpdate={getLeadList}
         totalCount={response.total}
+        metaData={{ searchPlaceholder: "Search by lead name, email, code" }}
       />
     </div>
   );

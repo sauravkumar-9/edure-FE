@@ -46,6 +46,9 @@ interface DataTableProps {
   isPagination?: boolean;
   totalCount?: number;
   onViewUpdate?: (filterData: any) => void;
+  metaData?: {
+    searchPlaceholder?: string;
+  };
 }
 
 export default function TableView({
@@ -55,6 +58,7 @@ export default function TableView({
   isPagination = true,
   totalCount = 0,
   onViewUpdate,
+  metaData,
 }: DataTableProps) {
   const [rowSelection, setRowSelection] = useState({});
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
@@ -111,7 +115,7 @@ export default function TableView({
 
   return (
     <div className="space-y-4">
-      {isToolBar && <DataTableToolbar table={table} />}
+      {isToolBar && <DataTableToolbar table={table} metaData={metaData} />}
 
       {/* Scroll container for horizontal scroll */}
       <div className="rounded-md border overflow-x-auto w-full bg-white">
