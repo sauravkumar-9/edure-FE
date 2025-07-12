@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import TableView from "@/components/table/table";
-import { generateColumnsFromResponse } from "./data/leadData";
+import { generateColumnsFromResponse } from "../utils/tableBuilder";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { response } from "./data/apiMock";
+import { response } from "../mockData/apiMock";
 
 export default function LeadList() {
   useEffect(() => {

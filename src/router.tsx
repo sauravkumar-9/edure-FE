@@ -23,8 +23,8 @@ import { PlacementCatchupDashboard } from "./modules/placement/catchup";
 import ExamsPage from "./modules/exam/examDetails";
 import CounsellerCatchUp from "./modules/counseller/counsellerCatchup";
 import CounsellerDashboard from "./modules/counseller/counsellerDashboard";
-import LeadProfile from "./modules/leads/leadProfie";
-import LeadsList from "./modules/leads/leadsList";
+import LeadProfile from "./modules/leads/pages/leadProfie";
+import LeadsList from "./modules/leads/pages/leadsList";
 
 export const router = createBrowserRouter(
   [
