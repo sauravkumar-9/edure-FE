@@ -46,6 +46,11 @@ interface DataTableProps {
   isPagination?: boolean;
   totalCount?: number;
   onViewUpdate?: (filterData: any) => void;
+  tableState: {
+    pagination: any;
+    sorting: any;
+    columnFilters: any;
+  };
   metaData?: {
     searchPlaceholder?: string;
   };
@@ -59,31 +64,10 @@ export default function TableView({
   totalCount = 0,
   onViewUpdate,
   metaData,
+  tableState: { pagination, sorting, columnFilters },
 }: DataTableProps) {
   const [rowSelection, setRowSelection] = useState({});
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-  const [sorting, setSorting] = useState<SortingState>([]);
-  const [pagination, setPagination] = useState({
-    pageIndex: 0,
-    pageSize: 10,
-  });
-
-  const hasInitialized = useRef(false);
-  useEffect(() => {
-    if (!hasInitialized.current) {
-      hasInitialized.current = true;
-      return;
-    }
-
-    console.log("columnFilters --------------");
-
-    onViewUpdate?.({
-      columnFilters,
-      sorting,
-      pagination,
-    });
-  }, [columnFilters, sorting, pagination]);
 
   const table = useReactTable({
     data,
@@ -97,17 +81,20 @@ export default function TableView({
     },
     pageCount: Math.ceil(totalCount / pagination.pageSize),
     manualPagination: true,
-
     enableRowSelection: true,
+
     onRowSelectionChange: setRowSelection,
-    onSortingChange: setSorting,
-    onColumnFiltersChange: setColumnFilters,
     onColumnVisibilityChange: setColumnVisibility,
     onPaginationChange: (updater) => {
-      // Handle pagination changes
       const newPagination =
         typeof updater === "function" ? updater(pagination) : updater;
-      setPagination(newPagination);
+      onViewUpdate?.({ pagination: newPagination });
+    },
+    onSortingChange: (newSorting) => {
+      onViewUpdate?.({ sorting: newSorting });
+    },
+    onColumnFiltersChange: (newFilters) => {
+      onViewUpdate?.({ columnFilters: newFilters });
     },
 
     getCoreRowModel: getCoreRowModel(),

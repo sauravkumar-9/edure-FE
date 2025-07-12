@@ -3,27 +3,40 @@ import TableView from "@/components/table/table";
 import { generateColumnsFromResponse } from "../utils/tableBuilder";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getAllLeads } from "../leadService";
+import { ColumnFiltersState, SortingState } from "@tanstack/react-table";
 
 export default function LeadList() {
   const [tabValue, setTabValue] = useState("all");
   const [leadReportColumns, setLeadReportColumns] = useState<any[]>([]);
-  const [leadListMock, setLeadListMock] = useState<any[]>([]);
   const [filterData, setFilterData] = useState<any>({});
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const [response, setResponse] = useState<any>({});
 
+  const [pagination, setPagination] = useState({
+    pageIndex: 0,
+    pageSize: 10,
+  });
+  const [sorting, setSorting] = useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+
   useEffect(() => {
     getLeadList();
   }, []);
 
-  // useEffect(() => {
-  //   getLeadList();
-  // }, [filterData]);
+  useEffect(() => {
+    console.log("API CALLEDD", { pagination, sorting, columnFilters });
+    getLeadList();
+  }, [pagination, sorting, columnFilters]);
 
-  const updateFilterData = (newFilterData: any) => {
-    console.log("newFilterDatanewFilterData", newFilterData);
-    setFilterData(newFilterData);
+  const updateTableState = (partial: {
+    pagination?: typeof pagination;
+    sorting?: typeof sorting;
+    columnFilters?: typeof columnFilters;
+  }) => {
+    if (partial.pagination) setPagination(partial.pagination);
+    if (partial.sorting) setSorting(partial.sorting);
+    if (partial.columnFilters) setColumnFilters(partial.columnFilters);
   };
 
   const getLeadList = async () => {
@@ -96,8 +109,9 @@ export default function LeadList() {
           <TableView
             data={response.rows}
             columns={leadReportColumns}
-            onViewUpdate={updateFilterData}
+            onViewUpdate={updateTableState}
             totalCount={response.total}
+            tableState={{ pagination, sorting, columnFilters }}
             metaData={{ searchPlaceholder: "Search by lead name, email, code" }}
           />
         </>
