@@ -8,11 +8,13 @@ import { ColumnFiltersState, SortingState } from "@tanstack/react-table";
 export default function LeadList() {
   const [tabValue, setTabValue] = useState("all");
   const [leadReportColumns, setLeadReportColumns] = useState<any[]>([]);
-  const [filterData, setFilterData] = useState<any>({});
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-
   const [response, setResponse] = useState<any>({});
 
+  // Loading states
+  const [isPageLoading, setIsPageLoading] = useState<boolean>(true);
+  const [isTableLoading, setIsTableLoading] = useState<boolean>(true);
+
+  // Filter States
   const [pagination, setPagination] = useState({
     pageIndex: 0,
     pageSize: 10,
@@ -21,12 +23,12 @@ export default function LeadList() {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
   useEffect(() => {
-    getLeadList();
+    getLeadList({ loadType: "page" });
   }, []);
 
   useEffect(() => {
     console.log("API CALLEDD", { pagination, sorting, columnFilters });
-    getLeadList();
+    getLeadList({ loadType: "table" });
   }, [pagination, sorting, columnFilters]);
 
   const updateTableState = (partial: {
@@ -39,11 +41,20 @@ export default function LeadList() {
     if (partial.columnFilters) setColumnFilters(partial.columnFilters);
   };
 
-  const getLeadList = async () => {
+  const getLeadList = async ({ loadType }: { loadType: "page" | "table" }) => {
     console.log("getLeadList called");
     try {
-      setIsLoading(true);
-      const formattedFilterData = formatFilterData(filterData);
+      if (loadType === "page") {
+        setIsPageLoading(true);
+      } else {
+        setIsTableLoading(true);
+      }
+
+      const formattedFilterData = formatFilterData({
+        pagination,
+        sorting,
+        columnFilters,
+      });
       const payload: any = {
         queryParams: formattedFilterData,
       };
@@ -53,9 +64,18 @@ export default function LeadList() {
 
       const columns = generateColumnsFromResponse(response);
       setLeadReportColumns(columns);
-      setIsLoading(false);
+
+      if (loadType === "page") {
+        setIsPageLoading(false);
+      } else {
+        setIsTableLoading(false);
+      }
     } catch (error) {
-      setIsLoading(false);
+      if (loadType === "page") {
+        setIsPageLoading(false);
+      } else {
+        setIsTableLoading(false);
+      }
     }
   };
 
@@ -83,7 +103,7 @@ export default function LeadList() {
 
   return (
     <div className="space-y-4">
-      {isLoading ? (
+      {isPageLoading ? (
         <div className="text-center text-muted-foreground py-12">
           Loading...
         </div>
@@ -113,6 +133,7 @@ export default function LeadList() {
             totalCount={response.total}
             tableState={{ pagination, sorting, columnFilters }}
             metaData={{ searchPlaceholder: "Search by lead name, email, code" }}
+            isTableLoading={isTableLoading}
           />
         </>
       )}
