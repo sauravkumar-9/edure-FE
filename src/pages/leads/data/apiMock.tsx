@@ -4,7 +4,7 @@ export const response = {
   page: 1,
   limit: 10,
   total: 20,
-  insights: {
+  stats: {
     verified: 10,
     unverified: 10,
     cold: 5,
@@ -13,12 +13,12 @@ export const response = {
     converted: 5,
     lost: 5,
   },
-  headerConfig: [
+  headers: [
     {
       label: "Lead Name",
       key: "fullName",
       dataType: "string",
-      filterData: {
+      filterConfig: {
         isBasic: false,
         isAdvanced: false,
         enableSorting: true,
@@ -29,7 +29,7 @@ export const response = {
       label: "Lead ID",
       key: "leadCode",
       dataType: "string",
-      filterData: {
+      filterConfig: {
         isBasic: false,
         isAdvanced: true,
         enableSorting: true,
@@ -40,7 +40,7 @@ export const response = {
       label: "Interested Course",
       key: "interestedCourse",
       dataType: "string",
-      filterData: {
+      filterConfig: {
         isBasic: false,
         isAdvanced: true,
         enableSorting: true,
@@ -52,7 +52,7 @@ export const response = {
       key: "leadStatus",
       dataType: "enum",
       enumValues: ["cold", "warm", "hot", "converted", "lost"],
-      filterData: {
+      filterConfig: {
         isBasic: true,
         isAdvanced: true,
         enableSorting: false,
@@ -64,7 +64,7 @@ export const response = {
       key: "leadSource",
       dataType: "enum",
       enumValues: ["walkin", "instagram", "referral", "website", "other"],
-      filterData: {
+      filterConfig: {
         isBasic: false,
         isAdvanced: true,
         enableSorting: true,
@@ -75,7 +75,7 @@ export const response = {
       label: "Counsellor",
       key: "counseller",
       dataType: "string",
-      filterData: {
+      filterConfig: {
         isBasic: false,
         isAdvanced: true,
         enableSorting: false,
@@ -87,7 +87,7 @@ export const response = {
       key: "verificationStatus",
       dataType: "enum",
       enumValues: ["Yes", "No"],
-      filterData: {
+      filterConfig: {
         isBasic: false,
         isAdvanced: true,
         enableSorting: true,
@@ -98,7 +98,7 @@ export const response = {
       label: "Last Follow Up",
       key: "lastFollowUp",
       dataType: "date",
-      filterData: {
+      filterConfig: {
         isBasic: false,
         isAdvanced: true,
         enableSorting: true,

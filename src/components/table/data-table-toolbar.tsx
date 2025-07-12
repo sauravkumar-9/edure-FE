@@ -27,28 +27,26 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
-import { Check, ChevronsUpDown } from "lucide-react";
+import { Check, ChevronsUpDown, TableIcon } from "lucide-react";
 
 export function DataTableToolbar({ table }: { table: any }) {
   const [showAdvancedFilter, setShowAdvancedFilter] = useState(false);
+  const [basicFilterValue, setBasicFilterValue] = useState("");
 
   // Get the single basic filter column (first one marked with isBasic)
   const basicFilterColumn = table
     .getAllColumns()
-    .find((column: any) => column.columnDef.meta?.filterData?.isBasic);
+    .find((column: any) => column.columnDef.meta?.filterConfig?.isBasic);
 
   // Columns for advanced filter (marked with isAdvanced)
   const advancedFilterColumns = table
     .getAllColumns()
-    .filter((column: any) => column.columnDef.meta?.filterData?.isAdvanced);
-
-  // State for basic filter value
-  const [basicFilterValue, setBasicFilterValue] = useState("");
+    .filter((column: any) => column.columnDef.meta?.filterConfig?.isAdvanced);
 
   // Only show columns that can be hidden (enableHiding: true)
   const hideableColumns = table
     .getAllColumns()
-    .filter((column: any) => column.columnDef.meta?.filterData?.enableHiding);
+    .filter((column: any) => column.columnDef.meta?.filterConfig?.enableHiding);
 
   // Check if any hideable columns are currently hidden
   const hasHiddenColumns = hideableColumns.some(
@@ -98,8 +96,8 @@ export function DataTableToolbar({ table }: { table: any }) {
   const renderBasicFilter = () => {
     if (!basicFilterColumn) return null;
 
-    const columnType = basicFilterColumn.columnDef.meta?.type || "string";
-    const enumValues = basicFilterColumn.columnDef.meta?.enum || [];
+    const columnType = basicFilterColumn.columnDef.meta?.type;
+    const enumValues = basicFilterColumn.columnDef.meta?.enum;
 
     if (columnType === "enum" && enumValues.length > 0) {
       return (
@@ -185,7 +183,7 @@ export function DataTableToolbar({ table }: { table: any }) {
               placeholder="Search all columns..."
               value={table.getState().globalFilter ?? ""}
               onChange={(e) => table.setGlobalFilter(e.target.value)}
-              className="h-8 w-[150px] lg:w-[250px] pr-8"
+              className="h-8 w-[150px] lg:w-[250px] pr-8 bg-white"
             />
             {table.getState().globalFilter && (
               <Button
@@ -199,10 +197,8 @@ export function DataTableToolbar({ table }: { table: any }) {
             )}
           </div>
 
-          {/* Basic Filter (single filter) */}
           {basicFilterColumn && renderBasicFilter()}
 
-          {/* Advanced Filter Button */}
           {advancedFilterColumns.length > 0 && (
             <Button
               variant={showAdvancedFilter ? "default" : "outline"}
@@ -234,7 +230,7 @@ export function DataTableToolbar({ table }: { table: any }) {
                   variant={hasHiddenColumns ? "default" : "outline"}
                   size="sm"
                 >
-                  <EyeOpenIcon className="h-4 w-4 mr-2" />
+                  <TableIcon className="h-4 w-4 mr-2" />
                   View
                 </Button>
               </DropdownMenuTrigger>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ColumnFiltersState,
   RowData,
@@ -30,7 +30,7 @@ declare module "@tanstack/react-table" {
     label?: string;
     type?: "string" | "number" | "date" | "enum" | "none";
     enum?: string[];
-    filterData?: {
+    filterConfig?: {
       isBasic?: boolean;
       isAdvanced?: boolean;
       enableSorting?: boolean;
@@ -38,7 +38,6 @@ declare module "@tanstack/react-table" {
     };
   }
 }
-
 
 interface DataTableProps {
   columns: any;
@@ -58,6 +57,10 @@ export default function TableView({
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [sorting, setSorting] = useState<SortingState>([]);
 
+  useEffect(() => {
+    console.log({ rowSelection, columnVisibility, columnFilters, sorting });
+  }, [rowSelection, columnVisibility, columnFilters, sorting]);
+
   const table = useReactTable({
     data,
     columns,
@@ -72,6 +75,7 @@ export default function TableView({
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     onColumnVisibilityChange: setColumnVisibility,
+
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
