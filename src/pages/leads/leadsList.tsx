@@ -64,7 +64,8 @@ export default function LeadList() {
       <TableView
         data={filteredData}
         columns={leadReportColumns}
-        onFilterUpdate={getLeadList}
+        onViewUpdate={getLeadList}
+        totalCount={response.total}
       />
     </div>
   );

@@ -3,7 +3,7 @@ import { faker } from "@faker-js/faker";
 export const response = {
   page: 1,
   limit: 10,
-  total: 20,
+  total: 50,
   stats: {
     verified: 10,
     unverified: 10,

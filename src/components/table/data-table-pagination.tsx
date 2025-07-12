@@ -16,16 +16,15 @@ import {
 
 interface DataTablePaginationProps<TData> {
   table: Table<TData>;
+  totalCount: number;
 }
 
 export function DataTablePagination<TData>({
   table,
+  totalCount,
 }: DataTablePaginationProps<TData>) {
   return (
-    <div
-      className="flex items-center justify-between overflow-clip px-2"
-      style={{ overflowClipMargin: 1 }}
-    >
+    <div className="flex items-center justify-between overflow-clip px-2">
       <div className="text-muted-foreground hidden flex-1 text-sm sm:block">
         {table.getFilteredSelectedRowModel().rows.length} of{" "}
         {table.getFilteredRowModel().rows.length} row(s) selected.
@@ -53,7 +52,7 @@ export function DataTablePagination<TData>({
         </div>
         <div className="flex w-[100px] items-center justify-center text-sm font-medium">
           Page {table.getState().pagination.pageIndex + 1} of{" "}
-          {table.getPageCount()}
+          {Math.ceil(totalCount / table.getState().pagination.pageSize)}
         </div>
         <div className="flex items-center space-x-2">
           <Button

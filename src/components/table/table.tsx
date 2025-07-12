@@ -44,7 +44,8 @@ interface DataTableProps {
   data: any;
   isToolBar?: boolean;
   isPagination?: boolean;
-  onFilterUpdate?: (filterData: any) => void;
+  totalCount?: number;
+  onViewUpdate?: (filterData: any) => void;
 }
 
 export default function TableView({
@@ -52,22 +53,28 @@ export default function TableView({
   data,
   isToolBar = true,
   isPagination = true,
-  onFilterUpdate,
+  totalCount = 0,
+  onViewUpdate,
 }: DataTableProps) {
   const [rowSelection, setRowSelection] = useState({});
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [sorting, setSorting] = useState<SortingState>([]);
+  const [pagination, setPagination] = useState({
+    pageIndex: 0,
+    pageSize: 10,
+  });
 
   useEffect(() => {
     console.log({ rowSelection, columnVisibility, columnFilters, sorting });
-    onFilterUpdate?.({
+    onViewUpdate?.({
       rowSelection,
       columnVisibility,
       columnFilters,
       sorting,
+      pagination,
     });
-  }, [rowSelection, columnVisibility, columnFilters, sorting]);
+  }, [rowSelection, columnVisibility, columnFilters, sorting, pagination]);
 
   const table = useReactTable({
     data,
@@ -77,12 +84,22 @@ export default function TableView({
       columnVisibility,
       rowSelection,
       columnFilters,
+      pagination,
     },
+    pageCount: Math.ceil(totalCount / pagination.pageSize),
+    manualPagination: true,
+
     enableRowSelection: true,
     onRowSelectionChange: setRowSelection,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     onColumnVisibilityChange: setColumnVisibility,
+    onPaginationChange: (updater) => {
+      // Handle pagination changes
+      const newPagination =
+        typeof updater === "function" ? updater(pagination) : updater;
+      setPagination(newPagination);
+    },
 
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
@@ -154,7 +171,9 @@ export default function TableView({
         </Table>
       </div>
 
-      {isPagination && <DataTablePagination table={table} />}
+      {isPagination && (
+        <DataTablePagination table={table} totalCount={totalCount} />
+      )}
     </div>
   );
 }
