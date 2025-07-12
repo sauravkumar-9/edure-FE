@@ -44,6 +44,7 @@ interface DataTableProps {
   data: any;
   isToolBar?: boolean;
   isPagination?: boolean;
+  onFilterUpdate?: (filterData: any) => void;
 }
 
 export default function TableView({
@@ -51,6 +52,7 @@ export default function TableView({
   data,
   isToolBar = true,
   isPagination = true,
+  onFilterUpdate,
 }: DataTableProps) {
   const [rowSelection, setRowSelection] = useState({});
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
@@ -59,6 +61,12 @@ export default function TableView({
 
   useEffect(() => {
     console.log({ rowSelection, columnVisibility, columnFilters, sorting });
+    onFilterUpdate?.({
+      rowSelection,
+      columnVisibility,
+      columnFilters,
+      sorting,
+    });
   }, [rowSelection, columnVisibility, columnFilters, sorting]);
 
   const table = useReactTable({

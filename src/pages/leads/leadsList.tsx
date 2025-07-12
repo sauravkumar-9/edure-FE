@@ -26,6 +26,12 @@ export default function LeadList() {
     }
   });
 
+  const getLeadList = (filterData: any) => {
+    try {
+      console.log("Finally", filterData);
+    } catch (error) {}
+  };
+
   return (
     <div className="space-y-4">
       <Tabs value={tabValue} onValueChange={setTabValue} className="w-full">
@@ -55,7 +61,11 @@ export default function LeadList() {
       </Tabs>
 
       {/* Single TableView with filtered data */}
-      <TableView data={filteredData} columns={leadReportColumns} />
+      <TableView
+        data={filteredData}
+        columns={leadReportColumns}
+        onFilterUpdate={getLeadList}
+      />
     </div>
   );
 }
