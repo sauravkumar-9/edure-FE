@@ -1,30 +1,30 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import Navigation from "./app/navigation";
 
-import ManagementDashboard from "./pages/management/dashboard";
+import ManagementDashboard from "./modules/management/dashboard";
 
-import StudentCatchUp from "./pages/student/catchup";
-import StudentAttendence from "./pages/student/attendence";
-import StudentGrade from "./pages/student/grade";
-import StudentProfile from "./pages/student/profile";
-import Assignments from "./pages/student/assignment";
-import CurrentCoursesTab from "./pages/placement/placement";
-import { ReportListing } from "./pages/report/reportList";
-import Report from "./pages/report/report";
-import PlacementDetails from "./pages/placement/placementDetails";
-import { AdmissionForm } from "./pages/forms/admissionPage";
-import { Admission } from "./pages/admission/admission";
-import AdmissionInsights from "./pages/admission/admissionInsights";
-import { AdmissionReport } from "./pages/admission/admissionReport";
-import TeacherDashboard from "./pages/faculty/catchup";
-import PlacementDashboard from "./pages/placement/placementDashboard";
-import { CompaniesList } from "./pages/placement/companiesList";
-import { PlacementCatchupDashboard } from "./pages/placement/catchup";
-import ExamsPage from "./pages/exam/examDetails";
-import CounsellerCatchUp from "./pages/counseller/counsellerCatchup";
-import CounsellerDashboard from "./pages/counseller/counsellerDashboard";
-import LeadProfile from "./pages/leads/leadProfie";
-import LeadsList from "./pages/leads/leadsList";
+import StudentCatchUp from "./modules/student/catchup";
+import StudentAttendence from "./modules/student/attendence";
+import StudentGrade from "./modules/student/grade";
+import StudentProfile from "./modules/student/profile";
+import Assignments from "./modules/student/assignment";
+import CurrentCoursesTab from "./modules/placement/placement";
+import { ReportListing } from "./modules/report/reportList";
+import Report from "./modules/report/report";
+import PlacementDetails from "./modules/placement/placementDetails";
+import { AdmissionForm } from "./modules/forms/admissionPage";
+import { Admission } from "./modules/admission/admission";
+import AdmissionInsights from "./modules/admission/admissionInsights";
+import { AdmissionReport } from "./modules/admission/admissionReport";
+import TeacherDashboard from "./modules/faculty/catchup";
+import PlacementDashboard from "./modules/placement/placementDashboard";
+import { CompaniesList } from "./modules/placement/companiesList";
+import { PlacementCatchupDashboard } from "./modules/placement/catchup";
+import ExamsPage from "./modules/exam/examDetails";
+import CounsellerCatchUp from "./modules/counseller/counsellerCatchup";
+import CounsellerDashboard from "./modules/counseller/counsellerDashboard";
+import LeadProfile from "./modules/leads/leadProfie";
+import LeadsList from "./modules/leads/leadsList";
 
 export const router = createBrowserRouter(
   [

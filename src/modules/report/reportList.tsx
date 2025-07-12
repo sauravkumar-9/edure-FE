@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ReportListCard } from "@/components/cards/reportListCard";
-import { roleBasedReports } from "@/pages/report/data/report";
+import { roleBasedReports } from "@/modules/report/data/report";
 import { SearchFilterBar } from "@/components/final/searchFilterBar";
 import { Link } from "react-router-dom";
 import { useRole } from "@/app/navigation";
