@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://sauravkumar-9.github.io/ed-tech",
+  "homepage": "https://sauravkumar-9.github.io/edure-FE",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

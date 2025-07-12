@@ -40,8 +40,8 @@ interface DataTableAdvancedFilterProps {
 export function DataTableAdvancedFilter({
   columns,
   onApply,
-  onReset,
-}: DataTableAdvancedFilterProps) {
+}: // onReset,
+DataTableAdvancedFilterProps) {
   const [conditions, setConditions] = useState<FilterCondition[]>([
     {
       id: crypto.randomUUID(),

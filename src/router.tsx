@@ -154,6 +154,6 @@ export const router = createBrowserRouter(
     { path: "/admission/form", element: <AdmissionForm /> },
   ],
   {
-    basename: "/ed-tech/", // Add this for GitHub Pages
+    basename: "/edure-FE/", // Add this for GitHub Pages
   }
 );
