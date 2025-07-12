@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
+
 import {
-  ColumnFiltersState,
   RowData,
-  SortingState,
   VisibilityState,
   flexRender,
   getCoreRowModel,
@@ -111,7 +111,6 @@ export default function TableView({
     <div className="space-y-4">
       {isToolBar && <DataTableToolbar table={table} metaData={metaData} />}
 
-      {/* Scroll container for horizontal scroll */}
       <div className="rounded-md border overflow-x-auto w-full bg-white">
         <Table>
           <TableHeader>
@@ -134,42 +133,53 @@ export default function TableView({
               </TableRow>
             ))}
           </TableHeader>
-          {isTableLoading ? (
-            <div>Loading</div>
-          ) : (
-            <TableBody>
-              {table.getRowModel().rows.length ? (
-                table.getRowModel().rows.map((row) => (
-                  <TableRow
-                    key={row.id}
-                    data-state={row.getIsSelected() && "selected"}
-                    className="group/row"
-                  >
-                    {row.getVisibleCells().map((cell) => (
-                      <TableCell
-                        key={cell.id}
-                        className={cell.column.columnDef.meta?.className ?? ""}
-                      >
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
-                        )}
+          <TableBody>
+            {isTableLoading ? (
+              // Skeleton loading state
+              Array.from({ length: pagination.pageSize }).map((_, rowIndex) => (
+                <TableRow key={`skeleton-${rowIndex}`}>
+                  {Array.from({ length: columns.length }).map(
+                    (_, cellIndex) => (
+                      <TableCell key={`skeleton-cell-${cellIndex}`}>
+                        <Skeleton className="h-6 w-full" />
                       </TableCell>
-                    ))}
-                  </TableRow>
-                ))
-              ) : (
-                <TableRow>
-                  <TableCell
-                    colSpan={columns.length}
-                    className="h-24 text-center"
-                  >
-                    No results.
-                  </TableCell>
+                    )
+                  )}
                 </TableRow>
-              )}
-            </TableBody>
-          )}
+              ))
+            ) : table.getRowModel().rows.length ? (
+              // Normal data rows
+              table.getRowModel().rows.map((row) => (
+                <TableRow
+                  key={row.id}
+                  data-state={row.getIsSelected() && "selected"}
+                  className="group/row"
+                >
+                  {row.getVisibleCells().map((cell) => (
+                    <TableCell
+                      key={cell.id}
+                      className={cell.column.columnDef.meta?.className ?? ""}
+                    >
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))
+            ) : (
+              // Empty state
+              <TableRow>
+                <TableCell
+                  colSpan={columns.length}
+                  className="h-24 text-center"
+                >
+                  No results.
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
         </Table>
       </div>
 
