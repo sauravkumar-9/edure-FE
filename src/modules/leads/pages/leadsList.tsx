@@ -4,6 +4,7 @@ import { generateColumnsFromResponse } from "../utils/tableBuilder";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getAllLeads } from "../leadService";
 import { ColumnFiltersState, SortingState } from "@tanstack/react-table";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function LeadList() {
   const [tabValue, setTabValue] = useState("all");
@@ -104,8 +105,61 @@ export default function LeadList() {
   return (
     <div className="space-y-4">
       {isPageLoading ? (
-        <div className="text-center text-muted-foreground py-12">
-          Loading...
+        <div className="space-y-4">
+          {/* Tab Loading Skeleton */}
+          <div className="flex justify-between items-center">
+            <div className="flex space-x-2">
+              {["all", "verified", "unverified"].map((tab) => (
+                <Skeleton key={tab} className="h-10 w-24 rounded-md" />
+              ))}
+            </div>
+          </div>
+
+          {/* Table Toolbar Loading Skeleton */}
+          <div className="flex items-center justify-between gap-2">
+            <Skeleton className="h-8 w-[250px]" />
+            <div className="flex gap-2">
+              <Skeleton className="h-8 w-24" />
+              <Skeleton className="h-8 w-24" />
+            </div>
+          </div>
+
+          {/* Table Loading Skeleton */}
+          <div className="rounded-md border overflow-x-auto w-full bg-white">
+            <table className="w-full">
+              <thead>
+                <tr>
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <th key={i} className="px-4 py-3 text-left">
+                      <Skeleton className="h-4 w-3/4" />
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {Array.from({ length: 10 }).map((_, rowIdx) => (
+                  <tr key={rowIdx} className="border-t">
+                    {Array.from({ length: 5 }).map((_, cellIdx) => (
+                      <td key={cellIdx} className="px-4 py-3">
+                        <Skeleton className="h-4 w-full" />
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Pagination Loading Skeleton */}
+          <div className="flex items-center justify-between">
+            <Skeleton className="h-8 w-32" />
+            <div className="flex gap-2">
+              <Skeleton className="h-8 w-8" />
+              <Skeleton className="h-8 w-8" />
+              <Skeleton className="h-8 w-8" />
+            </div>
+            <Skeleton className="h-8 w-32" />
+          </div>
         </div>
       ) : (
         <>

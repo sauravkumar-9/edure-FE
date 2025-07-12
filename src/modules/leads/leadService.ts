@@ -26,7 +26,7 @@ export const getAllLeads = async (payload: any) => {
   try {
     const { queryParams } = payload;
     console.log("queryParams", queryParams);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 10000));
     return response;
     // const response = await axios.get(`/leads?${queryParams}`);
     // return response.data;
