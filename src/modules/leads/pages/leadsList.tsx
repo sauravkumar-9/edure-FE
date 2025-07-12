@@ -2,72 +2,106 @@ import { useEffect, useState } from "react";
 import TableView from "@/components/table/table";
 import { generateColumnsFromResponse } from "../utils/tableBuilder";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { response } from "../mockData/apiMock";
+import { getAllLeads } from "../leadService";
 
 export default function LeadList() {
-  useEffect(() => {
-    setLeadListMock(response.rows);
-    const columns = generateColumnsFromResponse(response);
-    setLeadReportColumns(columns);
-  }, []);
   const [tabValue, setTabValue] = useState("all");
   const [leadReportColumns, setLeadReportColumns] = useState<any[]>([]);
   const [leadListMock, setLeadListMock] = useState<any[]>([]);
+  const [filterData, setFilterData] = useState<any>({});
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  // Filter data based on tab selection
-  const filteredData = leadListMock.filter((lead) => {
-    switch (tabValue) {
-      case "verified":
-        return lead.verificationStatus === "Yes";
-      case "unverified":
-        return lead.verificationStatus === "No";
-      default:
-        return true; // "all" case
-    }
-  });
+  const [response, setResponse] = useState<any>({});
 
-  const getLeadList = (filterData: any) => {
+  useEffect(() => {
+    getLeadList();
+  }, []);
+
+  // useEffect(() => {
+  //   getLeadList();
+  // }, [filterData]);
+
+  const updateFilterData = (newFilterData: any) => {
+    console.log("newFilterDatanewFilterData", newFilterData);
+    setFilterData(newFilterData);
+  };
+
+  const getLeadList = async () => {
+    console.log("getLeadList called");
     try {
-      console.log("Finally", filterData);
-    } catch (error) {}
+      setIsLoading(true);
+      const formattedFilterData = formatFilterData(filterData);
+      const payload: any = {
+        queryParams: formattedFilterData,
+      };
+      const response: any = await getAllLeads(payload);
+      console.log("Ddddd", response);
+      setResponse(response);
+
+      const columns = generateColumnsFromResponse(response);
+      setLeadReportColumns(columns);
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+    }
+  };
+
+  const formatFilterData = (filterData: any) => {
+    const {
+      searchValue,
+      sortBy,
+      sortDirection,
+      pageSize,
+      currentPage,
+      filterBy,
+    } = filterData;
+    const filter = filterBy?.map((item: any) => ({
+      [item.columnId]: item.value,
+    }));
+    return {
+      searchValue,
+      sortBy,
+      sortDirection,
+      pageSize,
+      currentPage,
+      filter,
+    };
   };
 
   return (
     <div className="space-y-4">
-      <Tabs value={tabValue} onValueChange={setTabValue} className="w-full">
-        <div className="flex items-center justify-between">
-          <TabsList>
-            <TabsTrigger value="all">
-              All Leads ({leadListMock.length})
-            </TabsTrigger>
-            <TabsTrigger value="verified">
-              Verified (
-              {
-                leadListMock.filter((lead) => lead.verificationStatus === "Yes")
-                  .length
-              }
-              )
-            </TabsTrigger>
-            <TabsTrigger value="unverified">
-              Unverified (
-              {
-                leadListMock.filter((lead) => lead.verificationStatus === "No")
-                  .length
-              }
-              )
-            </TabsTrigger>
-          </TabsList>
+      {isLoading ? (
+        <div className="text-center text-muted-foreground py-12">
+          Loading...
         </div>
-      </Tabs>
+      ) : (
+        <>
+          <Tabs value={tabValue} onValueChange={setTabValue} className="w-full">
+            <div className="flex items-center justify-between">
+              <TabsList>
+                <TabsTrigger value="all">
+                  All Leads (
+                  {response.stats?.verified + response.stats?.unverified})
+                </TabsTrigger>
+                <TabsTrigger value="verified">
+                  Verified ({response.stats?.verified})
+                </TabsTrigger>
+                <TabsTrigger value="unverified">
+                  Unverified ({response.stats?.unverified})
+                </TabsTrigger>
+              </TabsList>
+            </div>
+          </Tabs>
 
-      {/* Single TableView with filtered data */}
-      <TableView
-        data={filteredData}
-        columns={leadReportColumns}
-        onViewUpdate={getLeadList}
-        totalCount={response.total}
-        metaData={{ searchPlaceholder: "Search by lead name, email, code" }}
-      />
+          <TableView
+            data={response.rows}
+            columns={leadReportColumns}
+            onViewUpdate={updateFilterData}
+            totalCount={response.total}
+            metaData={{ searchPlaceholder: "Search by lead name, email, code" }}
+          />
+        </>
+      )}
     </div>
   );
 }

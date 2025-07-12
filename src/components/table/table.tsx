@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   ColumnFiltersState,
   RowData,
@@ -69,16 +69,21 @@ export default function TableView({
     pageSize: 10,
   });
 
+  const hasInitialized = useRef(false);
   useEffect(() => {
-    console.log({ rowSelection, columnVisibility, columnFilters, sorting });
+    if (!hasInitialized.current) {
+      hasInitialized.current = true;
+      return;
+    }
+
+    console.log("columnFilters --------------");
+
     onViewUpdate?.({
-      rowSelection,
-      columnVisibility,
       columnFilters,
       sorting,
       pagination,
     });
-  }, [rowSelection, columnVisibility, columnFilters, sorting, pagination]);
+  }, [columnFilters, sorting, pagination]);
 
   const table = useReactTable({
     data,

@@ -135,5 +135,3 @@ export const response = {
     };
   }),
 };
-
-console.log(JSON.stringify(response, null, 2));
