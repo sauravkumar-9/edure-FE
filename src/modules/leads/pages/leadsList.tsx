@@ -47,7 +47,7 @@ export default function LeadList() {
   }, []);
 
   useEffect(() => {
-    console.log("API CALLEDD", {
+    console.log("Current Filter Data", {
       pagination,
       sorting,
       columnFilters,
@@ -58,10 +58,10 @@ export default function LeadList() {
       sorting,
       columnFilters,
       searchTerm,
+      tabValue,
     });
-    console.log("queryString ---", queryString);
-    getLeadList({ loadType: "table" });
-  }, [pagination, sorting, columnFilters, searchTerm]);
+    getLeadList({ loadType: "table", queryString });
+  }, [pagination, sorting, columnFilters, searchTerm, tabValue]);
 
   interface FilterState {
     pagination: {
@@ -74,25 +74,26 @@ export default function LeadList() {
     }>;
     columnFilters: ColumnFiltersState;
     searchTerm?: string;
+    tabValue: string;
   }
 
   function generateQueryParams(filters: FilterState): string {
     const params = new URLSearchParams();
 
     // Pagination
-    params.set("page", String(filters.pagination.pageIndex + 1)); // API usually uses 1-based index
+    params.set("page", String(filters.pagination.pageIndex + 1));
     params.set("pageSize", String(filters.pagination.pageSize));
 
     // Sorting
     if (filters.sorting.length > 0) {
-      const sort = filters.sorting[0]; // Assuming single sort for simplicity
+      const sort = filters.sorting[0];
       params.set("sortBy", sort.id);
       params.set("sortOrder", sort.desc ? "desc" : "asc");
     }
 
     // Column Filters
     filters.columnFilters.forEach((filter: any) => {
-      if (filter.value.value.length > 0) {
+      if (filter.value?.value?.length > 0) {
         params.set(
           `${filter.id}_${filter.value.operator}`,
           filter.value.value.join(",")
@@ -100,10 +101,18 @@ export default function LeadList() {
       }
     });
 
-    // Search Term
+    // Search
     if (filters.searchTerm) {
       params.set("search", filters.searchTerm);
     }
+
+    // Tab Value (verified/unverified filter)
+    if (filters.tabValue === "verified") {
+      params.set("verified", "true");
+    } else if (filters.tabValue === "unverified") {
+      params.set("verified", "false");
+    }
+    // Don't add anything if tabValue === "all"
 
     return params.toString();
   }
@@ -114,7 +123,6 @@ export default function LeadList() {
     columnFilters?: typeof columnFilters;
     searchTerm?: string;
   }) => {
-    console.log("partial", partial);
     if (partial.pagination) setPagination(partial.pagination);
     if (partial.sorting) setSorting(partial.sorting);
     if (partial.columnFilters) setColumnFilters(partial.columnFilters);
@@ -176,17 +184,11 @@ export default function LeadList() {
     }
   };
 
-  const getLeadList = async ({ loadType }: LoadType) => {
+  const getLeadList = async ({ loadType, queryString }: LoadType) => {
     try {
       updateLoadingState({ loadType, loadingState: true });
-
-      const formattedFilterData = formatFilterData({
-        pagination,
-        sorting,
-        columnFilters,
-      });
       const payload: any = {
-        queryParams: formattedFilterData,
+        queryParams: queryString,
       };
       const response: any = await getAllLeads(payload);
       if (loadType === "page") {
@@ -201,28 +203,6 @@ export default function LeadList() {
     } catch (error) {
       updateLoadingState({ loadType, loadingState: false });
     }
-  };
-
-  const formatFilterData = (filterData: any) => {
-    const {
-      searchValue,
-      sortBy,
-      sortDirection,
-      pageSize,
-      currentPage,
-      filterBy,
-    } = filterData;
-    const filter = filterBy?.map((item: any) => ({
-      [item.columnId]: item.value,
-    }));
-    return {
-      searchValue,
-      sortBy,
-      sortDirection,
-      pageSize,
-      currentPage,
-      filter,
-    };
   };
 
   return (

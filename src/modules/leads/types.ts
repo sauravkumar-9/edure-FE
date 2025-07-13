@@ -15,6 +15,7 @@ export interface LeadStatusUpdate {
 
 export interface LoadType {
   loadType: "page" | "table";
+  queryString?: string;
 }
 
 export interface Lead {

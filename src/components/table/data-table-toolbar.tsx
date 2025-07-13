@@ -38,43 +38,43 @@ export function DataTableToolbar({
   };
 }) {
   const [showAdvancedFilter, setShowAdvancedFilter] = useState(false);
-  const [basicFilterValue, setBasicFilterValue] = useState("");
+  const [basicFilterValue, setBasicFilterValue] = useState<string[]>([]);
 
-  // Get the single basic filter column (first one marked with isBasic)
   const basicFilterColumn = table
     .getAllColumns()
     .find((column: any) => column.columnDef.meta?.filterConfig?.isBasic);
 
-  // Columns for advanced filter (marked with isAdvanced)
   const advancedFilterColumns = table
     .getAllColumns()
     .filter((column: any) => column.columnDef.meta?.filterConfig?.isAdvanced);
 
-  // Only show columns that can be hidden (enableHiding: true)
   const hideableColumns = table
     .getAllColumns()
     .filter((column: any) => column.columnDef.meta?.filterConfig?.enableHiding);
 
-  // Check if any hideable columns are currently hidden
   const hasHiddenColumns = hideableColumns.some(
     (column: any) => !column.getIsVisible()
   );
 
   const handleBasicFilterChange = (value: string) => {
-    console.log("Basic Filter Value:", value);
-    setBasicFilterValue(value);
+    let updatedValues = [...basicFilterValue];
+    if (updatedValues.includes(value)) {
+      updatedValues = updatedValues.filter((v) => v !== value);
+    } else {
+      updatedValues.push(value);
+    }
+
+    setBasicFilterValue(updatedValues);
 
     if (!basicFilterColumn) return;
 
-    // Apply filter immediately when changed
-    if (value) {
-      console.log("basicFilterColumn", basicFilterColumn);
+    if (updatedValues.length > 0) {
       table.setColumnFilters([
         {
           id: basicFilterColumn.id,
           value: {
-            operator: "equals",
-            value: [value],
+            operator: "in",
+            value: updatedValues,
           },
         },
       ]);
@@ -97,7 +97,7 @@ export function DataTableToolbar({
 
   const handleResetFilters = () => {
     table.setColumnFilters([]);
-    setBasicFilterValue("");
+    setBasicFilterValue([]);
     setShowAdvancedFilter(false);
   };
 
@@ -106,20 +106,16 @@ export function DataTableToolbar({
   };
 
   const handleDownload = () => {
-    // Implement your download logic here
     console.log("Download data");
   };
 
   const renderBasicFilter = () => {
-    console.log("YESSSSS", basicFilterColumn);
     if (!basicFilterColumn) return null;
-    console.log("KKKKKKKK", basicFilterColumn);
 
     const columnType = basicFilterColumn.columnDef.meta?.type;
     const enumValues = basicFilterColumn.columnDef.meta?.enum;
-    console.log(JSON.stringify(enumValues));
 
-    if (columnType === "enum" && enumValues.length > 0) {
+    if (columnType === "enum" && enumValues?.length > 0) {
       return (
         <Popover>
           <PopoverTrigger asChild>
@@ -128,14 +124,15 @@ export function DataTableToolbar({
               role="combobox"
               className={cn(
                 "w-[180px] justify-between",
-                !basicFilterValue && "text-muted-foreground"
+                basicFilterValue.length === 0 && "text-muted-foreground"
               )}
             >
-              {basicFilterValue ||
-                `Filter ${
-                  basicFilterColumn.columnDef.meta?.label ||
-                  basicFilterColumn.id
-                }`}
+              {basicFilterValue.length > 0
+                ? basicFilterValue.join(", ")
+                : `Filter ${
+                    basicFilterColumn.columnDef.meta?.label ||
+                    basicFilterColumn.id
+                  }`}
               <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
             </Button>
           </PopoverTrigger>
@@ -146,18 +143,14 @@ export function DataTableToolbar({
               <CommandGroup>
                 {enumValues.map((value: any) => (
                   <CommandItem
-                    key={value.id}
+                    key={value.value}
                     value={value.value}
-                    onSelect={() => {
-                      const newValue =
-                        basicFilterValue === value.value ? "" : value.value;
-                      handleBasicFilterChange(newValue);
-                    }}
+                    onSelect={() => handleBasicFilterChange(value.value)}
                   >
                     <Check
                       className={cn(
                         "mr-2 h-4 w-4",
-                        basicFilterValue === value.value
+                        basicFilterValue.includes(value.value)
                           ? "opacity-100"
                           : "opacity-0"
                       )}
@@ -167,6 +160,20 @@ export function DataTableToolbar({
                 ))}
               </CommandGroup>
             </Command>
+            {basicFilterValue.length > 0 && (
+              <div className="border-t px-2 py-2">
+                <Button
+                  variant="ghost"
+                  className="w-full text-sm"
+                  onClick={() => {
+                    setBasicFilterValue([]);
+                    table.setColumnFilters([]);
+                  }}
+                >
+                  Clear Filters
+                </Button>
+              </div>
+            )}
           </PopoverContent>
         </Popover>
       );
@@ -178,11 +185,27 @@ export function DataTableToolbar({
           placeholder={`Filter ${
             basicFilterColumn.columnDef.meta?.label || basicFilterColumn.id
           }`}
-          value={basicFilterValue}
-          onChange={(e) => handleBasicFilterChange(e.target.value)}
+          value={basicFilterValue[0] || ""}
+          onChange={(e) => {
+            const val = e.target.value;
+            setBasicFilterValue(val ? [val] : []);
+            table.setColumnFilters(
+              val
+                ? [
+                    {
+                      id: basicFilterColumn.id,
+                      value: {
+                        operator: "equals",
+                        value: [val],
+                      },
+                    },
+                  ]
+                : []
+            );
+          }}
           className="h-8 w-[180px] pr-8"
         />
-        {basicFilterValue && (
+        {basicFilterValue.length > 0 && (
           <Button
             variant="ghost"
             size="icon"
@@ -234,7 +257,7 @@ export function DataTableToolbar({
           )}
         </div>
 
-        {/* Right side buttons - Download and View */}
+        {/* Right Side: Download and View */}
         <div className="flex items-center gap-2">
           <Button
             variant="outline"
