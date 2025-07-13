@@ -55,6 +55,7 @@ export interface Lead {
 import { MessageSquare } from "lucide-react";
 import CommentDialog from "./commentDialog";
 import { UpdateStatusDialog } from "./statusUpdateDialog";
+import { Link } from "react-router-dom";
 
 // Updated StatusUpdateDialog with all functionality
 export function StatusUpdateDialog({ lead, onStatusUpdate }: any) {
@@ -115,8 +116,10 @@ export function StatusUpdateDialog({ lead, onStatusUpdate }: any) {
             Add Note
           </DropdownMenuItem>
           <DropdownMenuItem onClick={handleViewProfile}>
-            <User className="mr-2 h-4 w-4" />
-            View Profile
+            <Link to={lead.id} className="block flex" key={lead.id}>
+              <User className="mr-2 h-4 w-4" />
+              View Profile
+            </Link>
           </DropdownMenuItem>
           {/* You can add more items with icons as needed */}
         </DropdownMenuContent>

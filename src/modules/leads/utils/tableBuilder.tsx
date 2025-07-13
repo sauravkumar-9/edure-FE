@@ -41,26 +41,35 @@ export function generateColumnsFromResponse(
     {
       id: "select",
       header: ({ table }) => (
-        <Checkbox
-          checked={
-            table.getIsAllPageRowsSelected() ||
-            (table.getIsSomePageRowsSelected() && "indeterminate")
-          }
-          onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-          aria-label="Select all"
-          className="translate-y-[2px]"
-        />
+        <div className="pr-4">
+          <Checkbox
+            checked={
+              table.getIsAllPageRowsSelected() ||
+              (table.getIsSomePageRowsSelected() && "indeterminate")
+            }
+            onCheckedChange={(value) =>
+              table.toggleAllPageRowsSelected(!!value)
+            }
+            aria-label="Select all"
+            className="translate-y-[2px]"
+          />
+        </div>
       ),
       cell: ({ row }) => (
-        <Checkbox
-          checked={row.getIsSelected()}
-          onCheckedChange={(value) => row.toggleSelected(!!value)}
-          aria-label="Select row"
-          className="translate-y-[2px]"
-        />
+        <div className="flex items-center justify-center pr-4">
+          <Checkbox
+            checked={row.getIsSelected()}
+            onCheckedChange={(value) => row.toggleSelected(!!value)}
+            aria-label="Select row"
+            className="translate-y-[2px]"
+          />
+        </div>
       ),
       enableSorting: false,
       enableHiding: false,
+      meta: {
+        className: cn("sticky left-0 z-10 bg-background"),
+      },
     },
   ];
 
@@ -117,16 +126,17 @@ export function generateColumnsFromResponse(
 
   columns.push({
     id: "actions",
-    cell: ({ row }) => {
-      return (
-        <StatusUpdateDialog
-          lead={row.original}
-          onStatusUpdate={handleLeadUpdate}
-        />
-      );
-    },
+    cell: ({ row }) => (
+      <StatusUpdateDialog
+        lead={row.original}
+        onStatusUpdate={handleLeadUpdate}
+      />
+    ),
     enableSorting: false,
     enableHiding: false,
+    meta: {
+      className: cn("sticky right-0 z-10 bg-background"),
+    },
   });
 
   return columns;
