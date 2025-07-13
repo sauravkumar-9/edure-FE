@@ -10,6 +10,7 @@ import {
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
 import { Button } from "@/components/ui/button";
+import { StatusUpdateDialog } from "@/components/final/leadStatusUpdateDialog";
 
 type LeadStatus = "cold" | "warm" | "hot" | "converted" | "lost";
 type LeadSource = "walkin" | "instagram" | "referral" | "website" | "other";
@@ -26,7 +27,10 @@ interface Lead {
   lastFollowUp: string;
 }
 
-export function generateColumnsFromResponse(response: any): ColumnDef<Lead>[] {
+export function generateColumnsFromResponse(
+  response: any,
+  handleLeadUpdate: (lead: Lead) => void
+): ColumnDef<Lead>[] {
   const columns: ColumnDef<Lead>[] = [
     {
       id: "select",
@@ -103,6 +107,20 @@ export function generateColumnsFromResponse(response: any): ColumnDef<Lead>[] {
     }
 
     columns.push(column);
+  });
+
+  columns.push({
+    id: "actions",
+    cell: ({ row }) => {
+      return (
+        <StatusUpdateDialog
+          lead={row.original}
+          onStatusUpdate={handleLeadUpdate}
+        />
+      );
+    },
+    enableSorting: false,
+    enableHiding: false,
   });
 
   return columns;

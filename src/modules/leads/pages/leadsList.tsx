@@ -55,6 +55,10 @@ export default function LeadList() {
     }
   };
 
+  const handleLeadUpdate = (lead: any) => {
+    console.log("lead", lead);
+  };
+
   const getLeadList = async ({ loadType }: LoadType) => {
     try {
       updateLoadingState({ loadType, loadingState: true });
@@ -69,7 +73,10 @@ export default function LeadList() {
       };
       const response: any = await getAllLeads(payload);
       if (loadType === "page") {
-        leadReportColumnsRef.current = generateColumnsFromResponse(response);
+        leadReportColumnsRef.current = generateColumnsFromResponse(
+          response,
+          handleLeadUpdate
+        );
       }
 
       setResponse(response);
