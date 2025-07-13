@@ -51,7 +51,33 @@ export const leadListingResponse = {
       label: "Status",
       key: "leadStatus",
       dataType: "enum",
-      enumValues: ["cold", "warm", "hot", "converted", "lost"],
+      enumValues: [
+        {
+          id: 1,
+          label: "Cold",
+          value: "cold",
+        },
+        {
+          id: 2,
+          label: "Warm",
+          value: "warm",
+        },
+        {
+          id: 3,
+          label: "Hot",
+          value: "hot",
+        },
+        {
+          id: 4,
+          label: "Converted",
+          value: "converted",
+        },
+        {
+          id: 5,
+          label: "Lost",
+          value: "lost",
+        },
+      ],
       filterConfig: {
         isBasic: true,
         isAdvanced: true,
@@ -63,7 +89,33 @@ export const leadListingResponse = {
       label: "Source",
       key: "leadSource",
       dataType: "enum",
-      enumValues: ["walkin", "instagram", "referral", "website", "other"],
+      enumValues: [
+        {
+          id: 1,
+          label: "Walkin",
+          value: "walkin",
+        },
+        {
+          id: 2,
+          label: "Instagram",
+          value: "instagram",
+        },
+        {
+          id: 3,
+          label: "Referral",
+          value: "referral",
+        },
+        {
+          id: 4,
+          label: "Website",
+          value: "website",
+        },
+        {
+          id: 5,
+          label: "Other",
+          value: "other",
+        },
+      ],
       filterConfig: {
         isBasic: false,
         isAdvanced: true,
@@ -86,7 +138,18 @@ export const leadListingResponse = {
       label: "Verified",
       key: "verificationStatus",
       dataType: "enum",
-      enumValues: ["Yes", "No"],
+      enumValues: [
+        {
+          id: 1,
+          label: "Yes",
+          value: "Yes",
+        },
+        {
+          id: 2,
+          label: "No",
+          value: "No",
+        },
+      ],
       filterConfig: {
         isBasic: false,
         isAdvanced: true,

@@ -47,9 +47,66 @@ export default function LeadList() {
   }, []);
 
   useEffect(() => {
-    console.log("API CALLEDD", { pagination, sorting, columnFilters });
+    console.log("API CALLEDD", {
+      pagination,
+      sorting,
+      columnFilters,
+      searchTerm,
+    });
+    const queryString = generateQueryParams({
+      pagination,
+      sorting,
+      columnFilters,
+      searchTerm,
+    });
+    console.log("queryString ---", queryString);
     getLeadList({ loadType: "table" });
-  }, [pagination, sorting, columnFilters]);
+  }, [pagination, sorting, columnFilters, searchTerm]);
+
+  interface FilterState {
+    pagination: {
+      pageIndex: number;
+      pageSize: number;
+    };
+    sorting: Array<{
+      id: string;
+      desc: boolean;
+    }>;
+    columnFilters: ColumnFiltersState;
+    searchTerm?: string;
+  }
+
+  function generateQueryParams(filters: FilterState): string {
+    const params = new URLSearchParams();
+
+    // Pagination
+    params.set("page", String(filters.pagination.pageIndex + 1)); // API usually uses 1-based index
+    params.set("pageSize", String(filters.pagination.pageSize));
+
+    // Sorting
+    if (filters.sorting.length > 0) {
+      const sort = filters.sorting[0]; // Assuming single sort for simplicity
+      params.set("sortBy", sort.id);
+      params.set("sortOrder", sort.desc ? "desc" : "asc");
+    }
+
+    // Column Filters
+    filters.columnFilters.forEach((filter: any) => {
+      if (filter.value.value.length > 0) {
+        params.set(
+          `${filter.id}_${filter.value.operator}`,
+          filter.value.value.join(",")
+        );
+      }
+    });
+
+    // Search Term
+    if (filters.searchTerm) {
+      params.set("search", filters.searchTerm);
+    }
+
+    return params.toString();
+  }
 
   const updateTableState = (partial: {
     pagination?: typeof pagination;

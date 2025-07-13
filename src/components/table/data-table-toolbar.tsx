@@ -61,13 +61,23 @@ export function DataTableToolbar({
   );
 
   const handleBasicFilterChange = (value: string) => {
+    console.log("Basic Filter Value:", value);
     setBasicFilterValue(value);
 
     if (!basicFilterColumn) return;
 
     // Apply filter immediately when changed
     if (value) {
-      table.setColumnFilters([{ id: basicFilterColumn.id, value }]);
+      console.log("basicFilterColumn", basicFilterColumn);
+      table.setColumnFilters([
+        {
+          id: basicFilterColumn.id,
+          value: {
+            operator: "equals",
+            value: [value],
+          },
+        },
+      ]);
     } else {
       table.setColumnFilters([]);
     }
@@ -101,10 +111,13 @@ export function DataTableToolbar({
   };
 
   const renderBasicFilter = () => {
+    console.log("YESSSSS", basicFilterColumn);
     if (!basicFilterColumn) return null;
+    console.log("KKKKKKKK", basicFilterColumn);
 
     const columnType = basicFilterColumn.columnDef.meta?.type;
     const enumValues = basicFilterColumn.columnDef.meta?.enum;
+    console.log(JSON.stringify(enumValues));
 
     if (columnType === "enum" && enumValues.length > 0) {
       return (
@@ -131,22 +144,25 @@ export function DataTableToolbar({
               <CommandInput placeholder="Search value..." />
               <CommandEmpty>No value found</CommandEmpty>
               <CommandGroup>
-                {enumValues.map((value: string) => (
+                {enumValues.map((value: any) => (
                   <CommandItem
-                    key={value}
-                    value={value}
+                    key={value.id}
+                    value={value.value}
                     onSelect={() => {
-                      const newValue = basicFilterValue === value ? "" : value;
+                      const newValue =
+                        basicFilterValue === value.value ? "" : value.value;
                       handleBasicFilterChange(newValue);
                     }}
                   >
                     <Check
                       className={cn(
                         "mr-2 h-4 w-4",
-                        basicFilterValue === value ? "opacity-100" : "opacity-0"
+                        basicFilterValue === value.value
+                          ? "opacity-100"
+                          : "opacity-0"
                       )}
                     />
-                    {value}
+                    {value.label}
                   </CommandItem>
                 ))}
               </CommandGroup>
