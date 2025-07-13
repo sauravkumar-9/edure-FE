@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/table";
 import { DataTablePagination } from "./data-table-pagination";
 import { DataTableToolbar } from "./data-table-toolbar";
+import { EmptyTable } from "./table-empty-state";
 
 declare module "@tanstack/react-table" {
   interface ColumnMeta<TData extends RowData, TValue> {
@@ -107,6 +108,10 @@ export default function TableView({
     getFacetedUniqueValues: getFacetedUniqueValues(),
   });
 
+  const resetFilters = () => {
+    onViewUpdate?.({ columnFilters: [] });
+  };
+
   return (
     <div className="space-y-4">
       {isToolBar && <DataTableToolbar table={table} metaData={metaData} />}
@@ -170,14 +175,13 @@ export default function TableView({
               ))
             ) : (
               // Empty state
-              <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                >
-                  No results.
-                </TableCell>
-              </TableRow>
+              <EmptyTable
+                colSpan={columns.length}
+                icon="filter"
+                actionText="Reset Filters"
+                onAction={() => resetFilters()}
+                className="bg-muted/30"
+              />
             )}
           </TableBody>
         </Table>

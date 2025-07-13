@@ -48,7 +48,7 @@ interface UpdateStatusDialogProps {
   onOpenChange: (open: boolean) => void;
   onStatusUpdate: (updatedLead: {
     id: string;
-    leadStatus: LeadStatus;
+    newStatus: LeadStatus;
     comment?: string;
   }) => void;
 }
@@ -68,8 +68,8 @@ export function UpdateStatusDialog({
   const handleSubmit = () => {
     onStatusUpdate({
       id: lead.id,
-      leadStatus: status,
-      ...(comment.trim() && { comment }),
+      newStatus: status,
+      comment,
     });
     setComment("");
     onOpenChange(false);

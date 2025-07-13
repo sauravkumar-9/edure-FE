@@ -67,20 +67,21 @@ export function StatusUpdateDialog({ lead, onStatusUpdate }: any) {
     console.log("lead", lead);
   };
 
-  const handleStatusSubmit = () => {
+  const handleStatusSubmit = ({
+    newStatus,
+    comment,
+  }: {
+    newStatus: LeadStatus;
+    comment?: string;
+  }) => {
     const updatedLead = {
       id: lead.id,
-      leadStatus: status,
-      comments: [
-        ...(lead.comments || []),
-        `Status changed to ${status}${comment ? `: ${comment}` : ""}`,
-      ],
+      newStatus,
+      comments: comment,
     };
-
     if (onStatusUpdate) {
-      onStatusUpdate(updatedLead);
+      onStatusUpdate({ updatedLead, updateType: "STATUS" });
     }
-
     setStatusDialogOpen(false);
     setComment("");
   };
@@ -88,11 +89,10 @@ export function StatusUpdateDialog({ lead, onStatusUpdate }: any) {
   const handleCommentSubmit = (newComment: string) => {
     const updatedLead = {
       id: lead.id,
-      comments: [...(lead.comments || []), newComment],
+      comments: newComment,
     };
-
     if (onStatusUpdate) {
-      onStatusUpdate(updatedLead);
+      onStatusUpdate({ updatedLead, updateType: "NOTE" });
     }
   };
 
@@ -121,61 +121,6 @@ export function StatusUpdateDialog({ lead, onStatusUpdate }: any) {
           {/* You can add more items with icons as needed */}
         </DropdownMenuContent>
       </DropdownMenu>
-
-      {/* Status Update Dialog */}
-      {/* <Dialog open={statusDialogOpen} onOpenChange={setStatusDialogOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Update Status for {lead.fullName}</DialogTitle>
-            <p className="text-sm text-muted-foreground">
-              Lead ID: {lead.leadCode}
-            </p>
-          </DialogHeader>
-          <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="status" className="text-right">
-                Status
-              </Label>
-              <Select
-                value={status}
-                onValueChange={(value: LeadStatus) => setStatus(value)}
-              >
-                <SelectTrigger className="col-span-3">
-                  <SelectValue placeholder="Select status" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="cold">Cold</SelectItem>
-                  <SelectItem value="warm">Warm</SelectItem>
-                  <SelectItem value="hot">Hot</SelectItem>
-                  <SelectItem value="converted">Converted</SelectItem>
-                  <SelectItem value="lost">Lost</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="comment" className="text-right">
-                Comment
-              </Label>
-              <Input
-                id="comment"
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
-                className="col-span-3"
-                placeholder="Add any notes..."
-              />
-            </div>
-          </div>
-          <div className="flex justify-end gap-2">
-            <Button
-              variant="outline"
-              onClick={() => setStatusDialogOpen(false)}
-            >
-              Cancel
-            </Button>
-            <Button onClick={handleStatusSubmit}>Update Status</Button>
-          </div>
-        </DialogContent>
-      </Dialog> */}
 
       <UpdateStatusDialog
         lead={lead}

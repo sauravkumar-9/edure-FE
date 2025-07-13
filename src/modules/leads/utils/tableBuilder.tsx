@@ -29,7 +29,13 @@ interface Lead {
 
 export function generateColumnsFromResponse(
   response: any,
-  handleLeadUpdate: (lead: Lead) => void
+  handleLeadUpdate: ({
+    updatedLead,
+    updateType,
+  }: {
+    updatedLead: Lead;
+    updateType: "STATUS" | "NOTE";
+  }) => void
 ): ColumnDef<Lead>[] {
   const columns: ColumnDef<Lead>[] = [
     {

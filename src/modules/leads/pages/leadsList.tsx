@@ -8,6 +8,21 @@ import { generateColumnsFromResponse } from "../utils/tableBuilder";
 import { getAllLeads } from "../leadService";
 import { LoadType } from "../types";
 
+type LeadStatus = "cold" | "warm" | "hot" | "converted" | "lost";
+type LeadSource = "walkin" | "instagram" | "referral" | "website" | "other";
+
+interface Lead {
+  id: string;
+  leadCode: string;
+  fullName: string;
+  interestedCourse: string;
+  leadStatus: LeadStatus;
+  leadSource: LeadSource;
+  counseller: string;
+  verificationStatus: "Yes" | "No";
+  lastFollowUp: string;
+}
+
 export default function LeadList() {
   const [tabValue, setTabValue] = useState("all");
   const leadReportColumnsRef = useRef<any[]>([]);
@@ -55,8 +70,14 @@ export default function LeadList() {
     }
   };
 
-  const handleLeadUpdate = (lead: any) => {
-    console.log("lead", lead);
+  const handleLeadUpdate = ({
+    updatedLead,
+    updateType,
+  }: {
+    updatedLead: any;
+    updateType: "STATUS" | "NOTE";
+  }) => {
+    console.log("lead", { updatedLead, updateType });
   };
 
   const getLeadList = async ({ loadType }: LoadType) => {
