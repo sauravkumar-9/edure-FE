@@ -40,6 +40,7 @@ export default function LeadList() {
   });
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
   useEffect(() => {
     getLeadList({ loadType: "page" });
@@ -54,10 +55,14 @@ export default function LeadList() {
     pagination?: typeof pagination;
     sorting?: typeof sorting;
     columnFilters?: typeof columnFilters;
+    searchTerm?: string;
   }) => {
+    console.log("partial", partial);
     if (partial.pagination) setPagination(partial.pagination);
     if (partial.sorting) setSorting(partial.sorting);
     if (partial.columnFilters) setColumnFilters(partial.columnFilters);
+    if (partial.searchTerm || partial.searchTerm === "")
+      setSearchTerm(partial.searchTerm);
   };
 
   const updateLoadingState = ({
@@ -246,7 +251,7 @@ export default function LeadList() {
             columns={leadReportColumnsRef.current}
             onViewUpdate={updateTableState}
             totalCount={response.total}
-            tableState={{ pagination, sorting, columnFilters }}
+            tableState={{ pagination, sorting, columnFilters, searchTerm }}
             metaData={{ searchPlaceholder: "Search by lead name, email, code" }}
             isTableLoading={isTableLoading}
           />

@@ -51,6 +51,7 @@ interface DataTableProps {
     pagination: any;
     sorting: any;
     columnFilters: any;
+    searchTerm: string;
   };
   metaData?: {
     searchPlaceholder?: string;
@@ -66,7 +67,7 @@ export default function TableView({
   totalCount = 0,
   onViewUpdate,
   metaData,
-  tableState: { pagination, sorting, columnFilters },
+  tableState: { pagination, sorting, columnFilters, searchTerm },
   isTableLoading,
 }: DataTableProps) {
   const [rowSelection, setRowSelection] = useState({});
@@ -81,6 +82,7 @@ export default function TableView({
       rowSelection,
       columnFilters,
       pagination,
+      globalFilter: searchTerm,
     },
     pageCount: Math.ceil(totalCount / pagination.pageSize),
     manualPagination: true,
@@ -98,6 +100,9 @@ export default function TableView({
     },
     onColumnFiltersChange: (newFilters) => {
       onViewUpdate?.({ columnFilters: newFilters });
+    },
+    onGlobalFilterChange: (newFilters) => {
+      onViewUpdate?.({ searchTerm: newFilters });
     },
 
     getCoreRowModel: getCoreRowModel(),
