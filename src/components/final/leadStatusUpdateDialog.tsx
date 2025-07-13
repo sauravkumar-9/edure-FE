@@ -1,12 +1,4 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from "@/components/ui/hover-card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Checkbox } from "@/components/ui/checkbox";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,7 +10,6 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import {
   Select,
@@ -29,7 +20,7 @@ import {
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Ellipsis, Eye, RefreshCw, User } from "lucide-react";
+import { Edit3, Ellipsis, User } from "lucide-react";
 import { useState } from "react";
 
 // Lead Status and Source Types
@@ -62,168 +53,8 @@ export interface Lead {
 }
 
 import { MessageSquare } from "lucide-react";
-import { cn } from "@/lib/utils";
-
-// ... (keep all previous imports)
-
-// Add these interfaces
-interface CommentDialogProps {
-  lead: Lead;
-  onCommentSubmit?: (comment: string) => void;
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-}
-
-interface DetailsDialogProps {
-  lead: Lead;
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-}
-
-// Comment Dialog Component
-function CommentDialog({
-  lead,
-  onCommentSubmit,
-  open,
-  onOpenChange,
-}: CommentDialogProps) {
-  const [comment, setComment] = useState("");
-
-  const handleSubmit = () => {
-    if (comment.trim() && onCommentSubmit) {
-      onCommentSubmit(comment);
-      setComment("");
-      onOpenChange(false);
-    }
-  };
-
-  return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Add Comment for {lead.fullName}</DialogTitle>
-          <p className="text-sm text-muted-foreground">
-            Lead ID: {lead.leadCode}
-          </p>
-        </DialogHeader>
-        <div className="grid gap-4 py-4">
-          <div className="space-y-2">
-            <Label htmlFor="comment">Comment</Label>
-            <Input
-              id="comment"
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
-              placeholder="Enter your comment..."
-            />
-          </div>
-        </div>
-        <div className="flex justify-end gap-2">
-          <Button variant="outline" onClick={() => onOpenChange(false)}>
-            Cancel
-          </Button>
-          <Button onClick={handleSubmit}>Submit Comment</Button>
-        </div>
-      </DialogContent>
-    </Dialog>
-  );
-}
-
-// Details Dialog Component
-function DetailsDialog({ lead, open, onOpenChange }: DetailsDialogProps) {
-  return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[625px]">
-        <DialogHeader>
-          <DialogTitle>Lead Details</DialogTitle>
-          <p className="text-sm text-muted-foreground">
-            {lead.fullName} ({lead.leadCode})
-          </p>
-        </DialogHeader>
-        <div className="grid gap-4 py-4">
-          <div className="flex items-center space-x-4">
-            <Avatar className="h-14 w-14">
-              <AvatarImage
-                src={
-                  lead.profilePic ||
-                  `https://api.dicebear.com/7.x/initials/svg?seed=${lead.fullName}`
-                }
-              />
-              <AvatarFallback>
-                {lead.fullName
-                  .split(" ")
-                  .map((n) => n[0])
-                  .join("")}
-              </AvatarFallback>
-            </Avatar>
-            <div className="space-y-1">
-              <h4 className="text-lg font-semibold">{lead.fullName}</h4>
-              <p className="text-sm">{lead.interestedCourse}</p>
-              <Badge
-                className={cn(
-                  "capitalize",
-                  lead.leadStatus === "cold"
-                    ? "bg-gray-100 text-gray-800"
-                    : lead.leadStatus === "warm"
-                    ? "bg-blue-100 text-blue-800"
-                    : lead.leadStatus === "hot"
-                    ? "bg-orange-100 text-orange-800"
-                    : lead.leadStatus === "converted"
-                    ? "bg-green-100 text-green-800"
-                    : "bg-red-100 text-red-800"
-                )}
-              >
-                {lead.leadStatus.charAt(0).toUpperCase() +
-                  lead.leadStatus.slice(1)}
-              </Badge>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label>Email</Label>
-              <p>{lead.email || "Not provided"}</p>
-            </div>
-            <div className="space-y-2">
-              <Label>Phone</Label>
-              <p>{lead.phone || "Not provided"}</p>
-            </div>
-            <div className="space-y-2">
-              <Label>Source</Label>
-              <p>
-                {lead.leadSource.charAt(0).toUpperCase() +
-                  lead.leadSource.slice(1)}
-              </p>
-            </div>
-            <div className="space-y-2">
-              <Label>Verification</Label>
-              <p>
-                {lead.verificationStatus === "Yes"
-                  ? "Verified"
-                  : "Not Verified"}
-              </p>
-            </div>
-            <div className="space-y-2">
-              <Label>Last Follow Up</Label>
-              <p>{lead.lastFollowUp || "No follow ups"}</p>
-            </div>
-            <div className="space-y-2">
-              <Label>Counsellor</Label>
-              <div className="flex items-center space-x-2">
-                <Avatar className="h-6 w-6">
-                  <AvatarImage
-                    src={`https://api.dicebear.com/7.x/initials/svg?seed=${lead.counseller}`}
-                  />
-                  <AvatarFallback>{lead.counseller[0]}</AvatarFallback>
-                </Avatar>
-                <span>{lead.counseller}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </DialogContent>
-    </Dialog>
-  );
-}
+import CommentDialog from "./commentDialog";
+import { UpdateStatusDialog } from "./statusUpdateDialog";
 
 // Updated StatusUpdateDialog with all functionality
 export function StatusUpdateDialog({ lead, onStatusUpdate }: any) {
@@ -231,7 +62,10 @@ export function StatusUpdateDialog({ lead, onStatusUpdate }: any) {
   const [comment, setComment] = useState("");
   const [statusDialogOpen, setStatusDialogOpen] = useState(false);
   const [commentDialogOpen, setCommentDialogOpen] = useState(false);
-  const [detailsDialogOpen, setDetailsDialogOpen] = useState(false);
+
+  const handleViewProfile = () => {
+    console.log("lead", lead);
+  };
 
   const handleStatusSubmit = () => {
     const updatedLead = {
@@ -273,14 +107,14 @@ export function StatusUpdateDialog({ lead, onStatusUpdate }: any) {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuItem onClick={() => setStatusDialogOpen(true)}>
-            <RefreshCw className="mr-2 h-4 w-4" />
+            <Edit3 className="mr-2 h-4 w-4" />
             Update Status
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setCommentDialogOpen(true)}>
             <MessageSquare className="mr-2 h-4 w-4" />
             Add Comment
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setDetailsDialogOpen(true)}>
+          <DropdownMenuItem onClick={handleViewProfile}>
             <User className="mr-2 h-4 w-4" />
             View Profile
           </DropdownMenuItem>
@@ -289,7 +123,7 @@ export function StatusUpdateDialog({ lead, onStatusUpdate }: any) {
       </DropdownMenu>
 
       {/* Status Update Dialog */}
-      <Dialog open={statusDialogOpen} onOpenChange={setStatusDialogOpen}>
+      {/* <Dialog open={statusDialogOpen} onOpenChange={setStatusDialogOpen}>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Update Status for {lead.fullName}</DialogTitle>
@@ -341,7 +175,14 @@ export function StatusUpdateDialog({ lead, onStatusUpdate }: any) {
             <Button onClick={handleStatusSubmit}>Update Status</Button>
           </div>
         </DialogContent>
-      </Dialog>
+      </Dialog> */}
+
+      <UpdateStatusDialog
+        lead={lead}
+        open={statusDialogOpen}
+        onOpenChange={setStatusDialogOpen}
+        onStatusUpdate={handleStatusSubmit}
+      />
 
       {/* Comment Dialog */}
       <CommentDialog
@@ -349,13 +190,6 @@ export function StatusUpdateDialog({ lead, onStatusUpdate }: any) {
         open={commentDialogOpen}
         onOpenChange={setCommentDialogOpen}
         onCommentSubmit={handleCommentSubmit}
-      />
-
-      {/* Details Dialog */}
-      <DetailsDialog
-        lead={lead}
-        open={detailsDialogOpen}
-        onOpenChange={setDetailsDialogOpen}
       />
     </>
   );
