@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker";
 
-export const response = {
+export const leadListingResponse = {
   page: 1,
   limit: 10,
   total: 50,
@@ -134,4 +134,33 @@ export const response = {
       lastFollowUp: faker.date.recent({ days: 10 }).toISOString().split("T")[0],
     };
   }),
+};
+
+export const leadDashboardResponse = {
+  masterStats: [
+    {
+      title: "Total Revenue",
+      value: "$45,231.89",
+      change: "+20.1% from last month",
+      icon: "DollarSign",
+    },
+    {
+      title: "Total Leads",
+      value: 333,
+      change: 0,
+      icon: "DollarSign",
+    },
+    {
+      title: "Verified Leads",
+      value: 333,
+      change: 0,
+      icon: "DollarSign",
+    },
+    {
+      title: "Unverified Leads",
+      value: 333,
+      change: 0,
+      icon: "DollarSign",
+    },
+  ],
 };

@@ -1,14 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import TableView from "@/components/table/table";
-import { generateColumnsFromResponse } from "../utils/tableBuilder";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { getAllLeads } from "../leadService";
 import { ColumnFiltersState, SortingState } from "@tanstack/react-table";
 import { Skeleton } from "@/components/ui/skeleton";
 
+import { generateColumnsFromResponse } from "../utils/tableBuilder";
+import { getAllLeads } from "../leadService";
+import { LoadType } from "../types";
+
 export default function LeadList() {
   const [tabValue, setTabValue] = useState("all");
-  const [leadReportColumns, setLeadReportColumns] = useState<any[]>([]);
+  const leadReportColumnsRef = useRef<any[]>([]);
   const [response, setResponse] = useState<any>({});
 
   // Loading states
@@ -42,14 +44,20 @@ export default function LeadList() {
     if (partial.columnFilters) setColumnFilters(partial.columnFilters);
   };
 
-  const getLeadList = async ({ loadType }: { loadType: "page" | "table" }) => {
-    console.log("getLeadList called");
+  const updateLoadingState = ({
+    loadType,
+    loadingState,
+  }: LoadType & { loadingState: boolean }) => {
+    if (loadType === "page") {
+      setIsPageLoading(loadingState);
+    } else {
+      setIsTableLoading(loadingState);
+    }
+  };
+
+  const getLeadList = async ({ loadType }: LoadType) => {
     try {
-      if (loadType === "page") {
-        setIsPageLoading(true);
-      } else {
-        setIsTableLoading(true);
-      }
+      updateLoadingState({ loadType, loadingState: true });
 
       const formattedFilterData = formatFilterData({
         pagination,
@@ -60,23 +68,14 @@ export default function LeadList() {
         queryParams: formattedFilterData,
       };
       const response: any = await getAllLeads(payload);
-      console.log("Ddddd", response);
+      if (loadType === "page") {
+        leadReportColumnsRef.current = generateColumnsFromResponse(response);
+      }
+
       setResponse(response);
-
-      const columns = generateColumnsFromResponse(response);
-      setLeadReportColumns(columns);
-
-      if (loadType === "page") {
-        setIsPageLoading(false);
-      } else {
-        setIsTableLoading(false);
-      }
+      updateLoadingState({ loadType, loadingState: false });
     } catch (error) {
-      if (loadType === "page") {
-        setIsPageLoading(false);
-      } else {
-        setIsTableLoading(false);
-      }
+      updateLoadingState({ loadType, loadingState: false });
     }
   };
 
@@ -182,7 +181,7 @@ export default function LeadList() {
 
           <TableView
             data={response.rows}
-            columns={leadReportColumns}
+            columns={leadReportColumnsRef.current}
             onViewUpdate={updateTableState}
             totalCount={response.total}
             tableState={{ pagination, sorting, columnFilters }}

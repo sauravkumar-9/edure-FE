@@ -22,7 +22,7 @@ import { CompaniesList } from "./modules/placement/companiesList";
 import { PlacementCatchupDashboard } from "./modules/placement/catchup";
 import ExamsPage from "./modules/exam/examDetails";
 import CounsellerCatchUp from "./modules/counseller/counsellerCatchup";
-import CounsellerDashboard from "./modules/counseller/counsellerDashboard";
+import CounsellerDashboard from "./modules/leads/pages/leadDashboard";
 import LeadProfile from "./modules/leads/pages/leadProfie";
 import LeadsList from "./modules/leads/pages/leadsList";
 

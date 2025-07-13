@@ -11,3 +11,20 @@ export interface LeadStatusUpdate {
   id: string;
   status: "cold" | "warm" | "hot" | "converted" | "lost";
 }
+
+export interface LoadType {
+  loadType: "page" | "table";
+}
+
+export interface Lead {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  source: string;
+  status: "verified" | "unverified";
+  tag?: "hot" | "warm" | "cold";
+  date: string;
+  applications?: number;
+  converted?: number;
+}

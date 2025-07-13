@@ -1,9 +1,12 @@
 import axios from "@/lib/axios";
 import { LeadData, LeadStatusUpdate } from "@/modules/leads/types";
-import { response } from "./mockData/apiMock";
 
-export const addLead = async (data: LeadData) => {
+import { leadListingResponse, leadDashboardResponse } from "./mockData/apiMock";
+
+export const addLeadService = async (data: LeadData) => {
   try {
+    console.log("data", data);
+    return;
     const response = await axios.post("/leads", data);
     return response.data;
   } catch (error: any) {
@@ -26,8 +29,8 @@ export const getAllLeads = async (payload: any) => {
   try {
     const { queryParams } = payload;
     console.log("queryParams", queryParams);
-    await new Promise((resolve) => setTimeout(resolve, 10000));
-    return response;
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    return leadListingResponse;
     // const response = await axios.get(`/leads?${queryParams}`);
     // return response.data;
   } catch (error: any) {
@@ -56,6 +59,21 @@ export const getLeadById = async (id: string) => {
     console.error("Get lead by ID error:", error);
     throw new Error(
       error?.response?.data?.message || "Failed to fetch lead profile"
+    );
+  }
+};
+
+export const getDashboardData = async () => {
+  try {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    return leadDashboardResponse;
+
+    // const response = await axios.get(`/leads/dashboard`);
+    // return response.data;
+  } catch (error: any) {
+    console.error("Get dashboard data error:", error);
+    throw new Error(
+      error?.response?.data?.message || "Failed to fetch dashboard data"
     );
   }
 };
