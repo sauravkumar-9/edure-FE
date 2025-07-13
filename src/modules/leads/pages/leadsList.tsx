@@ -5,8 +5,9 @@ import { ColumnFiltersState, SortingState } from "@tanstack/react-table";
 import { Skeleton } from "@/components/ui/skeleton";
 
 import { generateColumnsFromResponse } from "../utils/tableBuilder";
-import { getAllLeads } from "../leadService";
+import { addNoteToLead, getAllLeads, updateLeadStatus } from "../leadService";
 import { LoadType } from "../types";
+import showToast from "@/components/other/toast";
 
 type LeadStatus = "cold" | "warm" | "hot" | "converted" | "lost";
 type LeadSource = "walkin" | "instagram" | "referral" | "website" | "other";
@@ -70,14 +71,47 @@ export default function LeadList() {
     }
   };
 
-  const handleLeadUpdate = ({
+  const handleLeadUpdate = async ({
     updatedLead,
     updateType,
   }: {
     updatedLead: any;
     updateType: "STATUS" | "NOTE";
   }) => {
-    console.log("lead", { updatedLead, updateType });
+    try {
+      console.log("lead", { updatedLead, updateType });
+      let sucessMsg = "";
+      if (updateType === "STATUS") {
+        await updateLeadStatus({
+          id: updatedLead.id,
+          status: updatedLead.newStatus,
+          note: updatedLead.note,
+        });
+        sucessMsg = `${updatedLead.fullName} has been updated as ${updatedLead.newStatus} lead.`;
+      } else if (updateType === "NOTE") {
+        await addNoteToLead({
+          id: updatedLead.id,
+          note: updatedLead.note,
+        });
+        sucessMsg = `Note added to ${updatedLead.name}`;
+      }
+      showToast({
+        title: "Lead added",
+        description: sucessMsg,
+        type: "success",
+      });
+    } catch (err) {
+      console.log(err);
+      const errorMsg =
+        updateType === "NOTE"
+          ? "Failed to add note"
+          : "Failed to update status";
+      showToast({
+        title: "Error",
+        description: errorMsg,
+        type: "error",
+      });
+    }
   };
 
   const getLeadList = async ({ loadType }: LoadType) => {

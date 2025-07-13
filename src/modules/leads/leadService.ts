@@ -3,34 +3,45 @@ import { LeadData, LeadStatusUpdate } from "@/modules/leads/types";
 
 import { leadListingResponse, leadDashboardResponse } from "./mockData/apiMock";
 
-export const addLeadService = async (data: LeadData) => {
+export const addLeadService = async (reqData: LeadData) => {
   try {
-    console.log("data", data);
+    console.log("addLeadService API call", reqData);
+
+    // API MOCK
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     return;
-    const response = await axios.post("/leads", data);
-    return response.data;
+
+    // const response = await axios.post("/leads", reqData);
+    // return response.data;
   } catch (error: any) {
     console.error("Add lead error:", error);
     throw new Error(error?.response?.data?.message || "Failed to add lead");
   }
 };
 
-export const bulkInsertLeads = async (leads: LeadData[]) => {
+export const bulkInsertLeads = async (reqData: LeadData[]) => {
   try {
-    const response = await axios.post("/leads/bulk", { leads });
-    return response.data;
+    console.log("bulkInsertLeads API call", reqData);
+
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    return;
+
+    // const response = await axios.post("/leads/bulk", { reqData });
+    // return response.data;
   } catch (error: any) {
     console.error("Bulk insert error:", error);
     throw new Error(error?.response?.data?.message || "Failed to insert leads");
   }
 };
 
-export const getAllLeads = async (payload: any) => {
+export const getAllLeads = async (reqData: any) => {
   try {
-    const { queryParams } = payload;
-    console.log("queryParams", queryParams);
+    console.log("getAllLeads API call", reqData);
+
+    // API MOCK
     await new Promise((resolve) => setTimeout(resolve, 1000));
     return leadListingResponse;
+
     // const response = await axios.get(`/leads?${queryParams}`);
     // return response.data;
   } catch (error: any) {
@@ -39,10 +50,18 @@ export const getAllLeads = async (payload: any) => {
   }
 };
 
-export const updateLeadStatus = async ({ id, status }: LeadStatusUpdate) => {
+export const updateLeadStatus = async (reqData: LeadStatusUpdate) => {
   try {
-    const response = await axios.patch(`/leads/${id}/status`, { status });
-    return response.data;
+    console.log("updateLeadStatus API call", reqData);
+
+    // API MOCK
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    return;
+
+    // const response = await axios.patch(`/leads/${reqData.id}/status`, {
+    //   status: reqData.status,
+    // });
+    // return response.data;
   } catch (error: any) {
     console.error("Update lead status error:", error);
     throw new Error(
@@ -51,10 +70,36 @@ export const updateLeadStatus = async ({ id, status }: LeadStatusUpdate) => {
   }
 };
 
-export const getLeadById = async (id: string) => {
+export const addNoteToLead = async (reqData: any) => {
   try {
-    const response = await axios.get(`/leads/${id}`);
-    return response.data;
+    console.log("addNoteToLead API call", reqData);
+
+    // API MOCK
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    return;
+
+    // const response = await axios.patch(`/leads/${reqData.id}/note`, {
+    //   note: reqData.note,
+    // });
+    // return response.data;
+  } catch (error: any) {
+    console.error("Add note to lead error:", error);
+    throw new Error(
+      error?.response?.data?.message || "Failed to add note to lead"
+    );
+  }
+};
+
+export const getLeadById = async (reqData: any) => {
+  try {
+    console.log("getLeadById API call", reqData);
+
+    // API MOCK
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    return;
+
+    // const response = await axios.get(`/leads/${id}`);
+    // return response.data;
   } catch (error: any) {
     console.error("Get lead by ID error:", error);
     throw new Error(
@@ -65,6 +110,9 @@ export const getLeadById = async (id: string) => {
 
 export const getDashboardData = async () => {
   try {
+    console.log("getDashboardData API call");
+
+    // API MOCK
     await new Promise((resolve) => setTimeout(resolve, 1000));
     return leadDashboardResponse;
 

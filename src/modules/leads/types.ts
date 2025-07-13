@@ -10,6 +10,7 @@ export interface LeadData {
 export interface LeadStatusUpdate {
   id: string;
   status: "cold" | "warm" | "hot" | "converted" | "lost";
+  note?: string;
 }
 
 export interface LoadType {

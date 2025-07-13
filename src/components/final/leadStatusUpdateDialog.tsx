@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Edit3, Ellipsis, User } from "lucide-react";
+import { Edit3, Ellipsis, StickyNote, User } from "lucide-react";
 import { useState } from "react";
 
 // Lead Status and Source Types
@@ -77,7 +77,7 @@ export function StatusUpdateDialog({ lead, onStatusUpdate }: any) {
     const updatedLead = {
       id: lead.id,
       newStatus,
-      comments: comment,
+      note: comment,
     };
     if (onStatusUpdate) {
       onStatusUpdate({ updatedLead, updateType: "STATUS" });
@@ -89,7 +89,7 @@ export function StatusUpdateDialog({ lead, onStatusUpdate }: any) {
   const handleCommentSubmit = (newComment: string) => {
     const updatedLead = {
       id: lead.id,
-      comments: newComment,
+      note: newComment,
     };
     if (onStatusUpdate) {
       onStatusUpdate({ updatedLead, updateType: "NOTE" });
@@ -111,8 +111,8 @@ export function StatusUpdateDialog({ lead, onStatusUpdate }: any) {
             Update Status
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setCommentDialogOpen(true)}>
-            <MessageSquare className="mr-2 h-4 w-4" />
-            Add Comment
+            <StickyNote className="mr-2 h-4 w-4" />
+            Add Note
           </DropdownMenuItem>
           <DropdownMenuItem onClick={handleViewProfile}>
             <User className="mr-2 h-4 w-4" />
