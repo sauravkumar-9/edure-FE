@@ -27,18 +27,31 @@ import {
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 import { Check, ChevronsUpDown, TableIcon } from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 export function DataTableToolbar({
   table,
   metaData,
+  onDownloadReport,
 }: {
   table: any;
   metaData?: {
     searchPlaceholder?: string;
   };
+  onDownloadReport?: () => void;
 }) {
   const [showAdvancedFilter, setShowAdvancedFilter] = useState(false);
   const [basicFilterValue, setBasicFilterValue] = useState<string[]>([]);
+  const [showDownloadDialog, setShowDownloadDialog] = useState(false);
 
   const basicFilterColumn = table
     .getAllColumns()
@@ -105,8 +118,13 @@ export function DataTableToolbar({
     setShowAdvancedFilter(!showAdvancedFilter);
   };
 
-  const handleDownload = () => {
-    console.log("Download data");
+  const handleDownloadClick = () => {
+    setShowDownloadDialog(true);
+  };
+
+  const confirmDownload = () => {
+    setShowDownloadDialog(false);
+    onDownloadReport?.();
   };
 
   const renderBasicFilter = () => {
@@ -262,7 +280,7 @@ export function DataTableToolbar({
           <Button
             variant="outline"
             size="sm"
-            onClick={handleDownload}
+            onClick={handleDownloadClick}
             className="hidden sm:flex"
           >
             <DownloadIcon className="h-4 w-4 mr-2" />
@@ -307,6 +325,28 @@ export function DataTableToolbar({
           onReset={handleResetFilters}
         />
       )}
+
+      {/* Download Confirmation Dialog */}
+      <AlertDialog
+        open={showDownloadDialog}
+        onOpenChange={setShowDownloadDialog}
+      >
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Confirm Download</AlertDialogTitle>
+            <AlertDialogDescription>
+              This will download the current filtered data. Large datasets may
+              take longer to process.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction onClick={confirmDownload}>
+              Download
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }

@@ -125,3 +125,21 @@ export const getDashboardData = async () => {
     );
   }
 };
+
+export const downloadLeadsReport = async (reqData: any) => {
+  try {
+    console.log("downloadLeadsReport API call", reqData);
+
+    // API MOCK
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    return;
+
+    // const response = await axios.get(`/leads/report?${queryString}`);
+    // return response.data;
+  } catch (error: any) {
+    console.error("Download leads report error:", error);
+    throw new Error(
+      error?.response?.data?.message || "Failed to download leads report"
+    );
+  }
+};

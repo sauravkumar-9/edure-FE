@@ -5,7 +5,12 @@ import { ColumnFiltersState, SortingState } from "@tanstack/react-table";
 import { Skeleton } from "@/components/ui/skeleton";
 
 import { generateColumnsFromResponse } from "../utils/tableBuilder";
-import { addNoteToLead, getAllLeads, updateLeadStatus } from "../leadService";
+import {
+  addNoteToLead,
+  downloadLeadsReport,
+  getAllLeads,
+  updateLeadStatus,
+} from "../leadService";
 import { LoadType } from "../types";
 import showToast from "@/components/other/toast";
 
@@ -128,6 +133,13 @@ export default function LeadList() {
     if (partial.columnFilters) setColumnFilters(partial.columnFilters);
     if (partial.searchTerm || partial.searchTerm === "")
       setSearchTerm(partial.searchTerm);
+  };
+
+  const handleDownloadReport = async () => {
+    await downloadLeadsReport({
+      searchTerm,
+      columnFilters,
+    });
   };
 
   const updateLoadingState = ({
@@ -287,6 +299,7 @@ export default function LeadList() {
             data={response.rows}
             columns={leadReportColumnsRef.current}
             onViewUpdate={updateTableState}
+            onDownloadReport={handleDownloadReport}
             totalCount={response.total}
             tableState={{ pagination, sorting, columnFilters, searchTerm }}
             metaData={{ searchPlaceholder: "Search by lead name, email, code" }}

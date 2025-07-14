@@ -57,9 +57,10 @@ interface DataTableProps {
     searchPlaceholder?: string;
   };
   isTableLoading?: boolean;
+  onDownloadReport?: () => void;
 }
 
-export default function TableView({
+export default function DataTableView({
   columns,
   data,
   isToolBar = true,
@@ -69,6 +70,7 @@ export default function TableView({
   metaData,
   tableState: { pagination, sorting, columnFilters, searchTerm },
   isTableLoading,
+  onDownloadReport,
 }: DataTableProps) {
   const [rowSelection, setRowSelection] = useState({});
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
@@ -119,7 +121,13 @@ export default function TableView({
 
   return (
     <div className="space-y-4">
-      {isToolBar && <DataTableToolbar table={table} metaData={metaData} />}
+      {isToolBar && (
+        <DataTableToolbar
+          table={table}
+          metaData={metaData}
+          onDownloadReport={onDownloadReport}
+        />
+      )}
 
       <div className="rounded-md border overflow-x-auto w-full bg-white">
         <Table>
