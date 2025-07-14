@@ -25,9 +25,23 @@ import CounsellerCatchUp from "./modules/counseller/counsellerCatchup";
 import CounsellerDashboard from "./modules/leads/pages/leadDashboard";
 import LeadProfile from "./modules/leads/pages/leadProfie";
 import LeadsList from "./modules/leads/pages/leadsList";
+import PublicLayout from "./app/publicLayout";
+import { ExamBriefingPage } from "./modules/onlineExam/components/examBriefing";
+import { PaymentPage } from "./modules/onlineExam/components/payment";
+import { SlotBookingPage } from "./modules/onlineExam/components/slotBooking";
+import { ConfirmationPage } from "./modules/onlineExam/components/confirmation";
+import { ExamStepperLayout } from "./modules/onlineExam/pages/registration";
 
 export const router = createBrowserRouter(
   [
+    {
+      path: "/",
+      element: <PublicLayout />, // Layout without sidebar
+      children: [
+        { path: "/admission/form", element: <AdmissionForm /> },
+        { path: "/registration", element: <ExamStepperLayout /> },
+      ],
+    },
     {
       path: "/",
       element: <Navigation />,
@@ -151,7 +165,6 @@ export const router = createBrowserRouter(
         },
       ],
     },
-    { path: "/admission/form", element: <AdmissionForm /> },
   ],
   {
     basename: "/edure-FE/", // Add this for GitHub Pages
