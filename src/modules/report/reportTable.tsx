@@ -45,53 +45,53 @@ interface ReportTableProps {
 
 export default function ReportTable({ reportData }: ReportTableProps) {
   console.log("DSDSDDS", reportData);
-  const tag = reportData.tag;
+  // const tag = reportData.tag;
 
   // Define fallback
-  let data: any = [];
-  let columns: any = [];
+  // let data: any = [];
+  // let columns: any = [];
 
-  // Switch data/columns based on tag
-  switch (tag) {
-    case "STUDENT_PERFORMANCE":
-      data = studentPerformanceMock;
-      columns = performanceReportColumns;
-      break;
+  // // Switch data/columns based on tag
+  // switch (tag) {
+  //   case "STUDENT_PERFORMANCE":
+  //     data = studentPerformanceMock;
+  //     columns = performanceReportColumns;
+  //     break;
 
-    case "ADMISSION":
-      data = admissionStudentListMock;
-      columns = admissionReportColumns;
-      break;
+  //   case "ADMISSION":
+  //     data = admissionStudentListMock;
+  //     columns = admissionReportColumns;
+  //     break;
 
-    case "FEES_COLLECTION":
-      data = feesCollectionMock;
-      columns = feesCollectionColumns;
-      break;
+  //   case "FEES_COLLECTION":
+  //     data = feesCollectionMock;
+  //     columns = feesCollectionColumns;
+  //     break;
 
-    case "PLACEMENT_STATS":
-      data = placementStatsMock;
-      columns = placementStatsColumns;
-      break;
+  //   case "PLACEMENT_STATS":
+  //     data = placementStatsMock;
+  //     columns = placementStatsColumns;
+  //     break;
 
-    case "COLLEGE_EXPENSE":
-      data = collegeExpenseMock;
-      columns = collegeExpenseColumns;
-      break;
+  //   case "COLLEGE_EXPENSE":
+  //     data = collegeExpenseMock;
+  //     columns = collegeExpenseColumns;
+  //     break;
 
-    case "TEACHER_PERFORMANCE":
-      data = teacherPerformanceMock;
-      columns = teacherPerformanceColumns;
-      break;
+  //   case "TEACHER_PERFORMANCE":
+  //     data = teacherPerformanceMock;
+  //     columns = teacherPerformanceColumns;
+  //     break;
 
-    case "COMPANY_PLACEMENT_STATS":
-      data = companyPlacementMock;
-      columns = companyPlacementColumns;
-      break;
-    default:
-      data = [];
-      columns = [];
-      break;
-  }
+  //   case "COMPANY_PLACEMENT_STATS":
+  //     data = companyPlacementMock;
+  //     columns = companyPlacementColumns;
+  //     break;
+  //   default:
+  //     data = [];
+  //     columns = [];
+  //     break;
+  // }
 
   return <div>{/* <TableView data={data} columns={columns} /> */}</div>;
 }
