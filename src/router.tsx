@@ -35,9 +35,9 @@ export const router = createBrowserRouter(
       path: "/",
       element: <PublicLayout />, // Layout without sidebar
       children: [
-        { path: "/admission/form", element: <AdmissionForm /> },
-        { path: "/registration", element: <ExamStepperLayout /> },
-        { path: "/test", element: <MCQExamPage /> },
+        { path: "admission/form", element: <AdmissionForm /> },
+        { path: "registration", element: <ExamStepperLayout /> },
+        { path: "test", element: <MCQExamPage /> },
       ],
     },
     {
