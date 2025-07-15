@@ -45,12 +45,6 @@ const steps = [
     icon: <Calendar className="h-5 w-5" />,
     description: "Choose date and time for your exam.",
   },
-  {
-    id: 4,
-    name: "Confirmation",
-    icon: <BadgeCheck className="h-5 w-5" />,
-    description: "Download admit card & confirm.",
-  },
 ];
 
 export function ExamStepperLayout() {
@@ -80,27 +74,39 @@ export function ExamStepperLayout() {
   return (
     <div className="h-screen flex flex-col bg-slate-50">
       {/* Fixed Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-indigo-600 to-blue-600 text-white shadow">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <header className="fixed top-0 left-0 right-0 z-50 h-24 bg-gradient-to-r from-indigo-600 to-blue-600 text-white shadow">
+        <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          {/* Logo & Title */}
           <div className="flex items-center gap-4">
             <img
               src="/university-logo.png"
               alt="University Logo"
-              className="h-10 w-10 rounded-full bg-white p-1 shadow"
+              className="h-14 w-14 rounded-full bg-white p-1 shadow-md"
             />
             <div>
-              <h1 className="text-lg font-bold">Academic University</h1>
-              <p className="text-sm text-white/90">Entrance Examination 2024</p>
+              <h1 className="text-2xl font-bold leading-tight">
+                Academic University
+              </h1>
+              <p className="text-sm sm:text-base text-white/90 font-medium">
+                National Entrance Examination 2024
+              </p>
             </div>
           </div>
-          <div className="text-sm text-white/90">
-            Welcome, <span className="font-semibold">{userName}</span>
+
+          {/* Welcome Message */}
+          <div className="text-white text-sm sm:text-base text-right">
+            <p className="font-medium">
+              👋 Welcome, <span className="font-bold">{userName}</span>!
+            </p>
+            <p className="text-white/80">
+              Let’s complete your exam registration.
+            </p>
           </div>
         </div>
       </header>
 
       {/* Main Area */}
-      <div className="flex flex-1 overflow-hidden pt-[80px]">
+      <div className="flex flex-1 overflow-hidden pt-24">
         {/* Sidebar */}
         <aside className="w-72 bg-white border-r shadow-sm h-full flex flex-col justify-between">
           {/* Scrollable Content */}
