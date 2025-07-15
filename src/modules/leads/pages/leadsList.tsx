@@ -17,18 +17,6 @@ import showToast from "@/components/other/toast";
 type LeadStatus = "cold" | "warm" | "hot" | "converted" | "lost";
 type LeadSource = "walkin" | "instagram" | "referral" | "website" | "other";
 
-interface Lead {
-  id: string;
-  leadCode: string;
-  fullName: string;
-  interestedCourse: string;
-  leadStatus: LeadStatus;
-  leadSource: LeadSource;
-  counseller: string;
-  verificationStatus: "Yes" | "No";
-  lastFollowUp: string;
-}
-
 export default function LeadList() {
   const [tabValue, setTabValue] = useState("all");
   const leadReportColumnsRef = useRef<any[]>([]);

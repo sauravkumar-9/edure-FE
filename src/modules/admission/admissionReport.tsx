@@ -13,7 +13,7 @@ export function AdmissionReport() {
         title="Admission Report"
         subtitle="Comprehensive overview of current admission statistics and trends"
       />
-      <TableView data={userList} columns={admissionReportColumns} />
+      {/* <TableView data={userList} columns={admissionReportColumns} /> */}
     </div>
   );
 }

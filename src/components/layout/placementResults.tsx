@@ -36,10 +36,9 @@ export const placementReportStatMockData = [
   },
 ];
 
-export default function PlacementResults({
-  userList,
-  columns,
-}: StudentAssignmentsProps) {
+export default function PlacementResults({}: // userList,
+// columns,
+StudentAssignmentsProps) {
   const placementReportStat = placementReportStatMockData;
 
   return (
@@ -55,8 +54,8 @@ export default function PlacementResults({
           />
         ))}
       </div>
-
-      <TableView data={userList} columns={columns} />
+      {/* 
+      <TableView data={userList} columns={columns} /> */}
     </React.Fragment>
   );
 }

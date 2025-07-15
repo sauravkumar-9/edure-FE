@@ -93,9 +93,5 @@ export default function ReportTable({ reportData }: ReportTableProps) {
       break;
   }
 
-  return (
-    <div>
-      <TableView data={data} columns={columns} />
-    </div>
-  );
+  return <div>{/* <TableView data={data} columns={columns} /> */}</div>;
 }

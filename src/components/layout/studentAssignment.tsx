@@ -16,7 +16,7 @@ export default function StudentAssignments({
       <div className="text-center p-8 bg-muted/50 rounded-lg">
         {description}
       </div>
-      <TableView data={userList} columns={columns} />
+      {/* <TableView data={userList} columns={columns} /> */}
     </>
   );
 }

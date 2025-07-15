@@ -11,7 +11,6 @@ import { MonitorSmartphone, Wifi, Camera } from "lucide-react";
 
 function getBrowserInfo() {
   const ua = navigator.userAgent;
-  let tem;
   const match =
     ua.match(/(chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
   const browser = match[1];

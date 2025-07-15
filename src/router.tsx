@@ -26,10 +26,6 @@ import CounsellerDashboard from "./modules/leads/pages/leadDashboard";
 import LeadProfile from "./modules/leads/pages/leadProfie";
 import LeadsList from "./modules/leads/pages/leadsList";
 import PublicLayout from "./app/publicLayout";
-import { ExamBriefingPage } from "./modules/onlineExam/components/examBriefing";
-import { PaymentPage } from "./modules/onlineExam/components/payment";
-import { SlotBookingPage } from "./modules/onlineExam/components/slotBooking";
-import { ConfirmationPage } from "./modules/onlineExam/components/confirmation";
 import { ExamStepperLayout } from "./modules/onlineExam/pages/registration";
 import { MCQExamPage } from "./modules/onlineExam/pages/MCQExamPage";
 

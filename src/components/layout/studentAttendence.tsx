@@ -134,12 +134,12 @@ export default function StudentAttendance({
         </div>
 
         <div className="">
-          <TableView
+          {/* <TableView
             data={attendanceData}
             columns={attendanceColumns}
             isToolBar={false}
             isPagination={false}
-          />
+          /> */}
           {/* <CustomBarChart
             title="Attendance by Subject"
             description="Overview of attendance percentages across different subjects"
