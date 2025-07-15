@@ -1,39 +1,38 @@
-// src/pages/exam-scheduling/confirmation.tsx
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-  CardFooter,
-} from "@/components/ui/card";
-import { CheckCircle2, Printer } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { CheckCircle2 } from "lucide-react";
 import { format } from "date-fns";
 
 export function ConfirmationPage() {
-  const navigate = useNavigate();
-  // These would typically come from state/context/params
+  // Normally fetched from context or API
   const examDetails = {
     date: new Date(),
     timeSlot: "2:00 PM - 3:00 PM",
     examId: "EXM-2023-00123",
     amountPaid: "₹500.00",
+    email: "saurav.kumar@example.com",
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-50">
-      <Card className="w-full max-w-2xl">
-        <CardHeader className="text-center">
+    <div className="flex items-center justify-center min-h-screen bg-white px-4">
+      <div className="w-full max-w-2xl space-y-8">
+        <div className="text-center space-y-4">
           <CheckCircle2 className="mx-auto h-16 w-16 text-green-500" />
-          <CardTitle className="text-2xl font-bold mt-4">
-            Booking Confirmed!
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="space-y-2">
-            <h3 className="font-semibold">Exam Details:</h3>
-            <div className="space-y-1">
+          <h1 className="text-2xl font-bold text-gray-800">
+            Registration Confirmed!
+          </h1>
+          <p className="text-muted-foreground text-sm">
+            Your exam slot has been successfully booked.
+          </p>
+        </div>
+
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-lg font-semibold">
+              Exam Details
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4 text-sm text-gray-700">
+            <div>
               <p>
                 <span className="font-medium">Exam ID:</span>{" "}
                 {examDetails.examId}
@@ -51,26 +50,41 @@ export function ConfirmationPage() {
                 {examDetails.amountPaid}
               </p>
             </div>
-          </div>
 
-          <div className="border-t pt-4 space-y-2">
-            <h3 className="font-semibold">What's Next?</h3>
-            <ul className="list-disc pl-5 space-y-1">
-              <li>You'll receive a confirmation email with exam details</li>
-              <li>Login 15 minutes before your scheduled time</li>
-              <li>Have your ID ready for verification</li>
-            </ul>
-          </div>
-        </CardContent>
-        <CardFooter className="flex justify-between">
-          <Button variant="outline" onClick={() => window.print()}>
-            <Printer className="mr-2 h-4 w-4" /> Print Receipt
-          </Button>
-          <Button onClick={() => navigate("/dashboard")}>
-            Go to Dashboard
-          </Button>
-        </CardFooter>
-      </Card>
+            <div className="pt-4 border-t">
+              <p>
+                A confirmation email has been sent to{" "}
+                <span className="font-medium text-indigo-600">
+                  {examDetails.email}
+                </span>
+                .
+              </p>
+              <p>
+                Your exam link will be shared via email and will also be
+                accessible here on this portal on the exam day.
+              </p>
+            </div>
+
+            <div className="pt-4 border-t">
+              <p>
+                To know more about the exam process or get in touch, please use
+                the <span className="font-medium">"About the Exam"</span> and{" "}
+                <span className="font-medium">"Contact Us"</span> options in the
+                sidebar.
+              </p>
+            </div>
+
+            <div className="pt-4 border-t">
+              <p className="font-semibold text-green-600">
+                ✅ Your registration is complete.
+              </p>
+              <p className="mt-1 text-gray-800 font-medium">
+                Best of luck for your examination!
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }
