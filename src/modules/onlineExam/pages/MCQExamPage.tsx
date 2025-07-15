@@ -176,13 +176,20 @@ export function MCQExamPage() {
       {/* Right Panel */}
       <div className="flex-1 flex flex-col h-full">
         {/* Fixed Top Header */}
-        <div className="sticky top-0 bg-white z-20 px-2 md:px-0 pt-4 pb-3 border-b flex items-center gap-4">
+        <div className="sticky top-0 z-20 bg-white px-4 md:px-6 py-3 border-b shadow-sm flex items-center gap-4">
           <span className="text-sm text-muted-foreground font-medium whitespace-nowrap">
-            Answered <strong>{totalAnswered}</strong> / {questions.length}
+            Answered{" "}
+            <strong className="text-foreground">{totalAnswered}</strong> /{" "}
+            {questions.length}
           </span>
-          <Progress value={progress} className="h-2 flex-1 rounded-full" />
+
+          <Progress
+            value={progress}
+            className="h-2 flex-1 rounded-full bg-indigo-100"
+          />
+
           <Button
-            variant="destructive"
+            className="bg-indigo-100 text-indigo-800 hover:bg-indigo-200"
             onClick={() => setShowFinalDialog(true)}
           >
             Submit Exam
