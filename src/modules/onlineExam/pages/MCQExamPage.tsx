@@ -189,7 +189,7 @@ export function MCQExamPage() {
           />
 
           <Button
-            className="bg-indigo-100 text-indigo-800 hover:bg-indigo-200"
+            className="bg-indigo-600 text-white hover:bg-indigo-700"
             onClick={() => setShowFinalDialog(true)}
           >
             Submit Exam
@@ -317,7 +317,10 @@ export function MCQExamPage() {
             >
               Cancel
             </Button>
-            <Button variant="destructive" onClick={handleFinalSubmit}>
+            <Button
+              className="bg-indigo-600 text-white hover:bg-indigo-700"
+              onClick={handleFinalSubmit}
+            >
               Submit Exam
             </Button>
           </DialogFooter>
