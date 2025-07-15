@@ -31,6 +31,7 @@ import { PaymentPage } from "./modules/onlineExam/components/payment";
 import { SlotBookingPage } from "./modules/onlineExam/components/slotBooking";
 import { ConfirmationPage } from "./modules/onlineExam/components/confirmation";
 import { ExamStepperLayout } from "./modules/onlineExam/pages/registration";
+import { MCQExamPage } from "./modules/onlineExam/pages/MCQExamPage";
 
 export const router = createBrowserRouter(
   [
@@ -40,6 +41,7 @@ export const router = createBrowserRouter(
       children: [
         { path: "/admission/form", element: <AdmissionForm /> },
         { path: "/registration", element: <ExamStepperLayout /> },
+        { path: "/test", element: <MCQExamPage /> },
       ],
     },
     {

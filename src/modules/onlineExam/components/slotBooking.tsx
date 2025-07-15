@@ -17,6 +17,7 @@ import {
   DialogFooter,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { ConfirmDialog } from "./confirmationDialog";
 
 export function SlotBookingPage({ onComplete }: { onComplete: () => void }) {
   const [date, setDate] = useState<Date | undefined>(new Date());
