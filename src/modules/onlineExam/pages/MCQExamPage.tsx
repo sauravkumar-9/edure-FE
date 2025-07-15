@@ -87,18 +87,40 @@ export function MCQExamPage() {
 
   if (isSubmitted) {
     return (
-      <div className="h-screen flex items-center justify-center bg-white px-4 py-10">
-        <Card className="max-w-md w-full text-center">
-          <CardHeader>
-            <CardTitle>Exam Submitted Successfully</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-gray-700">
-              Thank you! Your exam has been submitted.
-              <br />
-              You answered <strong>{totalAnswered}</strong> out of{" "}
-              {questions.length} questions.
+      <div className="h-screen flex items-center justify-center bg-gray-50 px-4 py-10">
+        <Card className="max-w-lg w-full text-center shadow-xl border border-indigo-100">
+          {/* Submission Message */}
+          <CardHeader className="space-y-2">
+            <CardTitle className="text-2xl font-semibold text-indigo-700">
+              Exam Completed 🎉
+            </CardTitle>
+            <p className="text-sm text-muted-foreground">
+              You have successfully submitted your exam.
             </p>
+          </CardHeader>
+
+          <CardContent className="space-y-4">
+            <div className="text-gray-700 text-base">
+              <p>
+                <strong>{totalAnswered}</strong> out of{" "}
+                <strong>{questions.length}</strong> questions answered.
+              </p>
+              <p className="mt-2 text-sm text-muted-foreground">
+                Results will be shared via your registered email once evaluation
+                is complete.
+              </p>
+              <p className="text-sm text-muted-foreground">
+                If you have any queries, contact the exam administrator.
+              </p>
+            </div>
+
+            <Button
+              variant="outline"
+              className="mt-4"
+              onClick={() => (window.location.href = "/")}
+            >
+              Back to Dashboard
+            </Button>
           </CardContent>
         </Card>
       </div>
