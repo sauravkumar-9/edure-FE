@@ -1,5 +1,5 @@
-import TableView from "@/components/table/table";
-import { examTimetableColumns, examTimetableData } from "./data";
+// import TableView from "@/components/table/table";
+// import { examTimetableColumns, examTimetableData } from "./data";
 
 export default function ExamsSchedule() {
   return (

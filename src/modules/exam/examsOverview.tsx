@@ -4,8 +4,8 @@ import {
   AlertTriangle,
   ClipboardList,
 } from "lucide-react";
-import { examColumns, examData } from "./data";
-import TableView from "@/components/table/table";
+// import { examColumns, examData } from "./data";
+// import TableView from "@/components/table/table";
 import { StatCard } from "@/components/final/statCard";
 
 const examStats = [
@@ -56,12 +56,12 @@ export default function ExamsOverview() {
       </div>
 
       {/* Exams Table */}
-      <TableView
+      {/* <TableView
         data={examData}
         columns={examColumns}
         isToolBar={false}
         isPagination={false}
-      />
+      /> */}
     </div>
   );
 }

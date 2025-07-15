@@ -14,9 +14,6 @@ import {
 import { LoadType } from "../types";
 import showToast from "@/components/other/toast";
 
-type LeadStatus = "cold" | "warm" | "hot" | "converted" | "lost";
-type LeadSource = "walkin" | "instagram" | "referral" | "website" | "other";
-
 export default function LeadList() {
   const [tabValue, setTabValue] = useState("all");
   const leadReportColumnsRef = useRef<any[]>([]);

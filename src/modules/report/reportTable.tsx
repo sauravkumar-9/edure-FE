@@ -1,4 +1,4 @@
-import TableView from "@/components/table/table";
+// import TableView from "@/components/table/table";
 import {
   admissionReportColumns,
   admissionStudentListMock,

@@ -1,5 +1,5 @@
 import React from "react";
-import TableView from "../table/table";
+// import TableView from "../table/table";
 import { StatCard } from "../final/statCard";
 import { Briefcase, UserCheck, Users, IndianRupee } from "lucide-react";
 

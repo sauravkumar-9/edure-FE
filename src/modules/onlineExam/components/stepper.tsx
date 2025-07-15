@@ -15,11 +15,7 @@ interface StepperProps {
   orientation?: "horizontal" | "vertical";
 }
 
-export function Stepper({
-  steps,
-  currentStep,
-  orientation = "vertical",
-}: StepperProps) {
+export function Stepper({ steps, orientation = "vertical" }: StepperProps) {
   return (
     <div
       className={cn(

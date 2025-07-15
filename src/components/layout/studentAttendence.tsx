@@ -1,6 +1,6 @@
 import { Clock, AlertCircle, CheckCircle2, Calendar, User } from "lucide-react";
-import TableView from "../table/table";
-import { attendanceColumns, attendanceData } from "./data";
+// import TableView from "../table/table";
+// import { attendanceColumns, attendanceData } from "./data";
 import { ChartRadialStacked } from "../cards/radialChart";
 import { AttendanceSummaryCard } from "../charts/progress";
 

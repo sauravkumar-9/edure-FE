@@ -1,4 +1,4 @@
-import TableView from "../table/table";
+// import TableView from "../table/table";
 
 interface StudentAssignmentsProps {
   description?: string;
@@ -8,9 +8,9 @@ interface StudentAssignmentsProps {
 
 export default function StudentAssignments({
   description = "Assignments content goes here",
-  userList,
-  columns,
-}: StudentAssignmentsProps) {
+}: // userList,
+// columns,
+StudentAssignmentsProps) {
   return (
     <>
       <div className="text-center p-8 bg-muted/50 rounded-lg">

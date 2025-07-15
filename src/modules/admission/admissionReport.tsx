@@ -1,5 +1,5 @@
-import TableView from "@/components/table/table";
-import { admissionReportColumns } from "./data/admissionReportColumns";
+// import TableView from "@/components/table/table";
+// import { admissionReportColumns } from "./data/admissionReportColumns";
 import { admissionStudentListMock } from "@/mockData/admission";
 import { admissionListSchema } from "./data/admissionReportColumns";
 import SectionHeader from "@/components/cards/sectionHeader";
