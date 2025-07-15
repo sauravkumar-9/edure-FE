@@ -1,37 +1,37 @@
-// import TableView from "@/components/table/table";
-import {
-  admissionReportColumns,
-  admissionStudentListMock,
-} from "./data/admissionReportColumns";
-import {
-  studentPerformanceMock,
-  performanceReportColumns,
-} from "./data/studentPerfomenceReportData";
+// // import TableView from "@/components/table/table";
+// import {
+//   admissionReportColumns,
+//   admissionStudentListMock,
+// } from "./data/admissionReportColumns";
+// import {
+//   studentPerformanceMock,
+//   performanceReportColumns,
+// } from "./data/studentPerfomenceReportData";
 
-import {
-  feesCollectionColumns,
-  feesCollectionMock,
-} from "./data/feeCollectionData";
+// import {
+//   feesCollectionColumns,
+//   feesCollectionMock,
+// } from "./data/feeCollectionData";
 
-import {
-  placementStatsColumns,
-  placementStatsMock,
-} from "./data/placementData";
+// import {
+//   placementStatsColumns,
+//   placementStatsMock,
+// } from "./data/placementData";
 
-import {
-  collegeExpenseColumns,
-  collegeExpenseMock,
-} from "./data/collegeExpenceData";
+// import {
+//   collegeExpenseColumns,
+//   collegeExpenseMock,
+// } from "./data/collegeExpenceData";
 
-import {
-  teacherPerformanceColumns,
-  teacherPerformanceMock,
-} from "./data/teacherPerfomence";
+// import {
+//   teacherPerformanceColumns,
+//   teacherPerformanceMock,
+// } from "./data/teacherPerfomence";
 
-import {
-  companyPlacementColumns,
-  companyPlacementMock,
-} from "./data/companyPlacementData";
+// import {
+//   companyPlacementColumns,
+//   companyPlacementMock,
+// } from "./data/companyPlacementData";
 // Utility to find tag from ID
 interface ReportTableProps {
   reportData: {
