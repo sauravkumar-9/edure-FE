@@ -1,4 +1,3 @@
-import axios from "@/lib/axios";
 import { LeadData, LeadStatusUpdate } from "@/modules/leads/types";
 
 import { leadListingResponse, leadDashboardResponse } from "./mockData/apiMock";

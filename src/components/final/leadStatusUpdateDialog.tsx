@@ -5,21 +5,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Edit3, Ellipsis, StickyNote, User } from "lucide-react";
 import { useState } from "react";
 
@@ -52,15 +37,12 @@ export interface Lead {
   // Add any additional fields your leads might have
 }
 
-import { MessageSquare } from "lucide-react";
 import CommentDialog from "./commentDialog";
 import { UpdateStatusDialog } from "./statusUpdateDialog";
 import { Link } from "react-router-dom";
 
 // Updated StatusUpdateDialog with all functionality
 export function StatusUpdateDialog({ lead, onStatusUpdate }: any) {
-  const [status, setStatus] = useState<LeadStatus>(lead.leadStatus);
-  const [comment, setComment] = useState("");
   const [statusDialogOpen, setStatusDialogOpen] = useState(false);
   const [commentDialogOpen, setCommentDialogOpen] = useState(false);
 
@@ -84,7 +66,7 @@ export function StatusUpdateDialog({ lead, onStatusUpdate }: any) {
       onStatusUpdate({ updatedLead, updateType: "STATUS" });
     }
     setStatusDialogOpen(false);
-    setComment("");
+    // setComment("");
   };
 
   const handleCommentSubmit = (newComment: string) => {

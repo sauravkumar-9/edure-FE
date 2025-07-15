@@ -1,11 +1,8 @@
 import { useState } from "react";
 import {
-  BookOpen,
-  MonitorCheck,
   Clock,
   CreditCard,
   Calendar,
-  BadgeCheck,
   CheckCircle2,
   Info,
   PhoneCall,

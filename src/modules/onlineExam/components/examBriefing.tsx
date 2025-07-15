@@ -1,21 +1,10 @@
 import { Button } from "@/components/ui/button";
-import {
-  ArrowRight,
-  BadgeCheck,
-  Camera,
-  Chrome,
-  Clock,
-  Globe2,
-  IdCard,
-  Info,
-} from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+import { ArrowRight } from "lucide-react";
 import { WelcomeBanner } from "@/components/final/welcomeBanner";
 import welcomeImage from "@/assets/vector/placementWelcome.png";
 import { InstructionSection } from "./instructionSection";
 
 // Simulated user name; replace with actual prop/context value as needed
-const userName = "Saurav";
 
 export function ExamBriefingPage({ onComplete }: { onComplete: () => void }) {
   return (
