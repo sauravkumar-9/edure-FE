@@ -2,7 +2,6 @@ import { useEffect, useState, useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { Alert, AlertDescription } from "@/components/ui/alert";
 import {
   Dialog,
   DialogContent,
@@ -10,8 +9,9 @@ import {
   DialogTitle,
   DialogFooter,
 } from "@/components/ui/dialog";
-import clsx from "clsx";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Info } from "lucide-react";
+import clsx from "clsx";
 
 const questions = Array.from({ length: 10 }, (_, i) => ({
   id: i + 1,
@@ -31,15 +31,19 @@ export function MCQExamPage() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const questionRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
+  const currentQuestion = questions[currentIndex];
+  const totalAnswered = Object.keys(answers).length;
+  const progress = (totalAnswered / questions.length) * 100;
+
+  // Auto-scroll to current question
   useEffect(() => {
-    if (questionRefs.current[currentIndex]) {
-      questionRefs.current[currentIndex]?.scrollIntoView({
-        behavior: "smooth",
-        block: "center",
-      });
-    }
+    questionRefs.current[currentIndex]?.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+    });
   }, [currentIndex]);
 
+  // Timer countdown
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft((prev) => {
@@ -54,10 +58,6 @@ export function MCQExamPage() {
     return () => clearInterval(timer);
   }, []);
 
-  const currentQuestion = questions[currentIndex];
-  const totalAnswered = Object.keys(answers).length;
-  const progress = (totalAnswered / questions.length) * 100;
-
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
@@ -70,27 +70,24 @@ export function MCQExamPage() {
     setAnswers((prev) => ({ ...prev, [id]: selectedOption }));
     setVisited((prev) => new Set(prev).add(id));
     setSelectedOption(null);
-    if (currentIndex < questions.length - 1) {
+    if (currentIndex < questions.length - 1)
       setCurrentIndex((prev) => prev + 1);
-    }
   };
 
   const handleSkip = () => {
     setVisited((prev) => new Set(prev).add(currentQuestion.id));
     setSelectedOption(null);
-    if (currentIndex < questions.length - 1) {
+    if (currentIndex < questions.length - 1)
       setCurrentIndex((prev) => prev + 1);
-    }
   };
 
   const handleFinalSubmit = () => {
-    console.log("Final submitted answers:", answers);
     setIsSubmitted(true);
   };
 
   if (isSubmitted) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-white px-4 py-10">
+      <div className="h-screen flex items-center justify-center bg-white px-4 py-10">
         <Card className="max-w-md w-full text-center">
           <CardHeader>
             <CardTitle>Exam Submitted Successfully</CardTitle>
@@ -109,9 +106,9 @@ export function MCQExamPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 px-4 py-6 md:px-8 flex gap-6">
+    <div className="h-screen overflow-hidden flex bg-gray-50 px-4 py-6 md:px-8 gap-6">
       {/* Left Panel */}
-      <div className="w-16 md:w-48 flex flex-col gap-6 sticky top-6">
+      <div className="w-16 md:w-70 flex flex-col gap-6">
         {/* Timer */}
         <Card className="text-center">
           <CardHeader className="p-3">
@@ -126,17 +123,21 @@ export function MCQExamPage() {
           </CardContent>
         </Card>
 
-        {/* Navigation */}
-        <Card className="flex-1 overflow-y-auto max-h-[calc(100vh-10rem)]">
+        {/* Question List */}
+        <Card className="flex-1 overflow-hidden gap-0">
           <CardHeader className="p-3">
-            <CardTitle className="text-xs text-muted-foreground">
-              QUESTIONS
+            <CardTitle className="text-sm font-semibold text-gray-800">
+              Navigate Questions
             </CardTitle>
+            <p className="text-xs text-muted-foreground mt-1">
+              Click a question number to jump and review or answer it.
+            </p>
           </CardHeader>
-          <CardContent className="p-2 space-y-2">
+          <CardContent className="px-4 py-2 space-y-2 overflow-y-auto max-h-[calc(100vh-10rem)]">
             {questions.map((q, idx) => {
               const attempted = answers[q.id];
               const seen = visited.has(q.id);
+              const active = currentIndex === idx;
               return (
                 <button
                   key={q.id}
@@ -145,19 +146,26 @@ export function MCQExamPage() {
                   }}
                   onClick={() => setCurrentIndex(idx)}
                   className={clsx(
-                    "w-full rounded-md p-2 text-sm font-medium flex items-center justify-center transition-colors",
+                    "w-full text-left p-2 rounded-md border text-xs font-medium",
                     {
-                      "bg-green-100 text-green-800 border border-green-300":
-                        attempted,
-                      "bg-yellow-100 text-yellow-800 border border-yellow-300":
+                      "bg-green-100 text-green-800 border-green-300": attempted,
+                      "bg-yellow-100 text-yellow-800 border-yellow-300":
                         seen && !attempted,
-                      "bg-gray-100 text-gray-600 border border-gray-300": !seen,
-                      "ring-2 ring-blue-500 border-blue-500":
-                        currentIndex === idx,
+                      "bg-gray-100 text-gray-600 border-gray-300": !seen,
+                      "ring-2 ring-blue-500 border-blue-500": active,
                     }
                   )}
                 >
-                  <span className="hidden md:inline">Question</span> {q.id}
+                  <div className="flex flex-col leading-snug">
+                    <span>Question {q.id}</span>
+                    <span className="text-[11px] text-muted-foreground">
+                      {attempted
+                        ? "Answered"
+                        : seen
+                        ? "Skipped"
+                        : "Not Visited"}
+                    </span>
+                  </div>
                 </button>
               );
             })}
@@ -166,13 +174,13 @@ export function MCQExamPage() {
       </div>
 
       {/* Right Panel */}
-      <div className="flex-1 flex flex-col h-[calc(100vh-3rem)]">
-        {/* Fixed Header */}
-        <div className="sticky top-0 bg-white z-10 pt-4 pb-2 border-b flex justify-between items-center gap-4">
-          <span className="text-sm text-gray-700 font-medium whitespace-nowrap">
-            Answered {totalAnswered} / {questions.length}
+      <div className="flex-1 flex flex-col h-full">
+        {/* Fixed Top Header */}
+        <div className="sticky top-0 bg-white z-20 px-2 md:px-0 pt-4 pb-3 border-b flex items-center gap-4">
+          <span className="text-sm text-muted-foreground font-medium whitespace-nowrap">
+            Answered <strong>{totalAnswered}</strong> / {questions.length}
           </span>
-          <Progress value={progress} className="h-3 flex-1" />
+          <Progress value={progress} className="h-2 flex-1 rounded-full" />
           <Button
             variant="destructive"
             onClick={() => setShowFinalDialog(true)}
@@ -194,14 +202,14 @@ export function MCQExamPage() {
           </AlertDescription>
         </Alert>
 
-        {/* Question */}
-        <Card className="flex-1 flex flex-col">
+        {/* Question & Options */}
+        <Card className="flex-1 flex flex-col overflow-hidden">
           <CardHeader>
             <CardTitle className="text-lg font-semibold">
               Question {currentIndex + 1} of {questions.length}
             </CardTitle>
           </CardHeader>
-          <CardContent className="flex-1 flex flex-col">
+          <CardContent className="flex-1 flex flex-col overflow-auto">
             <div className="flex-1">
               <p className="text-gray-800 text-lg mb-6">
                 {currentQuestion.question}
@@ -285,7 +293,7 @@ export function MCQExamPage() {
         </Card>
       </div>
 
-      {/* Submit Confirmation Dialog */}
+      {/* Confirmation Dialog */}
       <Dialog open={showFinalDialog} onOpenChange={setShowFinalDialog}>
         <DialogContent>
           <DialogHeader>
