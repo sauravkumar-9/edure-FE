@@ -25,6 +25,7 @@ import Notification from "./schedulingLayouts/notification";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { AvatarImage } from "@radix-ui/react-avatar";
 import showToast from "@/components/other/toast";
+import ConfigDialog from "@/components/final/configDialog";
 
 export default function PlacementDashboard() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -131,6 +132,34 @@ export default function PlacementDashboard() {
     },
   ];
 
+  const tabsDetails = [
+    {
+      value: "basic",
+      label: "Basic Info",
+      component: BasicInfo,
+    },
+    {
+      value: "job",
+      label: "Job Details",
+      component: JobDetails,
+    },
+    {
+      value: "eligibility",
+      label: "Eligibility",
+      component: Eligibility,
+    },
+    {
+      value: "process",
+      label: "Process",
+      component: Process,
+    },
+    {
+      value: "notifications",
+      label: "Notifications",
+      component: Notification,
+    },
+  ];
+
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -148,7 +177,18 @@ export default function PlacementDashboard() {
             Add Company
           </Button>
 
-          <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+          <ConfigDialog
+            isDialogOpen={isDialogOpen}
+            setIsDialogOpen={setIsDialogOpen}
+            tabsDetails={tabsDetails}
+            actionButtonLabel="Schedule New Placement"
+            dialogTitle="Schedule New Placement Drive"
+            handleSaveDraft={handleSaveDraft}
+            handleScheduleDrive={handleScheduleDrive}
+            handleDiscard={() => setIsDialogOpen(false)}
+          />
+
+          {/* <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <DialogTrigger asChild>
               <Button variant="default">Schedule New Placement</Button>
             </DialogTrigger>
@@ -203,7 +243,7 @@ export default function PlacementDashboard() {
                 </div>
               </div>
             </DialogContent>
-          </Dialog>
+          </Dialog> */}
         </div>
       </div>
 
