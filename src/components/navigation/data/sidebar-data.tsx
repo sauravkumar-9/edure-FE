@@ -119,6 +119,12 @@ export const sidebarData: SidebarData = {
           icon: BookOpenCheck,
           className: "text-indigo-500",
         },
+        {
+          title: "Slot",
+          url: "/teacher/slot",
+          icon: BookOpenCheck,
+          className: "text-indigo-500",
+        },
       ],
     },
     {

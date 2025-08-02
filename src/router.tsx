@@ -28,6 +28,7 @@ import LeadsList from "./modules/leads/pages/leadsList";
 import PublicLayout from "./app/publicLayout";
 import { ExamStepperLayout } from "./modules/onlineExam/pages/registration";
 import { MCQExamPage } from "./modules/onlineExam/pages/MCQExamPage";
+import TeacherSlotAvailability from "./modules/faculty/proctoringSlot";
 
 export const router = createBrowserRouter(
   [
@@ -99,6 +100,7 @@ export const router = createBrowserRouter(
               element: <Navigate to="catchup" replace />,
             },
             { path: "catchup", element: <TeacherDashboard /> },
+            { path: "slot", element: <TeacherSlotAvailability /> },
           ],
         },
         {
