@@ -58,13 +58,6 @@ export default function TeacherAvailabilityForm({
             <p className="text-base font-medium text-gray-800">
               {format(new Date(date), "EEEE, dd/MM/yyyy")}
             </p>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => markUnavailableForDay(date)}
-            >
-              Mark Unavailable for Full Day
-            </Button>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
@@ -91,12 +84,6 @@ export default function TeacherAvailabilityForm({
           </div>
         </div>
       ))}
-
-      <div className="text-right">
-        <Button onClick={handleConfirm} className="mt-4">
-          Confirm Availability
-        </Button>
-      </div>
     </div>
   );
 }

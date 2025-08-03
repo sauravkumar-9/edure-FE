@@ -21,6 +21,10 @@ export default function ConfigDialog(props: any) {
     handleDiscard,
   } = props;
 
+  const hasSingleTab = tabsDetails.length === 1;
+  const SingleComponent = hasSingleTab ? tabsDetails[0].component : null;
+  const singleTabProps = hasSingleTab ? tabsDetails[0].props : null;
+
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger asChild>
@@ -32,7 +36,11 @@ export default function ConfigDialog(props: any) {
         </DialogHeader>
 
         <div className="flex-1 overflow-y-auto space-y-6">
-          <DashboardTabs tabs={tabsDetails} />
+          {hasSingleTab ? (
+            <SingleComponent {...singleTabProps} />
+          ) : (
+            <DashboardTabs tabs={tabsDetails} />
+          )}
         </div>
 
         <ConfigActionFooter
