@@ -184,7 +184,7 @@ export default function ExamSchedulerPage() {
                 setIsDialogOpen={setShowSlotConfirmationDialog}
                 tabsDetails={confirmSlotsTabDetails}
                 actionButtonLabel="Confirm Slots"
-                dialogTitle="Schedule New Exam"
+                dialogTitle="Confirm Your Availability"
                 handleSaveDraft={handleSaveDraft}
                 handleScheduleDrive={handleConfirmSlots}
                 handleDiscard={() => setShowSlotConfirmationDialog(false)}

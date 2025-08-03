@@ -47,8 +47,6 @@ export default function TeacherAvailabilityForm({
 
   return (
     <div className="space-y-6">
-      <h2 className="text-lg font-semibold">Confirm Your Availability</h2>
-
       {examSchedule.map(({ date, slots }) => (
         <div
           key={date}
