@@ -29,14 +29,12 @@ interface ExamDetailsCardProps {
       teachersConfirmed: string;
     };
   };
-  examSchedule: any;
   getConfirmSlots?: (schedule: any) => void;
 }
 
 export default function ExamDetailsCard({
   examData,
   getConfirmSlots,
-  examSchedule,
 }: ExamDetailsCardProps) {
   const [showSlotConfirmationDialog, setShowSlotConfirmationDialog] =
     useState(false);
@@ -56,7 +54,7 @@ export default function ExamDetailsCard({
       label: "Confirm Slots",
       component: TeacherAvailabilityForm,
       props: {
-        examSchedule: examSchedule,
+        examSchedule: examData.dates,
       },
     },
   ];

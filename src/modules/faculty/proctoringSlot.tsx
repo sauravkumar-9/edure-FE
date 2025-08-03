@@ -1,17 +1,15 @@
-"use client";
-
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { ExamDetailsTab } from "./scedulingLayout/examBasicDetails";
 import { ExamSlotsTab } from "./scedulingLayout/examSlots";
 import ConfigDialog from "@/components/final/configDialog";
 
 import ExamDetailsCard from "./scedulingLayout/examDetaulsCard";
-import ExamDetails from "./mock/examList.json";
+import ExamDetailsMockResponse from "./mock/examList.json";
 
 export default function ExamSchedulerPage() {
   // Exam Config Data
-  const [showDialog, setShowDialog] = useState(false);
+  const [showScheduleExamDialog, setShowScheduleExamDialog] = useState(false);
   const [examName, setExamName] = useState("");
   const [selectedDates, setSelectedDates] = useState<Date[]>([]);
   const [studentCutoff, setStudentCutoff] = useState<Date>();
@@ -20,7 +18,18 @@ export default function ExamSchedulerPage() {
   const [slots, setSlots] = useState<
     Record<string, { start: string; end: string }[]>
   >({});
-  const [isSubmissionAllowed, setIsSubmissionAllowed] = useState(true);
+  const [isScheduleExamSubmissionAllowed, setIsScheduleExamSubmissionAllowed] =
+    useState(true);
+  const [examDetails, setExamDetails] = useState<any>({});
+
+  const getExamDetails = () => {
+    setExamDetails(ExamDetailsMockResponse);
+    console.log(ExamDetailsMockResponse);
+  };
+
+  useEffect(() => {
+    getExamDetails();
+  }, []);
 
   const addSlot = (dateStr: string) => {
     setSlots((prev) => ({
@@ -51,7 +60,7 @@ export default function ExamSchedulerPage() {
     }));
   };
 
-  const handleSave = () => {
+  const scheduleExam = () => {
     console.log({
       examName,
       selectedDates,
@@ -60,10 +69,10 @@ export default function ExamSchedulerPage() {
       teacherCutoff,
       lastRegDate,
     });
-    setShowDialog(false);
+    setShowScheduleExamDialog(false);
   };
 
-  const tabsDetails = [
+  const scheduleExamTabDetails = [
     {
       value: "details",
       label: "Details",
@@ -95,20 +104,7 @@ export default function ExamSchedulerPage() {
     },
   ];
 
-  const examDetails: any = ExamDetails;
-
-  const examSchedule = [
-    {
-      date: "2025-08-10",
-      slots: ["9:00 AM - 11:00 AM", "1:00 PM - 3:00 PM"],
-    },
-    {
-      date: "2025-08-12",
-      slots: ["10:00 AM - 12:00 PM", "2:00 PM - 4:00 PM"],
-    },
-  ];
-
-  const handleSaveDraft = () => {
+  const saveExamAsDraft = () => {
     console.log("Save Draft");
   };
 
@@ -119,26 +115,25 @@ export default function ExamSchedulerPage() {
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl font-bold">NUCAT Exam</h2>
+        <h2 className="text-xl font-bold">{examDetails?.examName}</h2>
         <ConfigDialog
-          tabsDetails={tabsDetails}
-          isDialogOpen={showDialog}
+          tabsDetails={scheduleExamTabDetails}
+          isDialogOpen={showScheduleExamDialog}
           actionButtonLabel="Schedule Exam"
-          dialogTitle="Schedule NUCAT Exam"
+          dialogTitle={`Schedule ${examDetails?.examName} Exam`}
           isDraft={true}
-          isSubmissionAllowed={isSubmissionAllowed}
-          setIsDialogOpen={setShowDialog}
-          handleSaveDraft={handleSaveDraft}
-          handleActionConfimration={handleSave}
-          handleDiscard={() => setShowDialog(false)}
+          isSubmissionAllowed={isScheduleExamSubmissionAllowed}
+          setIsDialogOpen={setShowScheduleExamDialog}
+          handleSaveDraft={saveExamAsDraft}
+          handleActionConfimration={scheduleExam}
+          handleDiscard={() => setShowScheduleExamDialog(false)}
         />
       </div>
 
       <div className="space-y-4">
-        {examDetails.exams.map((exam: any) => (
+        {examDetails.exams?.map((exam: any) => (
           <ExamDetailsCard
             key={exam.examId}
-            examSchedule={examSchedule}
             examData={exam}
             getConfirmSlots={handleConfirmSlots}
           />

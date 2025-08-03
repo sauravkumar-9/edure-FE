@@ -1,5 +1,6 @@
 {
   "totalExams": 1,
+  "examName": "NUCAT Exam",
   "exams": [
     {
       "examId": "exam-123",
@@ -8,27 +9,27 @@
       "dates": [
         {
           "day": "Monday",
-          "date": "13/01/2025",
-          "slots": ["10:00 AM - 12:00 PM", "2:00 PM - 4:00 PM"]
+          "date": "2025-08-10",
+          "slots": ["9:00 AM - 11:00 AM", "1:00 PM - 3:00 PM"]
         },
         {
           "day": "Wednesday",
-          "date": "15/01/2025",
-          "slots": ["10:00 AM - 12:00 PM", "2:00 PM - 4:00 PM"]
+          "date": "2025-08-10",
+          "slots": ["9:00 AM - 11:00 AM", "1:00 PM - 3:00 PM"]
         }
       ],
       "cutoffs": [
         {
           "label": "Student Registration",
-          "date": "10/01/2025"
+          "date": "10-01-2025"
         },
         {
           "label": "Student Slot Confirmation",
-          "date": "11/01/2025"
+          "date": "11-01-2025"
         },
         {
           "label": "Faculty Slot Confirmation",
-          "date": "12/01/2025"
+          "date": "12-01-2025"
         }
       ],
       "status": {
