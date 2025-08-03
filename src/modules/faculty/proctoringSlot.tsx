@@ -7,6 +7,7 @@ import { ExamSlotsTab } from "./scedulingLayout/examSlots";
 import ConfigDialog from "@/components/final/configDialog";
 
 import ExamDetailsCard from "./scedulingLayout/examDetaulsCard";
+import ExamDetails from "./mock/examList.json";
 
 export default function ExamSchedulerPage() {
   // Exam Config Data
@@ -94,6 +95,8 @@ export default function ExamSchedulerPage() {
     },
   ];
 
+  const examDetails: any = ExamDetails;
+
   const examSchedule = [
     {
       date: "2025-08-10",
@@ -132,10 +135,14 @@ export default function ExamSchedulerPage() {
       </div>
 
       <div className="space-y-4">
-        <ExamDetailsCard
-          examSchedule={examSchedule}
-          getConfirmSlots={handleConfirmSlots}
-        />
+        {examDetails.exams.map((exam: any) => (
+          <ExamDetailsCard
+            key={exam.examId}
+            examSchedule={examSchedule}
+            examData={exam}
+            getConfirmSlots={handleConfirmSlots}
+          />
+        ))}
       </div>
     </div>
   );
