@@ -50,13 +50,14 @@ export default function ExamDetailsCard(props: any) {
             </div>
           </div>
           <ConfigDialog
-            isDialogOpen={showSlotConfirmationDialog}
-            setIsDialogOpen={setShowSlotConfirmationDialog}
             tabsDetails={confirmSlotsTabDetails}
+            isDialogOpen={showSlotConfirmationDialog}
             actionButtonLabel="Confirm Slots"
             dialogTitle="Confirm Your Availability"
+            isDraft={false}
+            setIsDialogOpen={setShowSlotConfirmationDialog}
             handleSaveDraft={handleSaveDraft}
-            handleScheduleDrive={handleConfirmSlots}
+            handleActionConfimration={handleConfirmSlots}
             handleDiscard={() => setShowSlotConfirmationDialog(false)}
           />
         </div>

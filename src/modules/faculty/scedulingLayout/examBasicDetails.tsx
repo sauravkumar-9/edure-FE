@@ -39,36 +39,36 @@ export function ExamDetailsTab({
           onChange={(e) => setExamName(e.target.value)}
           className="w-full"
         />
+
+        <Calendar22
+          selectedDates={selectedDates}
+          onSelectDates={setSelectedDates}
+          label="Select Exam Dates"
+          multiSelect
+          className="w-full"
+        />
+
+        <Calendar22
+          selected={studentCutoff}
+          onSelect={setStudentCutoff}
+          label="Student Slot Booking Cutoff"
+          className="w-full"
+        />
+
+        <Calendar22
+          selected={teacherCutoff}
+          onSelect={setTeacherCutoff}
+          label="Teacher Slot Confirmation Cutoff"
+          className="w-full"
+        />
+
+        <Calendar22
+          selected={lastRegDate}
+          onSelect={setLastRegDate}
+          label="Student Registration Cutoff"
+          className="w-full"
+        />
       </div>
-
-      <Calendar22
-        selectedDates={selectedDates}
-        onSelectDates={setSelectedDates}
-        label="Select Exam Dates"
-        multiSelect
-        className="w-full"
-      />
-
-      <Calendar22
-        selected={studentCutoff}
-        onSelect={setStudentCutoff}
-        label="Student Slot Booking Cutoff"
-        className="w-full"
-      />
-
-      <Calendar22
-        selected={teacherCutoff}
-        onSelect={setTeacherCutoff}
-        label="Teacher Slot Confirmation Cutoff"
-        className="w-full"
-      />
-
-      <Calendar22
-        selected={lastRegDate}
-        onSelect={setLastRegDate}
-        label="Student Registration Cutoff"
-        className="w-full"
-      />
     </div>
   );
 }

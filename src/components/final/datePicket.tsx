@@ -50,7 +50,6 @@ export function Calendar22({
       onSelectDates(updated);
     } else {
       onSelect?.(date);
-      setOpen(false);
     }
   };
 

@@ -178,13 +178,14 @@ export default function PlacementDashboard() {
           </Button>
 
           <ConfigDialog
-            isDialogOpen={isDialogOpen}
-            setIsDialogOpen={setIsDialogOpen}
             tabsDetails={tabsDetails}
+            isDialogOpen={isDialogOpen}
             actionButtonLabel="Schedule New Placement"
             dialogTitle="Schedule New Placement Drive"
+            isDraft={true}
+            setIsDialogOpen={setIsDialogOpen}
             handleSaveDraft={handleSaveDraft}
-            handleScheduleDrive={handleScheduleDrive}
+            handleActionConfimration={handleScheduleDrive}
             handleDiscard={() => setIsDialogOpen(false)}
           />
 

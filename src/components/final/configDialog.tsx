@@ -17,8 +17,10 @@ export default function ConfigDialog(props: any) {
     actionButtonLabel,
     dialogTitle,
     handleSaveDraft,
-    handleScheduleDrive,
+    handleActionConfimration,
     handleDiscard,
+    isDraft,
+    isSubmissionAllowed,
   } = props;
 
   const hasSingleTab = tabsDetails.length === 1;
@@ -45,8 +47,11 @@ export default function ConfigDialog(props: any) {
 
         <ConfigActionFooter
           handleSaveDraft={handleSaveDraft}
-          handleScheduleDrive={handleScheduleDrive}
+          handleActionConfimration={handleActionConfimration}
           handleDiscard={handleDiscard}
+          confirmActionButtonLabel={actionButtonLabel}
+          isDraft={isDraft}
+          isSubmissionAllowed={isSubmissionAllowed}
         />
       </DialogContent>
     </Dialog>

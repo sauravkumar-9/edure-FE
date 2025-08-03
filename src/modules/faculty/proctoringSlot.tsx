@@ -1,50 +1,25 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import {
-  AlertTriangle,
-  Calendar,
-  CalendarIcon,
-  ClockIcon,
-  Plus,
-  UsersIcon,
-  X,
-} from "lucide-react";
-import { format } from "date-fns";
 import { useState } from "react";
-import { Input } from "@/components/ui/input";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Label } from "@/components/ui/label";
-import { Calendar22 } from "@/components/final/datePicket";
+
 import { ExamDetailsTab } from "./scedulingLayout/examBasicDetails";
 import { ExamSlotsTab } from "./scedulingLayout/examSlots";
 import ConfigDialog from "@/components/final/configDialog";
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { SectionHeading } from "@/components/final/sectionHeading";
-import TeacherAvailabilityForm from "./scedulingLayout/confirmAvailability";
+
 import ExamDetailsCard from "./scedulingLayout/examDetaulsCard";
 
 export default function ExamSchedulerPage() {
+  // Exam Config Data
   const [showDialog, setShowDialog] = useState(false);
-  const [showSlotConfirmationDialog, setShowSlotConfirmationDialog] =
-    useState(false);
   const [examName, setExamName] = useState("");
   const [selectedDates, setSelectedDates] = useState<Date[]>([]);
-  const [slots, setSlots] = useState<
-    Record<string, { start: string; end: string }[]>
-  >({});
   const [studentCutoff, setStudentCutoff] = useState<Date>();
   const [teacherCutoff, setTeacherCutoff] = useState<Date>();
   const [lastRegDate, setLastRegDate] = useState<Date>();
-  const [tab, setTab] = useState("details");
+  const [slots, setSlots] = useState<
+    Record<string, { start: string; end: string }[]>
+  >({});
+  const [isSubmissionAllowed, setIsSubmissionAllowed] = useState(true);
 
   const addSlot = (dateStr: string) => {
     setSlots((prev) => ({
@@ -143,13 +118,15 @@ export default function ExamSchedulerPage() {
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-xl font-bold">NUCAT Exam</h2>
         <ConfigDialog
-          isDialogOpen={showDialog}
-          setIsDialogOpen={setShowDialog}
           tabsDetails={tabsDetails}
-          actionButtonLabel="Schedule New Exam"
-          dialogTitle="Schedule New Exam"
+          isDialogOpen={showDialog}
+          actionButtonLabel="Schedule Exam"
+          dialogTitle="Schedule NUCAT Exam"
+          isDraft={true}
+          isSubmissionAllowed={isSubmissionAllowed}
+          setIsDialogOpen={setShowDialog}
           handleSaveDraft={handleSaveDraft}
-          handleScheduleDrive={handleSave}
+          handleActionConfimration={handleSave}
           handleDiscard={() => setShowDialog(false)}
         />
       </div>
