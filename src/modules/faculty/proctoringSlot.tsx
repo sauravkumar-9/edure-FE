@@ -1,7 +1,15 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { CalendarIcon, Plus, X } from "lucide-react";
+import {
+  AlertTriangle,
+  Calendar,
+  CalendarIcon,
+  ClockIcon,
+  Plus,
+  UsersIcon,
+  X,
+} from "lucide-react";
 import { format } from "date-fns";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
@@ -15,6 +23,12 @@ import {
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Calendar22 } from "@/components/final/datePicket";
+import { ExamDetailsTab } from "./scedulingLayout/examBasicDetails";
+import { ExamSlotsTab } from "./scedulingLayout/examSlots";
+import ConfigDialog from "@/components/final/configDialog";
+import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { SectionHeading } from "@/components/final/sectionHeading";
 
 export default function ExamSchedulerPage() {
   const [showDialog, setShowDialog] = useState(false);
@@ -69,198 +83,138 @@ export default function ExamSchedulerPage() {
     setShowDialog(false);
   };
 
+  const tabsDetails = [
+    {
+      value: "details",
+      label: "Details",
+      component: ExamDetailsTab,
+      props: {
+        examName,
+        setExamName,
+        selectedDates,
+        setSelectedDates,
+        studentCutoff,
+        setStudentCutoff,
+        teacherCutoff,
+        setTeacherCutoff,
+        lastRegDate,
+        setLastRegDate,
+      },
+    },
+    {
+      value: "slots",
+      label: "Slots",
+      component: ExamSlotsTab,
+      props: {
+        selectedDates,
+        slots,
+        addSlot,
+        removeSlot,
+        updateSlot,
+      },
+    },
+  ];
+
+  const handleSaveDraft = () => {
+    console.log("Save Draft");
+  };
+
   return (
-    <div className="p-6">
+    <div>
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl font-bold">Exam Schedule</h2>
-        <Dialog open={showDialog} onOpenChange={setShowDialog}>
-          <DialogTrigger asChild>
-            <Button onClick={() => setShowDialog(true)}>+ Schedule Exam</Button>
-          </DialogTrigger>
-
-          <DialogContent className="w-full max-w-4xl h-[90vh] flex flex-col">
-            <DialogHeader>
-              <DialogTitle>Schedule New Exam</DialogTitle>
-            </DialogHeader>
-
-            {/* Tabs Header - Fixed */}
-            <Tabs
-              value={tab}
-              onValueChange={setTab}
-              className="flex-1 flex flex-col"
-            >
-              <div className="sticky top-0 z-10 bg-white border-b">
-                <TabsList className="grid w-full grid-cols-2">
-                  <TabsTrigger value="details">Basic Info</TabsTrigger>
-                  <TabsTrigger value="slots">Exam Slots</TabsTrigger>
-                </TabsList>
-              </div>
-
-              {/* Scrollable Content */}
-              <div className="flex-1 overflow-y-auto px-1 pr-3 mt-4 space-y-6">
-                <TabsContent value="details">
-                  <div className="space-y-4">
-                    <div className="space-y-2">
-                      <Label>Exam Name</Label>
-                      <Input
-                        placeholder="Enter exam name"
-                        value={examName}
-                        onChange={(e) => setExamName(e.target.value)}
-                        className="w-full"
-                      />
-                    </div>
-
-                    <Calendar22
-                      selectedDates={selectedDates}
-                      onSelectDates={setSelectedDates}
-                      label="Select Exam Dates"
-                      multiSelect
-                      className="w-full"
-                    />
-
-                    <Calendar22
-                      selected={studentCutoff}
-                      onSelect={setStudentCutoff}
-                      label="Student Slot Booking Cutoff"
-                      className="w-full"
-                    />
-
-                    <Calendar22
-                      selected={teacherCutoff}
-                      onSelect={setTeacherCutoff}
-                      label="Teacher Slot Confirmation Cutoff"
-                      className="w-full"
-                    />
-
-                    <Calendar22
-                      selected={lastRegDate}
-                      onSelect={setLastRegDate}
-                      label="Student Registration Cutoff"
-                      className="w-full"
-                    />
-                  </div>
-                </TabsContent>
-
-                <TabsContent value="slots">
-                  {selectedDates.length === 0 ? (
-                    <p className="text-muted-foreground text-center py-4">
-                      Please select exam dates in the Basic Info tab first.
-                    </p>
-                  ) : (
-                    selectedDates.map((date) => {
-                      const dateStr = format(date, "yyyy-MM-dd");
-                      const dateSlots = slots[dateStr] || [];
-
-                      return (
-                        <div
-                          key={dateStr}
-                          className="border rounded-md p-4 space-y-4 bg-muted/10"
-                        >
-                          <div className="flex justify-between items-center border-b pb-2">
-                            <h4 className="text-base font-semibold">
-                              {format(date, "EEEE, dd/MM/yyyy")}
-                            </h4>
-                            <Button
-                              onClick={() => addSlot(dateStr)}
-                              variant="outline"
-                              size="sm"
-                            >
-                              <Plus className="w-4 h-4 mr-1" /> Add Slot
-                            </Button>
-                          </div>
-
-                          {dateSlots.length === 0 ? (
-                            <p className="text-sm text-muted-foreground">
-                              No slots added yet.
-                            </p>
-                          ) : (
-                            <div className="space-y-3">
-                              {dateSlots.map((slot, idx) => (
-                                <div
-                                  key={idx}
-                                  className="flex flex-col gap-3 md:flex-row md:items-end"
-                                >
-                                  <div className="w-full">
-                                    <Label>Start Time</Label>
-                                    <Input
-                                      type="time"
-                                      value={slot.start}
-                                      onChange={(e) =>
-                                        updateSlot(
-                                          dateStr,
-                                          idx,
-                                          "start",
-                                          e.target.value
-                                        )
-                                      }
-                                    />
-                                  </div>
-                                  <div className="w-full">
-                                    <Label>End Time</Label>
-                                    <Input
-                                      type="time"
-                                      value={slot.end}
-                                      onChange={(e) =>
-                                        updateSlot(
-                                          dateStr,
-                                          idx,
-                                          "end",
-                                          e.target.value
-                                        )
-                                      }
-                                    />
-                                  </div>
-                                  <Button
-                                    variant="ghost"
-                                    size="sm"
-                                    onClick={() => removeSlot(dateStr, idx)}
-                                    className="text-red-500"
-                                  >
-                                    <X className="h-4 w-4" />
-                                  </Button>
-                                </div>
-                              ))}
-                            </div>
-                          )}
-                        </div>
-                      );
-                    })
-                  )}
-                </TabsContent>
-              </div>
-
-              {/* Fixed Footer */}
-              <div className="sticky bottom-0 bg-white border-t pt-4 pb-2 px-4 flex justify-end gap-2">
-                {tab === "details" ? (
-                  <Button onClick={() => setTab("slots")}>Next</Button>
-                ) : (
-                  <>
-                    <Button variant="outline" onClick={() => setTab("details")}>
-                      Back
-                    </Button>
-                    <Button onClick={handleSave}>Save Schedule</Button>
-                  </>
-                )}
-              </div>
-            </Tabs>
-          </DialogContent>
-        </Dialog>
+        <h2 className="text-xl font-bold">NUCAT Exam</h2>
+        <ConfigDialog
+          isDialogOpen={showDialog}
+          setIsDialogOpen={setShowDialog}
+          tabsDetails={tabsDetails}
+          actionButtonLabel="Schedule New Exam"
+          dialogTitle="Schedule New Exam"
+          handleSaveDraft={handleSaveDraft}
+          handleScheduleDrive={handleSave}
+          handleDiscard={() => setShowDialog(false)}
+        />
       </div>
 
-      {/* Mock Schedule */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="border p-4 rounded-md shadow-sm bg-white">
-          <h3 className="text-lg font-semibold mb-2">Mock Exam</h3>
-          <p>
-            <strong>Dates:</strong> 13/01/2025, 15/01/2025
-          </p>
-          <p>
-            <strong>Slots:</strong> 10:00-12:00, 2:00-4:00
-          </p>
-          <p>
-            <strong>Registration Cutoff:</strong> 10/01/2025
-          </p>
-        </div>
+      <div className="space-y-4">
+        <Card className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
+          <div className="flex flex-col gap-4">
+            <div className="flex items-start justify-between">
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-1">
+                  Mock Exam
+                </h3>
+                <div className="flex items-center text-sm text-gray-600">
+                  <CalendarIcon className="h-4 w-4 mr-1 text-gray-500" />
+                  <span>13/01/2025, 15/01/2025</span>
+                </div>
+              </div>
+              <Button variant="default" size="sm">
+                Confirm Slots
+              </Button>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {/* Exam Slots */}
+              <div className="border rounded-md p-4 bg-gray-50">
+                <h4 className="font-medium text-gray-700 mb-2 flex items-center">
+                  <ClockIcon className="h-4 w-4 mr-2 text-gray-500" />
+                  Exam Slots
+                </h4>
+                <ul className="space-y-1">
+                  <li className="text-sm text-gray-700">10:00 AM - 12:00 PM</li>
+                  <li className="text-sm text-gray-700">2:00 PM - 4:00 PM</li>
+                </ul>
+              </div>
+
+              {/* Cutoff Dates */}
+              <div className="border rounded-md p-4 bg-gray-50">
+                <h4 className="font-medium text-gray-700 mb-2 flex items-center">
+                  <AlertTriangle className="h-4 w-4 mr-2 text-gray-500" />
+                  Cutoff Dates
+                </h4>
+                <ul className="space-y-1">
+                  <li className="text-sm text-gray-700">
+                    <span className="font-medium">Student Reg:</span> 10/01/2025
+                  </li>
+                  <li className="text-sm text-gray-700">
+                    <span className="font-medium">Booking:</span> 11/01/2025
+                  </li>
+                  <li className="text-sm text-gray-700">
+                    <span className="font-medium">Teacher Confirm:</span>{" "}
+                    12/01/2025
+                  </li>
+                </ul>
+              </div>
+
+              {/* Status */}
+              <div className="border rounded-md p-4 bg-gray-50">
+                <h4 className="font-medium text-gray-700 mb-2 flex items-center">
+                  <UsersIcon className="h-4 w-4 mr-2 text-gray-500" />
+                  Status
+                </h4>
+                <div className="space-y-1">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-gray-600">Students Registered:</span>
+                    <span className="font-medium">42/60</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-gray-600">Teachers Confirmed:</span>
+                    <span className="font-medium">8/10</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-gray-600">Slots Finalized:</span>
+                    <Badge
+                      variant="outline"
+                      className="text-green-600 border-green-200"
+                    >
+                      Completed
+                    </Badge>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Card>
       </div>
     </div>
   );

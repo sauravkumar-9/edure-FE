@@ -35,14 +35,16 @@ export default function DashboardTabs({
 }: // Add other props as needed
 DashboardTabsProps) {
   return (
-    <Tabs defaultValue={defaultTab} className={cn("mt-4", className)}>
-      <TabsList>
-        {tabs.map((tab) => (
-          <TabsTrigger key={tab.value} value={tab.value}>
-            {tab.label}
-          </TabsTrigger>
-        ))}
-      </TabsList>
+    <Tabs defaultValue={defaultTab} className={cn("", className)}>
+      <div className="bg-white sticky top-0 z-10 pb-3">
+        <TabsList>
+          {tabs.map((tab) => (
+            <TabsTrigger key={tab.value} value={tab.value}>
+              {tab.label}
+            </TabsTrigger>
+          ))}
+        </TabsList>
+      </div>
 
       {tabs.map((tab) => (
         <TabsContent key={tab.value} value={tab.value} className="mt-2">
