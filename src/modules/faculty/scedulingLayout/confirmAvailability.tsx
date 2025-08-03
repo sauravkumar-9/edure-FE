@@ -13,13 +13,9 @@ type ExamSlot = {
 
 type Props = {
   examSchedule: ExamSlot[];
-  onConfirm?: (availability: Record<string, string[]>) => void;
 };
 
-export default function TeacherAvailabilityForm({
-  examSchedule,
-  onConfirm,
-}: Props) {
+export default function TeacherAvailabilityForm({ examSchedule }: Props) {
   const [availability, setAvailability] = useState<Record<string, string[]>>(
     {}
   );
@@ -34,15 +30,6 @@ export default function TeacherAvailabilityForm({
       }
       return { ...prev, [date]: Array.from(current) };
     });
-  };
-
-  const markUnavailableForDay = (date: string) => {
-    setAvailability((prev) => ({ ...prev, [date]: [] }));
-  };
-
-  const handleConfirm = () => {
-    if (onConfirm) onConfirm(availability);
-    console.log("Confirmed availability:", availability);
   };
 
   return (
