@@ -29,9 +29,12 @@ import ConfigDialog from "@/components/final/configDialog";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { SectionHeading } from "@/components/final/sectionHeading";
+import TeacherAvailabilityForm from "./scedulingLayout/confirmAvailability";
 
 export default function ExamSchedulerPage() {
   const [showDialog, setShowDialog] = useState(false);
+  const [showSlotConfirmationDialog, setShowSlotConfirmationDialog] =
+    useState(false);
   const [examName, setExamName] = useState("");
   const [selectedDates, setSelectedDates] = useState<Date[]>([]);
   const [slots, setSlots] = useState<
@@ -115,8 +118,36 @@ export default function ExamSchedulerPage() {
     },
   ];
 
+  const confirmSlotsTabDetails = [
+    {
+      value: "confirm",
+      label: "Confirm",
+      component: TeacherAvailabilityForm,
+      props: {
+        examSchedule: [
+          {
+            date: "2025-08-10",
+            slots: ["9:00 AM - 11:00 AM", "1:00 PM - 3:00 PM"],
+          },
+          {
+            date: "2025-08-12",
+            slots: ["10:00 AM - 12:00 PM", "2:00 PM - 4:00 PM"],
+          },
+        ],
+        onConfirm: (data: any) => {
+          console.log("Submitted Data:", data);
+          // Make an API call here if needed
+        },
+      },
+    },
+  ];
+
   const handleSaveDraft = () => {
     console.log("Save Draft");
+  };
+
+  const handleConfirmSlots = () => {
+    setShowSlotConfirmationDialog(true);
   };
 
   return (
@@ -148,9 +179,16 @@ export default function ExamSchedulerPage() {
                   <span>13/01/2025, 15/01/2025</span>
                 </div>
               </div>
-              <Button variant="default" size="sm">
-                Confirm Slots
-              </Button>
+              <ConfigDialog
+                isDialogOpen={showSlotConfirmationDialog}
+                setIsDialogOpen={setShowSlotConfirmationDialog}
+                tabsDetails={confirmSlotsTabDetails}
+                actionButtonLabel="Confirm Slots"
+                dialogTitle="Schedule New Exam"
+                handleSaveDraft={handleSaveDraft}
+                handleScheduleDrive={handleConfirmSlots}
+                handleDiscard={() => setShowSlotConfirmationDialog(false)}
+              />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
