@@ -1,0 +1,35 @@
+{
+  "totalQuestion": 10,
+  "questions": [
+    {
+      "id": "1",
+      "code": "Q1",
+      "text": "What is the capital of India?",
+      "options": ["Delhi", "Mumbai", "Kolkata", "Chennai"],
+      "correctIndex": 0,
+      "difficulty": "easy",
+      "tags": ["geography"],
+      "createdAt": "2025-08-10",
+      "createdBy": {
+        "id": "1",
+        "name": "Saurav Kumar"
+      },
+      "timesUsed": 0
+    },
+    {
+      "id": "2",
+      "code": "Q2",
+      "text": "What is the capital of France?",
+      "options": ["Paris", "Lyon", "Marseille", "Nice"],
+      "correctIndex": 0,
+      "difficulty": "easy",
+      "tags": ["geography"],
+      "createdAt": "2025-08-10",
+      "createdBy": {
+        "id": "1",
+        "name": "Saurav Kumar"
+      },
+      "timesUsed": 0
+    }
+  ]
+}

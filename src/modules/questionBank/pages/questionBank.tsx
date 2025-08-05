@@ -11,10 +11,12 @@ import {
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Pencil, Trash2 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { QuestionDialog } from "../components/questionDialog";
 import { Question, defaultNewQuestion, Difficulty } from "../types";
+import QuestionMockResponse from "../mock/getQuestions.json";
+import { QuestionCardList } from "../components/questionCard";
 
 export default function QuestionBank() {
   const [questions, setQuestions] = useState<Question[]>([]);
@@ -24,6 +26,10 @@ export default function QuestionBank() {
     ...defaultNewQuestion,
   });
   const [editId, setEditId] = useState<string | null>(null);
+
+  useEffect(() => {
+    setQuestions(QuestionMockResponse.questions);
+  }, []);
 
   const handleAddOrEdit = () => {
     const isValid =
@@ -51,7 +57,7 @@ export default function QuestionBank() {
     setIsDialogOpen(false);
   };
 
-  const handleEdit = (q: Question) => {
+  const handleEdit = (q: any) => {
     const { id, ...questionData } = q;
     setCurrentQuestion(questionData);
     setEditId(id);
@@ -89,52 +95,15 @@ export default function QuestionBank() {
 
         {(["easy", "medium", "hard"] as Difficulty[]).map((diff) => (
           <TabsContent value={diff} key={diff}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-4">
               {questions
                 .filter((q) => q.difficulty === diff)
-                .map((q) => (
-                  <Card key={q.id}>
-                    <CardHeader>
-                      <CardTitle className="text-base">{q.text}</CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-2">
-                      {q.options.map((opt, idx) => (
-                        <div
-                          key={idx}
-                          className={`px-2 py-1 rounded border ${
-                            idx === q.correctIndex
-                              ? "border-green-500 bg-green-50"
-                              : "border-gray-200"
-                          }`}
-                        >
-                          {String.fromCharCode(65 + idx)}. {opt}
-                        </div>
-                      ))}
-                      <div className="flex gap-2 pt-2">
-                        {q.tags.map((tag, i) => (
-                          <Badge key={i} variant="outline">
-                            {tag}
-                          </Badge>
-                        ))}
-                      </div>
-                    </CardContent>
-                    <CardFooter className="justify-end gap-2">
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => handleEdit(q)}
-                      >
-                        <Pencil className="w-4 h-4" />
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => handleDelete(q.id)}
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </Button>
-                    </CardFooter>
-                  </Card>
+                .map((q: any) => (
+                  <QuestionCardList
+                    questions={q}
+                    onEdit={handleEdit}
+                    onDelete={handleDelete}
+                  />
                 ))}
             </div>
           </TabsContent>
