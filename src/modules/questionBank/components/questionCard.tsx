@@ -33,8 +33,26 @@ export function QuestionCardList({
             {questions.text}
           </CardTitle>
         </div>
+      </CardHeader>
 
-        <div className="flex flex-col gap-2">
+      <CardContent className="grid grid-cols-2 gap-2">
+        {questions.options.map((opt, idx) => (
+          <div
+            key={idx}
+            className={`flex items-start gap-3 p-2 rounded ${
+              idx === questions.correctIndex
+                ? "bg-green-50 border border-green-200"
+                : "bg-muted"
+            }`}
+          >
+            <div className="flex items-center justify-center h-6 w-6 rounded-full bg-background border font-medium text-sm">
+              {String.fromCharCode(65 + idx)}
+            </div>
+            <div className="flex-1 text-sm">{opt}</div>
+          </div>
+        ))}
+
+        <div className="flex flex-col gap-2 mt-4">
           <div className="flex items-center gap-2">
             <span className="text-sm font-medium text-muted-foreground">
               Difficulty:
@@ -68,28 +86,10 @@ export function QuestionCardList({
             </div>
           )}
         </div>
-      </CardHeader>
-
-      <CardContent className="grid grid-cols-2 gap-2">
-        {questions.options.map((opt, idx) => (
-          <div
-            key={idx}
-            className={`flex items-start gap-3 p-2 rounded ${
-              idx === questions.correctIndex
-                ? "bg-green-50 border border-green-200"
-                : "bg-muted"
-            }`}
-          >
-            <div className="flex items-center justify-center h-6 w-6 rounded-full bg-background border font-medium text-sm">
-              {String.fromCharCode(65 + idx)}
-            </div>
-            <div className="flex-1 text-sm">{opt}</div>
-          </div>
-        ))}
       </CardContent>
 
-      <CardFooter className="mt-auto pt-4 pb-2 px-4 border-t">
-        <div className="w-full flex justify-between items-center">
+      <CardFooter className="px-4 border-t">
+        <div className="w-full flex justify-between items-center pt-4">
           <div className="text-xs text-muted-foreground space-y-1">
             <div className="flex items-center gap-1">
               <span className="font-medium">Code:</span>
