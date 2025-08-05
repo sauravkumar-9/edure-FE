@@ -75,7 +75,7 @@ export default function ExamSchedulerPage() {
   const scheduleExamTabDetails = [
     {
       value: "details",
-      label: "Details",
+      label: "Basic Details",
       component: ExamDetailsTab,
       props: {
         examName,
@@ -92,7 +92,7 @@ export default function ExamSchedulerPage() {
     },
     {
       value: "slots",
-      label: "Slots",
+      label: "Exam Slots",
       component: ExamSlotsTab,
       props: {
         selectedDates,

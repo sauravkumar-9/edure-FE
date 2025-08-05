@@ -90,7 +90,6 @@ export default function ExamDetailsCard({
             actionButtonLabel="Confirm Slots"
             dialogTitle="Confirm exam slots"
             isDraft={true}
-            handleSaveDraft={examData.isDraft ? handleSaveDraft : undefined}
             handleActionConfimration={handleConfirmSlots}
             handleDiscard={() => setShowSlotConfirmationDialog(false)}
           />
