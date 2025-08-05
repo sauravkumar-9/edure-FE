@@ -125,6 +125,12 @@ export const sidebarData: SidebarData = {
           icon: BookOpenCheck,
           className: "text-indigo-500",
         },
+        {
+          title: "Questions",
+          url: "/questions/list",
+          icon: BookOpenCheck,
+          className: "text-indigo-500",
+        },
       ],
     },
     {

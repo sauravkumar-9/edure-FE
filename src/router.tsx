@@ -29,6 +29,7 @@ import PublicLayout from "./app/publicLayout";
 import { ExamStepperLayout } from "./modules/onlineExam/pages/registration";
 import { MCQExamPage } from "./modules/onlineExam/pages/MCQExamPage";
 import TeacherSlotAvailability from "./modules/faculty/proctoringSlot";
+import QuestionBank from "./modules/questionBank/pages/questionBank";
 
 export const router = createBrowserRouter(
   [
@@ -161,6 +162,16 @@ export const router = createBrowserRouter(
             //   path: "*",
             //   element: <Navigate to="insights" replace />,
             // },
+          ],
+        },
+        {
+          path: "questions",
+          children: [
+            {
+              index: true,
+              element: <Navigate to="list" replace />,
+            },
+            { path: "list", element: <QuestionBank /> },
           ],
         },
       ],
