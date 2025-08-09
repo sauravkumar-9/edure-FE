@@ -13,6 +13,9 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { Question, Difficulty } from "../types";
+import { useState } from "react";
+import { BlockMath } from "react-katex";
+import "katex/dist/katex.min.css";
 
 interface QuestionDialogProps {
   open: boolean;
@@ -36,6 +39,7 @@ export function QuestionDialog({
     updatedOptions[index] = value;
     onQuestionChange({ ...question, options: updatedOptions });
   };
+  const [question2, setQuestion2] = useState("");
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -48,19 +52,32 @@ export function QuestionDialog({
         <div className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="question-text">Question</Label>
-            <Textarea
+            {/* <Textarea
               id="question-text"
               placeholder="Enter question text"
               value={question.text}
               onChange={(e) =>
                 onQuestionChange({ ...question, text: e.target.value })
               }
-            />
+            /> */}
+            <div>
+              <textarea
+                value={question2}
+                onChange={(e) => setQuestion2(e.target.value)}
+                placeholder="Enter LaTeX, e.g. \\vec{a} + \\vec{b}"
+                rows={3}
+                className="w-full border rounded px-2 py-1"
+              />
+              <div className="mt-4">
+                <strong>Preview:</strong>
+                <BlockMath math={question2} />
+              </div>
+            </div>
           </div>
 
           <div className="space-y-2">
             <Label>Options</Label>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 gap-3">
               {question.options.map((opt, idx) => (
                 <div key={idx} className="flex items-center gap-2">
                   <div className="flex items-center justify-center w-8 h-8 rounded bg-muted font-medium">
