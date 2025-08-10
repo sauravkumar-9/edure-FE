@@ -6,6 +6,7 @@ import PlacementOverview from "@/components/layout/placementOverview";
 import PlacementResults from "@/components/layout/placementResults";
 import { placementCandidatesMock } from "@/mockData/placement";
 import JobRoles from "@/components/layout/placementJobRoles";
+import { useState } from "react";
 
 const userList = userListSchema.parse(placementCandidatesMock);
 const tabsDetails: any = [
@@ -30,7 +31,8 @@ const tabsDetails: any = [
   },
 ];
 
-function PlacementDetails() {
+export default function PlacementDetails() {
+  const [tabValue, setTabValue] = useState(tabsDetails[0].value);
   return (
     <div className="">
       <CompanyProfileHeader
@@ -53,9 +55,12 @@ function PlacementDetails() {
         location="Bangalore, India"
         deadline="Nov 20, 2023"
       />
-      <TabLayout tabs={tabsDetails} mode="content" />
+      <TabLayout
+        tabs={tabsDetails}
+        mode="content"
+        value={tabValue}
+        onChange={setTabValue}
+      />
     </div>
   );
 }
-
-export default PlacementDetails;

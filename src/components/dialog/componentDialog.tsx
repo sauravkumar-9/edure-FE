@@ -6,6 +6,7 @@ import {
 } from "@/components/ui/dialog";
 import TabLayout from "../comman/tabLayout";
 import DialogActionFooter from "./dialogActionFooter";
+import { useState } from "react";
 
 const dialogSizeMap: any = {
   LARGE: { height: 700, width: 900 },
@@ -36,6 +37,7 @@ export default function ComponentDialog(props: any) {
   const singleTabProps = hasSingleTab ? tabsDetails[0].props : null;
 
   const dialogSize = dialogSizeMap[dialogType];
+  const [tabValue, setTabValue] = useState(tabsDetails[0].value);
 
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
@@ -58,7 +60,13 @@ export default function ComponentDialog(props: any) {
           {hasSingleTab ? (
             <SingleComponent {...singleTabProps} />
           ) : (
-            <TabLayout tabs={tabsDetails} mode="content" />
+            <TabLayout
+              tabs={tabsDetails}
+              mode="content"
+              defaultTab={tabValue}
+              value={tabValue}
+              onChange={setTabValue}
+            />
           )}
         </div>
 
