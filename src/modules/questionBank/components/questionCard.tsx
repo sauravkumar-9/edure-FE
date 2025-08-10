@@ -11,7 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Pencil, Trash2 } from "lucide-react";
 import { format } from "date-fns";
-import { Question } from "../types";
+import { Question } from "../types/questionBankTypes";
 
 export function QuestionCardList({
   questions,

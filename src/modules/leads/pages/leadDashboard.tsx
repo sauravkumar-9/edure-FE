@@ -20,8 +20,8 @@ import { FileUp, Plus } from "lucide-react";
 import showToast from "@/components/other/toast";
 import { StatCard } from "@/components/final/statCard";
 import { Skeleton } from "@/components/ui/skeleton";
-import { getDashboardData, addLeadService } from "../leadService";
-import { convertMetricCard } from "../utils/builder";
+import { getDashboardData, addLeadService } from "../services/leadService";
+import { convertMetricCard } from "../helper/builder";
 
 export default function CounsellorLeadDashboard() {
   const [isAddLeadDialogOpen, setIsAddLeadDialogOpen] = useState(false);

@@ -14,7 +14,11 @@ import { Pencil, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { QuestionDialog } from "../components/questionDialog";
-import { Question, defaultNewQuestion, Difficulty } from "../types";
+import {
+  Question,
+  defaultNewQuestion,
+  Difficulty,
+} from "../types/questionBankTypes";
 import QuestionMockResponse from "../mock/getQuestions.json";
 import { QuestionCardList } from "../components/questionCard";
 

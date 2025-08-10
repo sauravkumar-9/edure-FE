@@ -1,6 +1,9 @@
-import { LeadData, LeadStatusUpdate } from "@/modules/leads/types";
+import { LeadData, LeadStatusUpdate } from "@/modules/leads/types/types";
 
-import { leadListingResponse, leadDashboardResponse } from "./mockData/apiMock";
+import {
+  leadListingResponse,
+  leadDashboardResponse,
+} from "../mockData/apiMock";
 
 export const addLeadService = async (reqData: LeadData) => {
   try {

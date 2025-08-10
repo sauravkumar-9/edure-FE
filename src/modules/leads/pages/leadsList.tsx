@@ -4,14 +4,14 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ColumnFiltersState, SortingState } from "@tanstack/react-table";
 import { Skeleton } from "@/components/ui/skeleton";
 
-import { generateColumnsFromResponse } from "../utils/tableBuilder";
+import { generateColumnsFromResponse } from "../helper/tableBuilder";
 import {
   addNoteToLead,
   downloadLeadsReport,
   getAllLeads,
   updateLeadStatus,
-} from "../leadService";
-import { LoadType } from "../types";
+} from "../services/leadService";
+import { LoadType } from "../types/types";
 import showToast from "@/components/other/toast";
 
 export default function LeadList() {
