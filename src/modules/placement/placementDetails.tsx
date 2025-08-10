@@ -1,5 +1,5 @@
 import { userListSchema } from "./data/schema";
-import TabLayout from "@/components/comman/tabs";
+import TabLayout from "@/components/comman/tabLayout";
 import { placementResultColumns } from "./data/placementResultColumns";
 import CompanyProfileHeader from "@/components/cards/companyCard";
 import PlacementOverview from "@/components/layout/placementOverview";

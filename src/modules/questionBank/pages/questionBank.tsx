@@ -14,10 +14,11 @@ import {
 import QuestionMockResponse from "../mock/getQuestions.json";
 import { QuestionCardList } from "../components/questionCard";
 import ComponentDialog from "@/components/dialog/componentDialog";
+import { FilterTabs } from "@/components/comman/filterTabs";
 
 export default function QuestionBank() {
   const [questions, setQuestions] = useState<Question[]>([]);
-  const [activeTab, setActiveTab] = useState<Difficulty>("easy");
+  const [activeTab, setActiveTab] = useState<string>("easy");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState<Omit<Question, "id">>({
     ...defaultNewQuestion,
@@ -81,6 +82,12 @@ export default function QuestionBank() {
     toast("Question deleted");
   };
 
+  const tabs = [
+    { value: "easy", label: "Easy" },
+    { value: "medium", label: "Medium" },
+    { value: "hard", label: "Hard" },
+  ];
+
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
@@ -95,32 +102,21 @@ export default function QuestionBank() {
         </Button>
       </div>
 
-      <Tabs
-        defaultValue={activeTab}
-        onValueChange={(v) => setActiveTab(v as Difficulty)}
-      >
-        <TabsList>
-          <TabsTrigger value="easy">Easy</TabsTrigger>
-          <TabsTrigger value="medium">Medium</TabsTrigger>
-          <TabsTrigger value="hard">Hard</TabsTrigger>
-        </TabsList>
+      <FilterTabs value={activeTab} onChange={setActiveTab} tabs={tabs} />
 
-        {(["easy", "medium", "hard"] as Difficulty[]).map((diff) => (
-          <TabsContent value={diff} key={diff}>
-            <div className="space-y-4">
-              {questions
-                .filter((q) => q.difficulty === diff)
-                .map((q: any) => (
-                  <QuestionCardList
-                    questions={q}
-                    onEdit={handleEdit}
-                    onDelete={handleDelete}
-                  />
-                ))}
-            </div>
-          </TabsContent>
-        ))}
-      </Tabs>
+      {(["easy", "medium", "hard"] as Difficulty[]).map((diff) => (
+        <div className="space-y-4">
+          {questions
+            .filter((q) => q.difficulty === diff)
+            .map((q: any) => (
+              <QuestionCardList
+                questions={q}
+                onEdit={handleEdit}
+                onDelete={handleDelete}
+              />
+            ))}
+        </div>
+      ))}
 
       <ComponentDialog
         isDialogOpen={isDialogOpen}

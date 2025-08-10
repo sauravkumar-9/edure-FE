@@ -1,4 +1,4 @@
-import TabLayout from "@/components/comman/tabs";
+import TabLayout from "@/components/comman/tabLayout";
 import ReportTable from "./reportTable";
 import ReportInsights from "./reportInsights";
 import React, { useState } from "react";

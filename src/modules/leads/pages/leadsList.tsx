@@ -13,6 +13,7 @@ import {
 } from "../services/leadService";
 import { LoadType } from "../types/types";
 import showToast from "@/components/comman/toast";
+import { FilterTabs } from "@/components/comman/filterTabs";
 
 export default function LeadList() {
   const [tabValue, setTabValue] = useState("all");
@@ -202,6 +203,20 @@ export default function LeadList() {
     }
   };
 
+  const tabs = [
+    {
+      value: "all",
+      label: "All Leads",
+      count: response?.stats?.verified + response?.stats?.unverified,
+    },
+    { value: "verified", label: "Verified", count: response?.stats?.verified },
+    {
+      value: "unverified",
+      label: "Unverified",
+      count: response?.stats?.unverified,
+    },
+  ];
+
   return (
     <div className="space-y-4">
       {isPageLoading ? (
@@ -263,22 +278,7 @@ export default function LeadList() {
         </div>
       ) : (
         <>
-          <Tabs value={tabValue} onValueChange={setTabValue} className="w-full">
-            <div className="flex items-center justify-between">
-              <TabsList>
-                <TabsTrigger value="all">
-                  All Leads (
-                  {response.stats?.verified + response.stats?.unverified})
-                </TabsTrigger>
-                <TabsTrigger value="verified">
-                  Verified ({response.stats?.verified})
-                </TabsTrigger>
-                <TabsTrigger value="unverified">
-                  Unverified ({response.stats?.unverified})
-                </TabsTrigger>
-              </TabsList>
-            </div>
-          </Tabs>
+          <FilterTabs value={tabValue} onChange={setTabValue} tabs={tabs} />
 
           <TableView
             data={response.rows}

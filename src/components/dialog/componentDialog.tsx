@@ -4,7 +4,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import TabLayout from "../comman/tabs";
+import TabLayout from "../comman/tabLayout";
 import DialogActionFooter from "./dialogActionFooter";
 
 const dialogSizeMap: any = {

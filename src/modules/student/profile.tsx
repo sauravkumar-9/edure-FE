@@ -3,7 +3,7 @@ import StudentProfileHeader from "../../components/cards/StudentProfileHeader";
 import type { StudentProfile } from "@/types/student";
 
 import StudentAttendance from "@/components/layout/studentAttendence";
-import TabLayout from "@/components/comman/tabs";
+import TabLayout from "@/components/comman/tabLayout";
 import StudentGrade from "@/components/layout/studentGrade";
 
 const tabsDetails: any = [

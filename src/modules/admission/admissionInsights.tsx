@@ -130,19 +130,6 @@ export default function AdmissionInsights() {
 
         <TabsContent value="overview" className="space-y-6">
           <div className="grid gap-4 md:grid-cols-2">
-            {/* <Card>
-              <CardHeader>
-                <CardTitle>Applications Trend</CardTitle>
-              </CardHeader>
-              <CardContent className="h-[300px]">
-                <LineChart
-                  data={admissionStats.trendData}
-                  xKey="month"
-                  yKey="applications"
-                />
-              </CardContent>
-            </Card> */}
-
             <CustomLineChart />
 
             <PieChartDonut />
@@ -150,18 +137,6 @@ export default function AdmissionInsights() {
         </TabsContent>
 
         <TabsContent value="departments" className="space-y-6">
-          {/* <Card>
-            <CardHeader>
-              <CardTitle>Applications by Department</CardTitle>
-            </CardHeader>
-            <CardContent className="h-[400px]">
-              <BarChart
-                data={admissionStats.topDepartments}
-                xKey="name"
-                yKey="value"
-              />
-            </CardContent>
-          </Card> */}
           <CustomBarChart
             title="Subject-wise Attendance"
             description="Attendance percentage by subject"
@@ -181,35 +156,6 @@ export default function AdmissionInsights() {
 
         <TabsContent value="demographics" className="space-y-6">
           <div className="grid gap-4 md:grid-cols-2">
-            {/* <Card>
-              <CardHeader>
-                <CardTitle>Gender Distribution</CardTitle>
-              </CardHeader>
-              <CardContent className="h-[300px]">
-                <PieChart
-                  data={[
-                    { name: "Male", value: 680 },
-                    { name: "Female", value: 565 },
-                  ]}
-                />
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>Category Distribution</CardTitle>
-              </CardHeader>
-              <CardContent className="h-[300px]">
-                <PieChart
-                  data={[
-                    { name: "General", value: 520 },
-                    { name: "OBC", value: 350 },
-                    { name: "SC", value: 220 },
-                    { name: "ST", value: 155 },
-                  ]}
-                />
-              </CardContent>
-            </Card> */}
             <PieChartDonut />
             <PieChartDonut />
           </div>

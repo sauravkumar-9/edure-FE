@@ -1,4 +1,4 @@
-import TabLayout from "@/components/comman/tabs";
+import TabLayout from "@/components/comman/tabLayout";
 import ExamsOverview from "./examsOverview";
 import ExamsSchedule from "./examsSchedule";
 
