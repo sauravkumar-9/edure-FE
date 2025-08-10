@@ -14,7 +14,7 @@ import { AdmissionForm } from "./modules/forms/admissionPage";
 import { Admission } from "./modules/admission/admission";
 import AdmissionInsights from "./modules/admission/admissionInsights";
 import { AdmissionReport } from "./modules/admission/admissionReport";
-import TeacherDashboard from "./modules/faculty/catchup";
+import TeacherDashboard from "./modules/faculty/pages/catchup";
 import PlacementDashboard from "./modules/placement/placementDashboard";
 import { CompaniesList } from "./modules/placement/companiesList";
 import { PlacementCatchupDashboard } from "./modules/placement/catchup";
@@ -25,7 +25,7 @@ import LeadsList from "./modules/leads/pages/leadsList";
 import PublicLayout from "./app/publicLayout";
 import { ExamStepperLayout } from "./modules/onlineExam/pages/registration";
 import { MCQExamPage } from "./modules/onlineExam/pages/MCQExamPage";
-import TeacherSlotAvailability from "./modules/faculty/proctoringSlot";
+import TeacherSlotAvailability from "./modules/faculty/pages/proctoringSlot";
 import QuestionBank from "./modules/questionBank/pages/questionBank";
 
 export const router = createBrowserRouter(

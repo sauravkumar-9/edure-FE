@@ -17,11 +17,11 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
-import BasicInfo from "./schedulingLayouts/basicInfo";
-import JobDetails from "./schedulingLayouts/jobDetails";
-import Eligibility from "./schedulingLayouts/eligibility";
-import Process from "./schedulingLayouts/process";
-import Notification from "./schedulingLayouts/notification";
+import BasicInfo from "./components/basicInfo";
+import JobDetails from "./components/jobDetails";
+import Eligibility from "./components/eligibility";
+import Process from "./components/process";
+import Notification from "./components/notification";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { AvatarImage } from "@radix-ui/react-avatar";
 import showToast from "@/components/comman/toast";

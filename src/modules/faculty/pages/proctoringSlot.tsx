@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 
-import { ExamDetailsTab } from "./scedulingLayout/examBasicDetails";
-import { ExamSlotsTab } from "./scedulingLayout/examSlots";
+import { ExamDetailsTab } from "../components/examBasicDetails";
+import { ExamSlotsTab } from "../components/examSlots";
 import ComponentDialog from "@/components/dialog/componentDialog";
 
-import ExamDetailsCard from "./scedulingLayout/examDetaulsCard";
-import ExamDetailsMockResponse from "./mock/examList.json";
+import ExamDetailsCard from "../components/examDetaulsCard";
+import ExamDetailsMockResponse from "../mock/examList.json";
 import { Button } from "@/components/ui/button";
 
 export default function ExamSchedulerPage() {
