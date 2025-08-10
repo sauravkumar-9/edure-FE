@@ -53,23 +53,7 @@ function PlacementDetails() {
         location="Bangalore, India"
         deadline="Nov 20, 2023"
       />
-      {/* <CompanyProfileHeader
-        company={{
-          name: "Google",
-          profileImage: "https://logo.clearbit.com/google.com",
-          description:
-            "A global technology company specializing in Internet-related services and products.",
-        }}
-        companyWebsite="https://google.com"
-        placementDate="June 15, 2023"
-        status="Ongoing"
-        hiringStats={{
-          offersMade: 42,
-          highestPackage: "45",
-          averagePackage: "28",
-        }}
-      /> */}
-      <TabLayout tabs={tabsDetails} />
+      <TabLayout tabs={tabsDetails} mode="content" />
     </div>
   );
 }

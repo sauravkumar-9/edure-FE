@@ -18,7 +18,7 @@ const tabsDetails: any = [
 function ExamDetails() {
   return (
     <div className="">
-      <TabLayout tabs={tabsDetails} className="mt-0" />
+      <TabLayout tabs={tabsDetails} mode="content" />
     </div>
   );
 }

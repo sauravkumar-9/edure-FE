@@ -106,7 +106,7 @@ function Report() {
           },
         ]}
       />
-      <TabLayout tabs={tabsDetails} reportData={reportData} />
+      <TabLayout tabs={tabsDetails} mode="content" />
     </React.Fragment>
   );
 }

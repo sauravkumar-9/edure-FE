@@ -47,7 +47,7 @@ function StudentProfile() {
   return (
     <div className="">
       <StudentProfileHeader student={studentData} />
-      <TabLayout tabs={tabsDetails} />
+      <TabLayout tabs={tabsDetails} mode="content" />
     </div>
   );
 }

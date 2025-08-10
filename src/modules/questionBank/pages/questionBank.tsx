@@ -1,7 +1,5 @@
 "use client";
 
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -14,7 +12,7 @@ import {
 import QuestionMockResponse from "../mock/getQuestions.json";
 import { QuestionCardList } from "../components/questionCard";
 import ComponentDialog from "@/components/dialog/componentDialog";
-import { FilterTabs } from "@/components/comman/filterTabs";
+import TabLayout from "@/components/comman/tabLayout";
 
 export default function QuestionBank() {
   const [questions, setQuestions] = useState<Question[]>([]);
@@ -102,7 +100,12 @@ export default function QuestionBank() {
         </Button>
       </div>
 
-      <FilterTabs value={activeTab} onChange={setActiveTab} tabs={tabs} />
+      <TabLayout
+        mode="filter"
+        value={activeTab}
+        onChange={setActiveTab}
+        tabs={tabs}
+      />
 
       {(["easy", "medium", "hard"] as Difficulty[]).map((diff) => (
         <div className="space-y-4">

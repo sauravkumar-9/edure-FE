@@ -58,7 +58,7 @@ export default function ComponentDialog(props: any) {
           {hasSingleTab ? (
             <SingleComponent {...singleTabProps} />
           ) : (
-            <TabLayout tabs={tabsDetails} />
+            <TabLayout tabs={tabsDetails} mode="content" />
           )}
         </div>
 

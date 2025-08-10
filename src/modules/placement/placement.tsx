@@ -1,12 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 
 import DataListingHeader from "@/components/cards/dataListingHeader";
 import { sampleJobs } from "@/components/final/data";
 import { JobCard } from "@/components/final/hobCard";
-import { FilterTabs } from "@/components/comman/filterTabs";
+import TabLayout from "@/components/comman/tabLayout";
 
 export default function CurrentCoursesTab() {
   const [filter, setFilter] = useState("live");
@@ -34,7 +33,12 @@ export default function CurrentCoursesTab() {
   return (
     <div className="w-full">
       <DataListingHeader />
-      <FilterTabs value={filter} onChange={setFilter} tabs={tabs} />
+      <TabLayout
+        mode="filter"
+        value={filter}
+        onChange={setFilter}
+        tabs={tabs}
+      />
 
       {/* Job Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

@@ -1,4 +1,4 @@
-import { NavigationTabs } from "@/components/comman/navigationTab";
+import TabLayout from "@/components/comman/tabLayout";
 import { Outlet } from "react-router-dom";
 
 interface TabItem {
@@ -23,7 +23,7 @@ const tabs: TabItem[] = [
 export function Admission() {
   return (
     <div className="space-y-4">
-      <NavigationTabs tabs={tabs} />
+      <TabLayout tabs={tabs} mode="navigation" />
       <Outlet />
     </div>
   );

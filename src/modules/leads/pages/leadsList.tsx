@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import TableView from "@/components/table/table";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ColumnFiltersState, SortingState } from "@tanstack/react-table";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -13,7 +12,7 @@ import {
 } from "../services/leadService";
 import { LoadType } from "../types/types";
 import showToast from "@/components/comman/toast";
-import { FilterTabs } from "@/components/comman/filterTabs";
+import TabLayout from "@/components/comman/tabLayout";
 
 export default function LeadList() {
   const [tabValue, setTabValue] = useState("all");
@@ -278,7 +277,12 @@ export default function LeadList() {
         </div>
       ) : (
         <>
-          <FilterTabs value={tabValue} onChange={setTabValue} tabs={tabs} />
+          <TabLayout
+            mode="filter"
+            value={tabValue}
+            onChange={setTabValue}
+            tabs={tabs}
+          />
 
           <TableView
             data={response.rows}
