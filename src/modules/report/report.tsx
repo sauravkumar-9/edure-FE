@@ -1,4 +1,4 @@
-import DashboardTabs from "@/components/other/tabs";
+import TabLayout from "@/components/comman/tabs";
 import ReportTable from "./reportTable";
 import ReportInsights from "./reportInsights";
 import React, { useState } from "react";
@@ -106,7 +106,7 @@ function Report() {
           },
         ]}
       />
-      <DashboardTabs tabs={tabsDetails} reportData={reportData} />
+      <TabLayout tabs={tabsDetails} reportData={reportData} />
     </React.Fragment>
   );
 }

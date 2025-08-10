@@ -3,7 +3,7 @@ import StudentProfileHeader from "../../components/cards/StudentProfileHeader";
 import type { StudentProfile } from "@/types/student";
 
 import StudentAttendance from "@/components/layout/studentAttendence";
-import DashboardTabs from "@/components/other/tabs";
+import TabLayout from "@/components/comman/tabs";
 import StudentGrade from "@/components/layout/studentGrade";
 
 const tabsDetails: any = [
@@ -47,7 +47,7 @@ function StudentProfile() {
   return (
     <div className="">
       <StudentProfileHeader student={studentData} />
-      <DashboardTabs tabs={tabsDetails} />
+      <TabLayout tabs={tabsDetails} />
     </div>
   );
 }

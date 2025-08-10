@@ -14,7 +14,7 @@ interface GaugeMeterProps {
   // Add other GaugeMeter props as needed
 }
 
-interface DashboardTabsProps {
+interface TabLayoutProps {
   tabs: TabContent[];
   defaultTab?: string;
   gaugeMeterProps?: {
@@ -27,13 +27,13 @@ interface DashboardTabsProps {
   // Add other component props as needed
 }
 
-export default function DashboardTabs({
+export default function TabLayout({
   tabs,
   defaultTab = tabs[0]?.value,
   className,
   reportData,
 }: // Add other props as needed
-DashboardTabsProps) {
+TabLayoutProps) {
   return (
     <Tabs defaultValue={defaultTab} className={cn("", className)}>
       <div className="bg-white sticky top-0 z-10 pb-3">

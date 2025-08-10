@@ -1,4 +1,4 @@
-import DashboardTabs from "@/components/other/tabs";
+import TabLayout from "@/components/comman/tabs";
 import ExamsOverview from "./examsOverview";
 import ExamsSchedule from "./examsSchedule";
 
@@ -18,7 +18,7 @@ const tabsDetails: any = [
 function ExamDetails() {
   return (
     <div className="">
-      <DashboardTabs tabs={tabsDetails} className="mt-0" />
+      <TabLayout tabs={tabsDetails} className="mt-0" />
     </div>
   );
 }

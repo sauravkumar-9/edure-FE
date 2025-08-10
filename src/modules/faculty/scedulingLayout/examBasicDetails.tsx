@@ -1,6 +1,6 @@
 "use client";
 
-import DatePicker from "@/components/comman/datePicket";
+import DatePicker from "@/components/comman/datePicker";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 

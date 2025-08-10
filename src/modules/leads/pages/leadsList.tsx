@@ -12,7 +12,7 @@ import {
   updateLeadStatus,
 } from "../services/leadService";
 import { LoadType } from "../types/types";
-import showToast from "@/components/other/toast";
+import showToast from "@/components/comman/toast";
 
 export default function LeadList() {
   const [tabValue, setTabValue] = useState("all");

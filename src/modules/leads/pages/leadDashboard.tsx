@@ -17,7 +17,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { FileUp, Plus } from "lucide-react";
-import showToast from "@/components/other/toast";
+import showToast from "@/components/comman/toast";
 import { StatCard } from "@/components/final/statCard";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getDashboardData, addLeadService } from "../services/leadService";

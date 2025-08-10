@@ -24,7 +24,7 @@ import Process from "./schedulingLayouts/process";
 import Notification from "./schedulingLayouts/notification";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { AvatarImage } from "@radix-ui/react-avatar";
-import showToast from "@/components/other/toast";
+import showToast from "@/components/comman/toast";
 import ComponentDialog from "@/components/dialog/componentDialog";
 
 export default function PlacementDashboard() {

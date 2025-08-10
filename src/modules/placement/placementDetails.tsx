@@ -1,5 +1,5 @@
 import { userListSchema } from "./data/schema";
-import DashboardTabs from "@/components/other/tabs";
+import TabLayout from "@/components/comman/tabs";
 import { placementResultColumns } from "./data/placementResultColumns";
 import CompanyProfileHeader from "@/components/cards/companyCard";
 import PlacementOverview from "@/components/layout/placementOverview";
@@ -69,7 +69,7 @@ function PlacementDetails() {
           averagePackage: "28",
         }}
       /> */}
-      <DashboardTabs tabs={tabsDetails} />
+      <TabLayout tabs={tabsDetails} />
     </div>
   );
 }

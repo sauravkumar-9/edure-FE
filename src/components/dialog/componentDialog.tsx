@@ -4,7 +4,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import DashboardTabs from "../other/tabs";
+import TabLayout from "../comman/tabs";
 import DialogActionFooter from "./dialogActionFooter";
 
 const dialogSizeMap: any = {
@@ -58,7 +58,7 @@ export default function ComponentDialog(props: any) {
           {hasSingleTab ? (
             <SingleComponent {...singleTabProps} />
           ) : (
-            <DashboardTabs tabs={tabsDetails} />
+            <TabLayout tabs={tabsDetails} />
           )}
         </div>
 
