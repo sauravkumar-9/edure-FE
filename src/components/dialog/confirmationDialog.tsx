@@ -28,11 +28,11 @@ export function ConfirmationDialog({
   onOpenChange,
   title,
   description,
-  confirmLabel = "Confirm",
+  confirmLabel,
   cancelLabel,
   onConfirm,
-  isLoading = false,
-  disableConfirm = false,
+  isLoading,
+  disableConfirm,
   customDataComponent,
 }: ConfirmationDialogProps) {
   return (
@@ -55,6 +55,7 @@ export function ConfirmationDialog({
           isDraft={false}
           isSubmissionAllowed={false}
           isLoading={isLoading}
+          disableConfirm={disableConfirm}
           cancelButtonLabel={cancelLabel}
         />
       </DialogContent>

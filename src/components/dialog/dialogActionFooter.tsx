@@ -6,13 +6,12 @@ export default function DialogActionFooter(props: any) {
     handleSaveDraft,
     handleActionConfimration,
     handleDiscard,
-    confirmButtonLabel,
-    isDraft = false,
-    isSubmissionAllowed,
-    showBorder = false,
-    isLoading,
-    disableConfirm,
+    confirmButtonLabel = "Confirm",
     cancelButtonLabel = "Cancel",
+    isDraft = false,
+    showBorder = false,
+    isLoading = false,
+    disableConfirm = false,
   } = props;
 
   return (

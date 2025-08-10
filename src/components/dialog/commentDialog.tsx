@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -52,7 +51,6 @@ interface CommentDialogProps {
 }
 
 export default function CommentDialog({
-  lead,
   onCommentSubmit,
   open,
   onOpenChange,
