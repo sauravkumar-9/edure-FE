@@ -10,7 +10,7 @@ import {
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
 import { Button } from "@/components/ui/button";
-import { StatusUpdateDialog } from "@/components/final/leadStatusUpdateDialog";
+import { StatusUpdateDialog } from "@/modules/leads/components/leadStatusUpdateDialog";
 
 type LeadStatus = "cold" | "warm" | "hot" | "converted" | "lost";
 type LeadSource = "walkin" | "instagram" | "referral" | "website" | "other";

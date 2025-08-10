@@ -37,9 +37,10 @@ export interface Lead {
   // Add any additional fields your leads might have
 }
 
-import CommentDialog from "../dialog/commentDialog";
-import { UpdateStatusDialog } from "./statusUpdateDialog";
+import CommentDialog from "../../../components/dialog/commentDialog";
 import { Link } from "react-router-dom";
+import { StatusUpdateForm } from "./statusUpdateForm";
+import ComponentDialog from "@/components/dialog/componentDialog";
 
 // Updated StatusUpdateDialog with all functionality
 export function StatusUpdateDialog({ lead, onStatusUpdate }: any) {
@@ -79,6 +80,19 @@ export function StatusUpdateDialog({ lead, onStatusUpdate }: any) {
     }
   };
 
+  const confirmSlotsTabDetails = [
+    {
+      value: "confirm",
+      label: "Confirm Slots",
+      component: StatusUpdateForm,
+      props: {
+        lead,
+        onCancel: () => setStatusDialogOpen(false),
+        onStatusUpdate,
+      },
+    },
+  ];
+
   return (
     <>
       <DropdownMenu>
@@ -107,14 +121,17 @@ export function StatusUpdateDialog({ lead, onStatusUpdate }: any) {
         </DropdownMenuContent>
       </DropdownMenu>
 
-      <UpdateStatusDialog
-        lead={lead}
-        open={statusDialogOpen}
-        onOpenChange={setStatusDialogOpen}
-        onStatusUpdate={handleStatusSubmit}
+      <ComponentDialog
+        isDialogOpen={statusDialogOpen}
+        setIsDialogOpen={setStatusDialogOpen}
+        tabsDetails={confirmSlotsTabDetails}
+        actionButtonLabel="Update Status"
+        dialogTitle="Update Status"
+        dialogDescription={`${lead.fullName}`}
+        handleScheduleDrive={handleStatusSubmit}
+        dialogType="SMALL"
       />
 
-      {/* Comment Dialog */}
       <CommentDialog
         lead={lead}
         open={commentDialogOpen}

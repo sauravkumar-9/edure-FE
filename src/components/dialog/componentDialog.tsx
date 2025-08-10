@@ -12,7 +12,7 @@ import DialogActionBar from "./dialogActionBar";
 const dialogSizeMap: any = {
   LARGE: { height: 700, width: 900 },
   MEDIUM: { height: 500, width: 700 },
-  SMALL: { height: 400, width: 500 },
+  SMALL: { height: 300, width: 300 },
   ALERT: { height: 300, width: 400 },
   DEFAULT: { height: 700, width: 900 },
 };
@@ -42,7 +42,12 @@ export default function ComponentDialog(props: any) {
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogContent
-        className={`sm:max-w-[${dialogSize.width}px] h-[${dialogSize.height}px] flex flex-col`}
+        // if hasSingleTab then dont fix the size
+        className={`${
+          hasSingleTab
+            ? ""
+            : `sm:max-w-[${dialogSize.width}px] h-[${dialogSize.height}px] flex flex-col`
+        }`}
       >
         <DialogHeader className="pb-2">
           <DialogTitle>{dialogTitle}</DialogTitle>
@@ -65,7 +70,7 @@ export default function ComponentDialog(props: any) {
           handleDiscard={handleDiscard}
           confirmActionButtonLabel={actionButtonLabel}
           isDraft={isDraft}
-          showBorder={true}
+          showBorder={!hasSingleTab}
           isSubmissionAllowed={isSubmissionAllowed}
         />
       </DialogContent>
