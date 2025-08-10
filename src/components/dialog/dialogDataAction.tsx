@@ -41,9 +41,6 @@ export default function DialogDataAction(props: any) {
 
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-      <DialogTrigger asChild>
-        <Button variant="default">{actionButtonLabel}</Button>
-      </DialogTrigger>
       <DialogContent
         className={`sm:max-w-[${dialogSize.width}px] h-[${dialogSize.height}px] flex flex-col`}
       >

@@ -177,74 +177,22 @@ export default function PlacementDashboard() {
             Add Company
           </Button>
 
+          <Button variant="default" onClick={() => setIsDialogOpen(true)}>
+            <PlusIcon className="w-4 h-4 mr-2" />
+            Schedule New Placement
+          </Button>
+
           <DialogDataAction
             tabsDetails={tabsDetails}
             isDialogOpen={isDialogOpen}
-            actionButtonLabel="Schedule New Placement"
             dialogTitle="Schedule New Placement Drive"
             isDraft={true}
             setIsDialogOpen={setIsDialogOpen}
             handleSaveDraft={handleSaveDraft}
             handleActionConfimration={handleScheduleDrive}
             handleDiscard={() => setIsDialogOpen(false)}
+            dialogType="LARGE"
           />
-
-          {/* <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-            <DialogTrigger asChild>
-              <Button variant="default">Schedule New Placement</Button>
-            </DialogTrigger>
-            <DialogContent className="sm:max-w-[900px] h-[700px] flex flex-col">
-              <DialogHeader className="pb-2">
-                <DialogTitle>Schedule New Placement Drive</DialogTitle>
-              </DialogHeader>
-
-              <div className="flex-1 overflow-y-auto space-y-6">
-                <Tabs defaultValue="basic" className="w-full">
-                  <TabsList className="grid grid-cols-5 sticky top-0 z-10">
-                    <TabsTrigger value="basic">Basic Info</TabsTrigger>
-                    <TabsTrigger value="job">Job Details</TabsTrigger>
-                    <TabsTrigger value="eligibility">Eligibility</TabsTrigger>
-                    <TabsTrigger value="process">Process</TabsTrigger>
-                    <TabsTrigger value="notifications">
-                      Notifications
-                    </TabsTrigger>
-                  </TabsList>
-                  <TabsContent value="basic" className="mt-6">
-                    <BasicInfo />
-                  </TabsContent>
-                  <TabsContent value="job" className="mt-6">
-                    <JobDetails />
-                  </TabsContent>
-                  <TabsContent value="eligibility" className="mt-6">
-                    <Eligibility />
-                  </TabsContent>
-                  <TabsContent value="process" className="mt-6">
-                    <Process />
-                  </TabsContent>
-                  <TabsContent value="notifications" className="mt-6">
-                    <Notification />
-                  </TabsContent>
-                </Tabs>
-              </div>
-
-              <div className="border-t pt-4 flex justify-between">
-                <Button
-                  variant="outline"
-                  onClick={() => setIsDialogOpen(false)}
-                >
-                  Discard
-                </Button>
-                <div className="space-x-2">
-                  <Button variant="secondary" onClick={handleSaveDraft}>
-                    Save as Draft
-                  </Button>
-                  <Button onClick={handleScheduleDrive}>
-                    Schedule Placement
-                  </Button>
-                </div>
-              </div>
-            </DialogContent>
-          </Dialog> */}
         </div>
       </div>
 

@@ -6,6 +6,7 @@ import DialogDataAction from "@/components/dialog/dialogDataAction";
 
 import ExamDetailsCard from "./scedulingLayout/examDetaulsCard";
 import ExamDetailsMockResponse from "./mock/examList.json";
+import { Button } from "@/components/ui/button";
 
 export default function ExamSchedulerPage() {
   // Exam Config Data
@@ -116,6 +117,13 @@ export default function ExamSchedulerPage() {
     <div>
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-xl font-bold">{examDetails?.examName}</h2>
+        <Button
+          variant="default"
+          onClick={() => setShowScheduleExamDialog(true)}
+        >
+          Schedule Exam
+        </Button>
+
         <DialogDataAction
           tabsDetails={scheduleExamTabDetails}
           isDialogOpen={showScheduleExamDialog}

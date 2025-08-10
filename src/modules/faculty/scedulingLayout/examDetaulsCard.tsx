@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import TeacherAvailabilityForm from "./confirmAvailability";
+import { Button } from "@/components/ui/button";
 
 interface ExamDetailsCardProps {
   examData: {
@@ -82,6 +83,10 @@ export default function ExamDetailsCard({
             <span>{formattedDates}</span>
           </div>
         </div>
+
+        <Button variant="default" onClick={handleConfirmSlots}>
+          Confirm Slots
+        </Button>
 
         <DialogDataAction
           isDialogOpen={showSlotConfirmationDialog}
