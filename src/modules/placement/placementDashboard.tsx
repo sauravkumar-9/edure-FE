@@ -25,7 +25,7 @@ import Notification from "./schedulingLayouts/notification";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { AvatarImage } from "@radix-ui/react-avatar";
 import showToast from "@/components/other/toast";
-import DialogDataAction from "@/components/dialog/dialogDataAction";
+import ComponentDialog from "@/components/dialog/componentDialog";
 
 export default function PlacementDashboard() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -182,7 +182,7 @@ export default function PlacementDashboard() {
             Schedule New Placement
           </Button>
 
-          <DialogDataAction
+          <ComponentDialog
             tabsDetails={tabsDetails}
             isDialogOpen={isDialogOpen}
             dialogTitle="Schedule New Placement Drive"

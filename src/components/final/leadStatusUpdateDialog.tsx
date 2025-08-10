@@ -37,7 +37,7 @@ export interface Lead {
   // Add any additional fields your leads might have
 }
 
-import CommentDialog from "./commentDialog";
+import CommentDialog from "../dialog/commentDialog";
 import { UpdateStatusDialog } from "./statusUpdateDialog";
 import { Link } from "react-router-dom";
 

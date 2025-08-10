@@ -7,8 +7,9 @@ import {
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
-import { NameCodeCell } from "./nameCodeCell";
+import { NameCodeCell } from "../final/nameCodeCell";
 import { Textarea } from "../ui/textarea";
+import DialogActionBar from "./dialogActionBar";
 
 // Lead Status and Source Types
 export type LeadStatus = "cold" | "warm" | "hot" | "converted" | "lost";
@@ -47,6 +48,8 @@ interface CommentDialogProps {
   onCommentSubmit?: (comment: string) => void;
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  dialogDescription?: string;
+  dialogTitle?: string;
 }
 
 export default function CommentDialog({
@@ -54,6 +57,8 @@ export default function CommentDialog({
   onCommentSubmit,
   open,
   onOpenChange,
+  dialogDescription,
+  dialogTitle,
 }: CommentDialogProps) {
   const [comment, setComment] = useState("");
 
@@ -74,8 +79,10 @@ export default function CommentDialog({
     <Dialog open={open} onOpenChange={handleClose}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Add Comment for</DialogTitle>
-          <NameCodeCell fullName={lead.fullName} code={lead.leadCode} />
+          <DialogTitle>{dialogTitle}</DialogTitle>
+          {dialogDescription && (
+            <p className="text-sm text-muted-foreground">{dialogDescription}</p>
+          )}
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid w-full gap-1.5">
@@ -90,14 +97,12 @@ export default function CommentDialog({
           </div>
         </div>
 
-        <div className="flex justify-end gap-2">
-          <Button variant="outline" onClick={handleClose}>
-            Cancel
-          </Button>
-          <Button onClick={handleSubmit} disabled={!comment.trim()}>
-            Add Comment
-          </Button>
-        </div>
+        <DialogActionBar
+          handleActionConfimration={handleSubmit}
+          confirmActionButtonLabel="Add Comment"
+          isDraft={false}
+          isSubmissionAllowed={!comment.trim()}
+        />
       </DialogContent>
     </Dialog>
   );

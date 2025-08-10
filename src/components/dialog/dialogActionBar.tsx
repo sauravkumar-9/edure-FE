@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 
-export function ConfigActionFooter(props: any) {
+export default function DialogActionBar(props: any) {
   const {
     handleSaveDraft,
     handleActionConfimration,
@@ -8,10 +8,13 @@ export function ConfigActionFooter(props: any) {
     confirmActionButtonLabel,
     isDraft = false,
     isSubmissionAllowed,
+    showBorder = false,
   } = props;
 
   return (
-    <div className="border-t pt-4 flex justify-between">
+    <div
+      className={`flex justify-between ${showBorder ? "border-t pt-4" : ""}`}
+    >
       <div>
         {isDraft && (
           <Button variant="secondary" onClick={handleSaveDraft}>

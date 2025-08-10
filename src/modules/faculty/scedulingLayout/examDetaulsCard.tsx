@@ -1,4 +1,4 @@
-import DialogDataAction from "@/components/dialog/dialogDataAction";
+import ComponentDialog from "@/components/dialog/componentDialog";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import {
@@ -88,7 +88,7 @@ export default function ExamDetailsCard({
           Confirm Slots
         </Button>
 
-        <DialogDataAction
+        <ComponentDialog
           isDialogOpen={showSlotConfirmationDialog}
           setIsDialogOpen={setShowSlotConfirmationDialog}
           tabsDetails={confirmSlotsTabDetails}

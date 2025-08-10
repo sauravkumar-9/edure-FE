@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { ExamDetailsTab } from "./scedulingLayout/examBasicDetails";
 import { ExamSlotsTab } from "./scedulingLayout/examSlots";
-import DialogDataAction from "@/components/dialog/dialogDataAction";
+import ComponentDialog from "@/components/dialog/componentDialog";
 
 import ExamDetailsCard from "./scedulingLayout/examDetaulsCard";
 import ExamDetailsMockResponse from "./mock/examList.json";
@@ -124,7 +124,7 @@ export default function ExamSchedulerPage() {
           Schedule Exam
         </Button>
 
-        <DialogDataAction
+        <ComponentDialog
           tabsDetails={scheduleExamTabDetails}
           isDialogOpen={showScheduleExamDialog}
           actionButtonLabel="Schedule Exam"
