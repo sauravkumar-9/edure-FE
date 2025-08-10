@@ -207,7 +207,7 @@ export function MCQExamPage() {
           />
 
           <Button
-            className="bg-indigo-600 text-white hover:bg-indigo-700"
+            className="btn-primary"
             onClick={() => setShowFinalDialog(true)}
           >
             Submit Exam

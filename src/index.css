@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -133,4 +134,11 @@ input[type="button"],
 input[type="submit"],
 input[type="reset"] {
   cursor: pointer;
+}
+
+
+
+
+.btn-primary {
+  @apply bg-indigo-600 text-white hover:bg-indigo-700 px-4 py-2 rounded-md font-medium transition;
 }

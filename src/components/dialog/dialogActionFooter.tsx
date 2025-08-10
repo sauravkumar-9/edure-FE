@@ -32,7 +32,7 @@ export default function DialogActionFooter(props: any) {
             {cancelButtonLabel}
           </Button>
           <Button
-            className="bg-indigo-600 text-white hover:bg-indigo-700"
+            className="btn-primary"
             onClick={handleActionConfimration}
             disabled={isLoading || disableConfirm}
           >
