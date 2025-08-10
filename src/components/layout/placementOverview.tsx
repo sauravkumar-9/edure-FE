@@ -1,6 +1,6 @@
 import { Building2, BarChart2, ClipboardList, CheckCircle } from "lucide-react";
 import { Button } from "../ui/button";
-import { AccordionSection } from "../final/accordionSection";
+import { AccordionSection } from "../comman/accordionSection";
 import { Accordion } from "@/components/ui/accordion";
 
 const overviewSectionMockData = [

@@ -7,7 +7,6 @@ import {
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
-import { NameCodeCell } from "../final/nameCodeCell";
 import { Textarea } from "../ui/textarea";
 import DialogActionBar from "./dialogActionBar";
 

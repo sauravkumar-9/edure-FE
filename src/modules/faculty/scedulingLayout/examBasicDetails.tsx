@@ -1,6 +1,6 @@
 "use client";
 
-import { Calendar22 } from "@/components/final/datePicket";
+import DatePicker from "@/components/comman/datePicket";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
@@ -40,7 +40,7 @@ export function ExamDetailsTab({
           className="w-full"
         />
 
-        <Calendar22
+        <DatePicker
           selectedDates={selectedDates}
           onSelectDates={setSelectedDates}
           label="Select Exam Dates"
@@ -48,21 +48,21 @@ export function ExamDetailsTab({
           className="w-full"
         />
 
-        <Calendar22
+        <DatePicker
           selected={studentCutoff}
           onSelect={setStudentCutoff}
           label="Student Slot Booking Cutoff"
           className="w-full"
         />
 
-        <Calendar22
+        <DatePicker
           selected={teacherCutoff}
           onSelect={setTeacherCutoff}
           label="Teacher Slot Confirmation Cutoff"
           className="w-full"
         />
 
-        <Calendar22
+        <DatePicker
           selected={lastRegDate}
           onSelect={setLastRegDate}
           label="Student Registration Cutoff"

@@ -13,7 +13,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-interface Calendar22Props {
+export interface DatePickerProps {
   label?: string;
   selected?: Date;
   onSelect?: (date: Date | undefined) => void;
@@ -26,7 +26,7 @@ interface Calendar22Props {
   className?: string;
 }
 
-export function Calendar22({
+export default function DatePicker({
   label = "Select Date",
   selected,
   onSelect,
@@ -34,7 +34,7 @@ export function Calendar22({
   selectedDates = [],
   onSelectDates,
   className,
-}: Calendar22Props) {
+}: DatePickerProps) {
   const [open, setOpen] = React.useState(false);
 
   const handleSelect = (date: Date | undefined) => {
