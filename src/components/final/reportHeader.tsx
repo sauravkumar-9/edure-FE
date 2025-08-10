@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import SearchableSelect from "./dropDown";
+import DropDown from "./dropDown";
 
 interface DashboardHeaderProps {
   title: string;
@@ -35,7 +35,7 @@ export function ReportHeader({
       {rightSection || (
         <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto bg-white">
           {filters.map((filter, index) => (
-            <SearchableSelect
+            <DropDown
               key={index}
               options={filter.options}
               value={filter.value}

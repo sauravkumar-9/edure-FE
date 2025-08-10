@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import DropDown from "@/components/final/dropDown";
 
 export type LeadStatus = "cold" | "warm" | "hot" | "converted" | "lost";
 export interface Lead {
@@ -57,25 +58,22 @@ export function StatusUpdateForm({
     setComment("");
   };
 
+  const onSelectChange: any = (value: LeadStatus) => {
+    setStatus(value);
+  };
+
   return (
     <div className="grid gap-4 py-4">
       <div className="space-y-2">
         <Label htmlFor="status">Status</Label>
-        <Select
+
+        <DropDown
+          options={["cold", "warm", "hot", "converted", "lost"]}
           value={status}
-          onValueChange={(value: LeadStatus) => setStatus(value)}
-        >
-          <SelectTrigger>
-            <SelectValue placeholder="Select status" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="cold">Cold</SelectItem>
-            <SelectItem value="warm">Warm</SelectItem>
-            <SelectItem value="hot">Hot</SelectItem>
-            <SelectItem value="converted">Converted</SelectItem>
-            <SelectItem value="lost">Lost</SelectItem>
-          </SelectContent>
-        </Select>
+          onChange={onSelectChange}
+          placeholder="Select status"
+          maxVisibleItems={5}
+        />
       </div>
       <div className="space-y-2">
         <Label htmlFor="comment">Comment</Label>
