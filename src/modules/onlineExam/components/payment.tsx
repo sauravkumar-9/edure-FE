@@ -11,6 +11,7 @@ import {
   DialogFooter,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { ConfirmationDialog } from "@/components/dialog/confirmationDialog";
 
 const paymentOptions = [
   { id: "card", label: "Credit / Debit Card" },
@@ -96,34 +97,17 @@ export function PaymentPage({ onComplete }: { onComplete: () => void }) {
         </div>
       </div>
 
-      {/* Confirmation Dialog */}
-      <Dialog open={showDialog} onOpenChange={setShowDialog}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Confirm Payment Method</DialogTitle>
-          </DialogHeader>
-          <div className="space-y-2 text-sm text-gray-700">
-            <p>
-              <strong>Selected Method:</strong> {selectedMethodLabel}
-            </p>
-            <p>
-              <strong>Amount:</strong> ₹500.00
-            </p>
-            <p className="text-sm text-red-500 mt-2">
-              ⚠️ Once confirmed, this cannot be changed.
-            </p>
-          </div>
-          <DialogFooter className="pt-4">
-            <Button
-              onClick={handleConfirm}
-              disabled={isConfirming}
-              className="w-full"
-            >
-              {isConfirming ? "Confirming..." : "Confirm & Continue"}
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+      <ConfirmationDialog
+        open={showDialog}
+        onOpenChange={setShowDialog}
+        title="Confirm Payment Method"
+        description={`Are you sure you want to proceed with ${selectedMethodLabel} payment?`}
+        confirmLabel="Confirm & Continue"
+        cancelLabel="Cancel"
+        onConfirm={handleConfirm}
+        disableConfirm={isConfirming}
+        isLoading={isConfirming}
+      />
     </>
   );
 }

@@ -17,6 +17,7 @@ import {
   DialogFooter,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { ConfirmationDialog } from "@/components/dialog/confirmationDialog";
 
 export function SlotBookingPage({ onComplete }: { onComplete: () => void }) {
   const [date, setDate] = useState<Date | undefined>(new Date());
@@ -129,11 +130,16 @@ export function SlotBookingPage({ onComplete }: { onComplete: () => void }) {
       </div>
 
       {/* Confirmation Dialog */}
-      <Dialog open={showDialog} onOpenChange={setShowDialog}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Confirm Your Slot</DialogTitle>
-          </DialogHeader>
+      <ConfirmationDialog
+        open={showDialog}
+        onOpenChange={setShowDialog}
+        title="Confirm Your Slot"
+        confirmLabel="Confirm Slot"
+        cancelLabel="Cancel"
+        onConfirm={handleConfirm}
+        disableConfirm={isConfirming}
+        isLoading={isConfirming}
+        customDataComponent={
           <div className="space-y-2 text-sm text-gray-700">
             <p>
               <strong>Date:</strong> {date && format(date, "PPP")}
@@ -142,20 +148,11 @@ export function SlotBookingPage({ onComplete }: { onComplete: () => void }) {
               <strong>Slot:</strong> {selectedSlotInfo?.time}
             </p>
             <p className="text-sm text-red-500 mt-2">
-              ⚠️ Once confirmed, the slot cannot be changed.
+              Once confirmed, the slot cannot be changed.
             </p>
           </div>
-          <DialogFooter className="pt-4">
-            <Button
-              onClick={handleConfirm}
-              disabled={isConfirming}
-              className="w-full"
-            >
-              {isConfirming ? "Confirming..." : "Confirm Slot"}
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+        }
+      />
     </>
   );
 }

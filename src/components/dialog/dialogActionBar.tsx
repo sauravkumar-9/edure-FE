@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { DialogFooter } from "../ui/dialog";
 
 export default function DialogActionBar(props: any) {
   const {
@@ -12,7 +13,7 @@ export default function DialogActionBar(props: any) {
   } = props;
 
   return (
-    <div
+    <DialogFooter
       className={`flex justify-between ${showBorder ? "border-t pt-4" : ""}`}
     >
       <div>
@@ -36,6 +37,6 @@ export default function DialogActionBar(props: any) {
           </Button>
         </div>
       </div>
-    </div>
+    </DialogFooter>
   );
 }
