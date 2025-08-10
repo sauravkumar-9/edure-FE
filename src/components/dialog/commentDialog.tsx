@@ -8,7 +8,7 @@ import {
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { Textarea } from "../ui/textarea";
-import DialogActionBar from "./dialogActionBar";
+import DialogActionFooter from "./dialogActionFooter";
 
 // Lead Status and Source Types
 export type LeadStatus = "cold" | "warm" | "hot" | "converted" | "lost";
@@ -96,9 +96,9 @@ export default function CommentDialog({
           </div>
         </div>
 
-        <DialogActionBar
+        <DialogActionFooter
           handleActionConfimration={handleSubmit}
-          confirmActionButtonLabel="Add Comment"
+          confirmButtonLabel="Add Comment"
           isDraft={false}
           isSubmissionAllowed={!comment.trim()}
         />

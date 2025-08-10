@@ -7,7 +7,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import DashboardTabs from "../other/tabs";
-import DialogActionBar from "./dialogActionBar";
+import DialogActionFooter from "./dialogActionFooter";
 
 const dialogSizeMap: any = {
   LARGE: { height: 700, width: 900 },
@@ -64,11 +64,11 @@ export default function ComponentDialog(props: any) {
           )}
         </div>
 
-        <DialogActionBar
+        <DialogActionFooter
           handleSaveDraft={handleSaveDraft}
           handleActionConfimration={handleActionConfimration}
           handleDiscard={handleDiscard}
-          confirmActionButtonLabel={actionButtonLabel}
+          confirmButtonLabel={actionButtonLabel}
           isDraft={isDraft}
           showBorder={!hasSingleTab}
           isSubmissionAllowed={isSubmissionAllowed}

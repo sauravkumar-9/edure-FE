@@ -7,9 +7,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogDescription,
-  DialogFooter,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
+import DialogActionFooter from "./dialogActionFooter";
 
 interface ConfirmationDialogProps {
   open: boolean;
@@ -30,7 +29,7 @@ export function ConfirmationDialog({
   title,
   description,
   confirmLabel = "Confirm",
-  cancelLabel = "Cancel",
+  cancelLabel,
   onConfirm,
   isLoading = false,
   disableConfirm = false,
@@ -50,22 +49,14 @@ export function ConfirmationDialog({
 
         {customDataComponent}
 
-        <DialogFooter className="pt-4 flex justify-end gap-2">
-          <Button
-            variant="outline"
-            onClick={() => onOpenChange(false)}
-            disabled={isLoading}
-          >
-            {cancelLabel}
-          </Button>
-          <Button
-            className="bg-indigo-600 text-white hover:bg-indigo-700"
-            onClick={onConfirm}
-            disabled={isLoading || disableConfirm}
-          >
-            {isLoading ? "Processing..." : confirmLabel}
-          </Button>
-        </DialogFooter>
+        <DialogActionFooter
+          handleActionConfimration={onConfirm}
+          confirmButtonLabel={confirmLabel}
+          isDraft={false}
+          isSubmissionAllowed={false}
+          isLoading={isLoading}
+          cancelButtonLabel={cancelLabel}
+        />
       </DialogContent>
     </Dialog>
   );

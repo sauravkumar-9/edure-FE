@@ -1,15 +1,18 @@
 import { Button } from "@/components/ui/button";
 import { DialogFooter } from "../ui/dialog";
 
-export default function DialogActionBar(props: any) {
+export default function DialogActionFooter(props: any) {
   const {
     handleSaveDraft,
     handleActionConfimration,
     handleDiscard,
-    confirmActionButtonLabel,
+    confirmButtonLabel,
     isDraft = false,
     isSubmissionAllowed,
     showBorder = false,
+    isLoading,
+    disableConfirm,
+    cancelButtonLabel = "Cancel",
   } = props;
 
   return (
@@ -27,13 +30,14 @@ export default function DialogActionBar(props: any) {
       <div className="flex-1 flex justify-end">
         <div className="space-x-2">
           <Button variant="outline" onClick={() => handleDiscard(false)}>
-            Cancel
+            {cancelButtonLabel}
           </Button>
           <Button
+            className="bg-indigo-600 text-white hover:bg-indigo-700"
             onClick={handleActionConfimration}
-            disabled={!isSubmissionAllowed}
+            disabled={isLoading || disableConfirm}
           >
-            {confirmActionButtonLabel}
+            {isLoading ? "Processing..." : confirmButtonLabel}
           </Button>
         </div>
       </div>
