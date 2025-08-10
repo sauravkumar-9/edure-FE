@@ -25,7 +25,7 @@ import Notification from "./schedulingLayouts/notification";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { AvatarImage } from "@radix-ui/react-avatar";
 import showToast from "@/components/other/toast";
-import ConfigDialog from "@/components/final/configDialog";
+import DialogDataAction from "@/components/dialog/dialogDataAction";
 
 export default function PlacementDashboard() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -177,7 +177,7 @@ export default function PlacementDashboard() {
             Add Company
           </Button>
 
-          <ConfigDialog
+          <DialogDataAction
             tabsDetails={tabsDetails}
             isDialogOpen={isDialogOpen}
             actionButtonLabel="Schedule New Placement"

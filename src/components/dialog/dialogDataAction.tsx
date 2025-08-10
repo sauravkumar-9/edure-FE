@@ -7,9 +7,9 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import DashboardTabs from "../other/tabs";
-import { ConfigActionFooter } from "./configActionFoooter";
+import { ConfigActionFooter } from "../final/configActionFoooter";
 
-export default function ConfigDialog(props: any) {
+export default function DialogDataAction(props: any) {
   const {
     isDialogOpen,
     setIsDialogOpen,

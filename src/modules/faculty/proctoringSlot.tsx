@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { ExamDetailsTab } from "./scedulingLayout/examBasicDetails";
 import { ExamSlotsTab } from "./scedulingLayout/examSlots";
-import ConfigDialog from "@/components/final/configDialog";
+import DialogDataAction from "@/components/dialog/dialogDataAction";
 
 import ExamDetailsCard from "./scedulingLayout/examDetaulsCard";
 import ExamDetailsMockResponse from "./mock/examList.json";
@@ -116,7 +116,7 @@ export default function ExamSchedulerPage() {
     <div>
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-xl font-bold">{examDetails?.examName}</h2>
-        <ConfigDialog
+        <DialogDataAction
           tabsDetails={scheduleExamTabDetails}
           isDialogOpen={showScheduleExamDialog}
           actionButtonLabel="Schedule Exam"
