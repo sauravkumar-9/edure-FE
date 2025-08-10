@@ -1,8 +1,6 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import Navigation from "./app/navigation";
 
-import ManagementDashboard from "./modules/management/dashboard";
-
 import StudentCatchUp from "./modules/student/catchup";
 import StudentAttendence from "./modules/student/attendence";
 import StudentGrade from "./modules/student/grade";
@@ -21,7 +19,6 @@ import PlacementDashboard from "./modules/placement/placementDashboard";
 import { CompaniesList } from "./modules/placement/companiesList";
 import { PlacementCatchupDashboard } from "./modules/placement/catchup";
 import ExamsPage from "./modules/exam/examDetails";
-import CounsellerCatchUp from "./modules/counseller/counsellerCatchup";
 import CounsellerDashboard from "./modules/leads/pages/leadDashboard";
 import LeadProfile from "./modules/leads/pages/leadProfie";
 import LeadsList from "./modules/leads/pages/leadsList";
@@ -57,7 +54,7 @@ export const router = createBrowserRouter(
               index: true,
               element: <Navigate to="catchup" replace />,
             },
-            { path: "catchup", element: <ManagementDashboard /> },
+            { path: "catchup", element: "" },
           ],
         },
         {
@@ -67,7 +64,7 @@ export const router = createBrowserRouter(
               index: true,
               element: <Navigate to="catchup" replace />,
             },
-            { path: "catchup", element: <CounsellerCatchUp /> },
+            { path: "catchup", element: "" },
             { path: "dashboard", element: <CounsellerDashboard /> },
           ],
         },
