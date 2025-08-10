@@ -1,16 +1,8 @@
 "use client";
 
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-  CardFooter,
-} from "@/components/ui/card";
+
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Pencil, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { QuestionDialog } from "../components/questionDialog";
@@ -21,6 +13,7 @@ import {
 } from "../types/questionBankTypes";
 import QuestionMockResponse from "../mock/getQuestions.json";
 import { QuestionCardList } from "../components/questionCard";
+import ComponentDialog from "@/components/dialog/componentDialog";
 
 export default function QuestionBank() {
   const [questions, setQuestions] = useState<Question[]>([]);
@@ -34,6 +27,21 @@ export default function QuestionBank() {
   useEffect(() => {
     setQuestions(QuestionMockResponse.questions);
   }, []);
+
+  const confirmSlotsTabDetails = [
+    {
+      value: "confirm",
+      label: "Confirm Slots",
+      component: QuestionDialog,
+      props: {
+        question: { id: editId || "", ...currentQuestion },
+        onQuestionChange: (q: any) => {
+          const { id, ...questionData } = q;
+          setCurrentQuestion(questionData);
+        },
+      },
+    },
+  ];
 
   const handleAddOrEdit = () => {
     const isValid =
@@ -114,16 +122,14 @@ export default function QuestionBank() {
         ))}
       </Tabs>
 
-      <QuestionDialog
-        open={isDialogOpen}
-        onOpenChange={setIsDialogOpen}
-        question={{ id: editId || "", ...currentQuestion }}
-        onQuestionChange={(q) => {
-          const { id, ...questionData } = q;
-          setCurrentQuestion(questionData);
-        }}
-        onSubmit={handleAddOrEdit}
-        isEditing={!!editId}
+      <ComponentDialog
+        isDialogOpen={isDialogOpen}
+        setIsDialogOpen={setIsDialogOpen}
+        tabsDetails={confirmSlotsTabDetails}
+        actionButtonLabel={editId ? "Update Question" : "Add Question"}
+        dialogTitle={editId ? "Update Question" : "Add Question"}
+        handleScheduleDrive={handleAddOrEdit}
+        handleDiscard={() => setIsDialogOpen(false)}
       />
     </div>
   );

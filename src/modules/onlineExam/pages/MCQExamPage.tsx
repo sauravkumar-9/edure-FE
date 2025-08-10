@@ -2,16 +2,11 @@ import { useEffect, useState, useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogFooter,
-} from "@/components/ui/dialog";
+
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Info } from "lucide-react";
 import clsx from "clsx";
+import { ConfirmationDialog } from "@/components/dialog/confirmationDialog";
 
 const questions = Array.from({ length: 10 }, (_, i) => ({
   id: i + 1,
@@ -30,6 +25,7 @@ export function MCQExamPage() {
   const [showFinalDialog, setShowFinalDialog] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const questionRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const currentQuestion = questions[currentIndex];
   const totalAnswered = Object.keys(answers).length;
@@ -323,31 +319,17 @@ export function MCQExamPage() {
       </div>
 
       {/* Confirmation Dialog */}
-      <Dialog open={showFinalDialog} onOpenChange={setShowFinalDialog}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Confirm Exam Submission</DialogTitle>
-          </DialogHeader>
-          <p className="text-sm text-gray-600">
-            You have answered {totalAnswered} out of {questions.length}{" "}
-            questions. Are you sure you want to submit the exam?
-          </p>
-          <DialogFooter>
-            <Button
-              variant="secondary"
-              onClick={() => setShowFinalDialog(false)}
-            >
-              Cancel
-            </Button>
-            <Button
-              className="bg-indigo-600 text-white hover:bg-indigo-700"
-              onClick={handleFinalSubmit}
-            >
-              Submit Exam
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+      <ConfirmationDialog
+        open={showFinalDialog}
+        onOpenChange={setShowFinalDialog}
+        title="Confirm Exam Submission"
+        description={`You have answered ${totalAnswered} out of ${questions.length} questions. Are you sure you want to submit the exam?`}
+        confirmLabel="Submit Exam"
+        cancelLabel="Cancel"
+        onConfirm={handleFinalSubmit}
+        isLoading={isSubmitting}
+        disableConfirm={isSubmitting}
+      />
     </div>
   );
 }

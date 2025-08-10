@@ -58,7 +58,11 @@ export function ConfirmationDialog({
           >
             {cancelLabel}
           </Button>
-          <Button onClick={onConfirm} disabled={isLoading || disableConfirm}>
+          <Button
+            className="bg-indigo-600 text-white hover:bg-indigo-700"
+            onClick={onConfirm}
+            disabled={isLoading || disableConfirm}
+          >
             {isLoading ? "Processing..." : confirmLabel}
           </Button>
         </DialogFooter>
