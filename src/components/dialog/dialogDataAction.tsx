@@ -7,7 +7,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import DashboardTabs from "../other/tabs";
-import { ConfigActionFooter } from "../final/configActionFoooter";
+import { ConfigActionFooter } from "./configActionFoooter";
 
 const dialogSizeMap: any = {
   LARGE: { height: 700, width: 900 },
@@ -24,6 +24,7 @@ export default function DialogDataAction(props: any) {
     tabsDetails,
     actionButtonLabel,
     dialogTitle,
+    dialogDescription,
     handleSaveDraft,
     handleActionConfimration,
     handleDiscard,
@@ -48,6 +49,9 @@ export default function DialogDataAction(props: any) {
       >
         <DialogHeader className="pb-2">
           <DialogTitle>{dialogTitle}</DialogTitle>
+          {dialogDescription && (
+            <p className="text-sm text-muted-foreground">{dialogDescription}</p>
+          )}
         </DialogHeader>
 
         <div className="flex-1 overflow-y-auto space-y-6">
