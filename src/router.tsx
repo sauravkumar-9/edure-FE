@@ -14,8 +14,8 @@ import CounsellerDashboard from "./modules/leads/pages/leadDashboard";
 import LeadProfile from "./modules/leads/pages/leadProfie";
 import LeadsList from "./modules/leads/pages/leadsList";
 import PublicLayout from "./app/publicLayout";
-import { ExamStepperLayout } from "./modules/onlineExam/pages/registration";
-import { MCQExamPage } from "./modules/onlineExam/pages/MCQExamPage";
+import { ExamStepperLayout } from "./modules/exam/pages/registration";
+import { MCQExamPage } from "./modules/exam/pages/MCQExamPage";
 import TeacherSlotAvailability from "./modules/faculty/pages/proctoringSlot";
 import QuestionBank from "./modules/questionBank/pages/questionBank";
 
