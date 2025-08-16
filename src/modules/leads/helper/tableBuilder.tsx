@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/hover-card";
 import { Button } from "@/components/ui/button";
 import { StatusUpdateDialog } from "@/modules/leads/components/leadStatusUpdateDialog";
+import { ProfileAvatar } from "@/components/comman/profileAvatar";
 
 type LeadStatus = "cold" | "warm" | "hot" | "converted" | "lost";
 type LeadSource = "walkin" | "instagram" | "referral" | "website" | "other";
@@ -148,23 +149,11 @@ function renderFullNameCell({ row }: { row: any }) {
   const email = row.original.email || "";
   const interestedCourse = row.original.interestedCourse || "";
   const leadCode = row.original.leadCode || "";
-  const avatarFallback = fullName
-    .split(" ")
-    .map((n: string) => n[0])
-    .join("");
 
   return (
     <HoverCard>
       <div className="flex items-center space-x-3">
-        <Avatar className="h-8 w-8">
-          <AvatarImage
-            src={
-              row.original.profilePic ||
-              `https://api.dicebear.com/7.x/initials/svg?seed=${fullName}`
-            }
-          />
-          <AvatarFallback>{avatarFallback}</AvatarFallback>
-        </Avatar>
+        <ProfileAvatar name={fullName} />
         <HoverCardTrigger asChild>
           <span className="hover:underline hover:underline-offset-4 hover:cursor-pointer">
             {fullName}
@@ -173,15 +162,7 @@ function renderFullNameCell({ row }: { row: any }) {
       </div>
       <HoverCardContent className="w-80">
         <div className="flex justify-between space-x-4">
-          <Avatar className="h-14 w-14">
-            <AvatarImage
-              src={
-                row.original.profilePic ||
-                `https://api.dicebear.com/7.x/initials/svg?seed=${fullName}`
-              }
-            />
-            <AvatarFallback>{avatarFallback}</AvatarFallback>
-          </Avatar>
+          <ProfileAvatar name={fullName} size="lg" />
           <div className="space-y-1 flex-1">
             <h4 className="text-sm font-semibold">{fullName}</h4>
             <p className="text-sm">{interestedCourse}</p>
@@ -231,12 +212,7 @@ function renderCounsellorCell({ row }: { row: any }) {
   const counseller = row.getValue("counseller");
   return (
     <div className="flex items-center space-x-2">
-      <Avatar className="h-6 w-6">
-        <AvatarImage
-          src={`https://api.dicebear.com/7.x/initials/svg?seed=${counseller}`}
-        />
-        <AvatarFallback>{counseller[0]}</AvatarFallback>
-      </Avatar>
+      <ProfileAvatar name={counseller} size="sm" />
       <span>{counseller}</span>
     </div>
   );
@@ -245,9 +221,9 @@ function renderCounsellorCell({ row }: { row: any }) {
 function renderVerificationCell({ row }: { row: any }) {
   const verified = row.getValue("verificationStatus");
   return verified === "Yes" ? (
-    <Badge className="bg-green-100 text-green-800">Verified</Badge>
+    <Badge className="badge-green">Verified</Badge>
   ) : (
-    <Badge className="bg-red-100 text-red-800">Not Verified</Badge>
+    <Badge className="badge-red">Not Verified</Badge>
   );
 }
 
