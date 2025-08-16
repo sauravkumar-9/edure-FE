@@ -205,11 +205,11 @@ function renderFullNameCell({ row }: { row: any }) {
 function renderStatusCell({ row }: { row: any }) {
   const status: LeadStatus = row.getValue("leadStatus");
   const statusClassMap: Record<LeadStatus, string> = {
-    cold: "bg-gray-100 text-gray-800",
-    warm: "bg-blue-100 text-blue-800",
-    hot: "bg-orange-100 text-orange-800",
-    converted: "bg-green-100 text-green-800",
-    lost: "bg-red-100 text-red-800",
+    cold: "badge-gray",
+    warm: "badge-blue",
+    hot: "badge-orange",
+    converted: "badge-green",
+    lost: "badge-red",
   };
   return (
     <Badge className={cn("capitalize", statusClassMap[status])}>
