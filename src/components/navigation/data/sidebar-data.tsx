@@ -60,8 +60,8 @@ export const sidebarData: SidebarData = {
           className: "text-indigo-500",
         },
         {
-          title: "Slot",
-          url: "/teacher/slot",
+          title: "Exam",
+          url: "/teacher/exam",
           icon: BookOpenCheck,
           className: "text-indigo-500",
         },

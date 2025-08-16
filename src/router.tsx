@@ -89,7 +89,7 @@ export const router = createBrowserRouter(
               element: <Navigate to="catchup" replace />,
             },
             { path: "catchup", element: <TeacherDashboard /> },
-            { path: "slot", element: <TeacherSlotAvailability /> },
+            { path: "exam", element: <TeacherSlotAvailability /> },
           ],
         },
         {
