@@ -347,7 +347,7 @@ export default function PlacementDashboard() {
 }
 
 // Icons
-function PlusIcon(props: React.SVGProps<SVGSVGElement>) {
+function PlusIcon(props: any) {
   return (
     <svg
       {...props}
