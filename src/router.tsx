@@ -1,24 +1,15 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import Navigation from "./app/navigation";
 
-import StudentCatchUp from "./modules/student/catchup";
-import StudentAttendence from "./modules/student/attendence";
-import StudentGrade from "./modules/student/grade";
-import StudentProfile from "./modules/student/profile";
-import Assignments from "./modules/student/assignment";
 import CurrentCoursesTab from "./modules/placement/placement";
 import { ReportListing } from "./modules/report/reportList";
 import Report from "./modules/report/report";
 import PlacementDetails from "./modules/placement/placementDetails";
 import { AdmissionForm } from "./modules/forms/admissionPage";
-import { Admission } from "./modules/admission/admission";
-import AdmissionInsights from "./modules/admission/admissionInsights";
-import { AdmissionReport } from "./modules/admission/admissionReport";
 import TeacherDashboard from "./modules/faculty/pages/catchup";
 import PlacementDashboard from "./modules/placement/placementDashboard";
 import { CompaniesList } from "./modules/placement/companiesList";
 import { PlacementCatchupDashboard } from "./modules/placement/catchup";
-import ExamsPage from "./modules/exam/examDetails";
 import CounsellerDashboard from "./modules/leads/pages/leadDashboard";
 import LeadProfile from "./modules/leads/pages/leadProfie";
 import LeadsList from "./modules/leads/pages/leadsList";
@@ -45,7 +36,7 @@ export const router = createBrowserRouter(
       children: [
         {
           index: true,
-          element: <Navigate to="/student/catchup" replace />,
+          element: <Navigate to="/teacher/catchup" replace />,
         },
         {
           path: "management",
@@ -102,20 +93,6 @@ export const router = createBrowserRouter(
           ],
         },
         {
-          path: "student",
-          children: [
-            {
-              index: true,
-              element: <Navigate to="catchup" replace />,
-            },
-            { path: "profile", element: <StudentProfile /> },
-            { path: "catchup", element: <StudentCatchUp /> },
-            { path: "attendence", element: <StudentAttendence /> },
-            { path: "grade", element: <StudentGrade /> },
-            { path: "assignments", element: <Assignments /> },
-          ],
-        },
-        {
           path: "placement",
           children: [
             {
@@ -127,38 +104,6 @@ export const router = createBrowserRouter(
             { path: "list/:id", element: <PlacementDetails /> },
             { path: "dashboard", element: <PlacementDashboard /> },
             { path: "companyList", element: <CompaniesList /> },
-          ],
-        },
-        {
-          path: "exam",
-          children: [
-            {
-              index: true,
-              element: <Navigate to="details" replace />,
-            },
-            { path: "details", element: <ExamsPage /> },
-          ],
-        },
-        {
-          path: "admission",
-          element: <Admission />,
-          children: [
-            {
-              index: true,
-              element: <Navigate to="insights" replace />,
-            },
-            {
-              path: "insights",
-              element: <AdmissionInsights />,
-            },
-            {
-              path: "report",
-              element: <AdmissionReport />,
-            },
-            // {
-            //   path: "*",
-            //   element: <Navigate to="insights" replace />,
-            // },
           ],
         },
         {

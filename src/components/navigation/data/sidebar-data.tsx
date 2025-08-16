@@ -38,54 +38,6 @@ export const sidebarData: SidebarData = {
 
   navGroups: [
     {
-      title: "Student",
-      hideTitle: true,
-      items: [
-        {
-          title: "Catchup",
-          url: "/student/catchup",
-          icon: LayoutDashboard,
-          className: "text-indigo-500",
-        },
-        {
-          title: "Attendance",
-          url: "/student/attendence",
-          icon: CalendarCheck2,
-          className: "text-indigo-500",
-        },
-        {
-          title: "Grade Book",
-          url: "/student/grade",
-          icon: BookOpenCheck,
-          className: "text-indigo-500",
-        },
-        {
-          title: "Placements",
-          url: "/placement/list",
-          icon: Briefcase,
-          className: "text-indigo-500",
-        },
-        {
-          title: "Profile",
-          url: "/student/profile",
-          icon: User,
-          className: "text-indigo-500",
-        },
-        {
-          title: "Exams",
-          url: "/exam/details",
-          icon: PencilRuler,
-          className: "text-indigo-500",
-        },
-        // {
-        //   title: "Assignments",
-        //   url: "/student/assignments",
-        //   icon: FileText,
-        //   className: "text-indigo-500",
-        // },
-      ],
-    },
-    {
       title: "Teacher",
       hideTitle: true,
       items: [
@@ -93,12 +45,6 @@ export const sidebarData: SidebarData = {
           title: "Catchup",
           url: "/teacher/catchup",
           icon: LayoutDashboard,
-          className: "text-indigo-500",
-        },
-        {
-          title: "Attendance",
-          url: "/teacher/attendence",
-          icon: CalendarCheck2,
           className: "text-indigo-500",
         },
         {
@@ -111,12 +57,6 @@ export const sidebarData: SidebarData = {
           title: "Reports",
           url: "/report/list",
           icon: FileBarChart,
-          className: "text-indigo-500",
-        },
-        {
-          title: "Grade Book",
-          url: "/teacher/grade",
-          icon: BookOpenCheck,
           className: "text-indigo-500",
         },
         {
