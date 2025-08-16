@@ -1,4 +1,4 @@
-import { LeadData, LeadStatusUpdate } from "@/modules/leads/types/types";
+import { LeadData, LeadStatusUpdate } from "@/modules/leads/leadTypes";
 
 import {
   leadListingResponse,

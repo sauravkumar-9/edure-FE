@@ -10,7 +10,7 @@ import {
   getAllLeads,
   updateLeadStatus,
 } from "../services/leadService";
-import { LoadType } from "../types/types";
+import { LoadType } from "../leadTypes";
 import showToast from "@/components/comman/toast";
 import TabLayout from "@/components/comman/tabLayout";
 

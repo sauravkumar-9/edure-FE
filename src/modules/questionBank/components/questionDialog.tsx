@@ -2,7 +2,7 @@
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Question, Difficulty } from "../types/questionBankTypes";
+import { Question, Difficulty } from "../questionBankTypes";
 import { useState } from "react";
 import { BlockMath } from "react-katex";
 import "katex/dist/katex.min.css";
