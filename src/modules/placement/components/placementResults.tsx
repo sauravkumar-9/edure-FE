@@ -1,6 +1,6 @@
 import React from "react";
 // import TableView from "../table/table";
-import { StatCard } from "../final/statCard";
+import { StatCard } from "../../../components/final/statCard";
 import { Briefcase, UserCheck, Users, IndianRupee } from "lucide-react";
 
 interface StudentAssignmentsProps {

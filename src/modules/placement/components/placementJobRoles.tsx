@@ -1,7 +1,7 @@
 import { Code, Smartphone, Settings } from "lucide-react";
-import { Button } from "../ui/button";
-import { JobOpeningsBanner } from "../cards/jobOpeningBanner";
-import { AccordionSection } from "../comman/accordionSection";
+import { Button } from "../../../components/ui/button";
+import { JobOpeningsBanner } from "../../../components/cards/jobOpeningBanner";
+import { AccordionSection } from "../../../components/comman/accordionSection";
 import { Accordion } from "@/components/ui/accordion";
 
 const jobRolesMockData = [

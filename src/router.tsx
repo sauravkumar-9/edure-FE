@@ -1,15 +1,15 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import Navigation from "./app/navigation";
 
-import CurrentCoursesTab from "./modules/placement/placement";
+import CurrentCoursesTab from "./modules/placement/pages/placement";
 import { ReportListing } from "./modules/report/reportList";
 import Report from "./modules/report/report";
-import PlacementDetails from "./modules/placement/placementDetails";
+import PlacementDetails from "./modules/placement/pages/placementDetails";
 import { AdmissionForm } from "./modules/forms/admissionPage";
 import TeacherDashboard from "./modules/faculty/pages/catchup";
-import PlacementDashboard from "./modules/placement/placementDashboard";
-import { CompaniesList } from "./modules/placement/companiesList";
-import { PlacementCatchupDashboard } from "./modules/placement/catchup";
+import PlacementDashboard from "./modules/placement/pages/placementDashboard";
+import { CompaniesList } from "./modules/placement/pages/companiesList";
+import { PlacementCatchupDashboard } from "./modules/placement/pages/catchup";
 import CounsellerDashboard from "./modules/leads/pages/leadDashboard";
 import LeadProfile from "./modules/leads/pages/leadProfie";
 import LeadsList from "./modules/leads/pages/leadsList";

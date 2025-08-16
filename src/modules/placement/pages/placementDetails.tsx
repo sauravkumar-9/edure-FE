@@ -1,11 +1,11 @@
-import { userListSchema } from "./data/schema";
+import { userListSchema } from "../data/schema";
 import TabLayout from "@/components/comman/tabLayout";
-import { placementResultColumns } from "./data/placementResultColumns";
+import { placementResultColumns } from "../data/placementResultColumns";
 import CompanyProfileHeader from "@/components/cards/companyCard";
-import PlacementOverview from "@/components/layout/placementOverview";
-import PlacementResults from "@/components/layout/placementResults";
+import PlacementOverview from "@/modules/placement/components/placementOverview";
+import PlacementResults from "@/modules/placement/components/placementResults";
 import { placementCandidatesMock } from "@/mockData/placement";
-import JobRoles from "@/components/layout/placementJobRoles";
+import JobRoles from "@/modules/placement/components/placementJobRoles";
 import { useState } from "react";
 
 const userList = userListSchema.parse(placementCandidatesMock);
