@@ -36,19 +36,19 @@ export function QuestionCardList({
       </CardHeader>
 
       <CardContent className="grid grid-cols-2 gap-2">
-        {questions.options.map((opt, idx) => (
+        {questions.options.map((option, index) => (
           <div
-            key={idx}
+            key={option.optionId}
             className={`flex items-start gap-3 p-2 rounded ${
-              idx === questions.correctIndex
+              option.optionId === questions.correctOptionId
                 ? "bg-green-50 border border-green-200"
                 : "bg-muted"
             }`}
           >
             <div className="flex items-center justify-center h-6 w-6 rounded-full bg-background border font-medium text-sm">
-              {String.fromCharCode(65 + idx)}
+              {String.fromCharCode(65 + index)}
             </div>
-            <div className="flex-1 text-sm">{opt}</div>
+            <div className="flex-1 text-sm">{option.optionLabel}</div>
           </div>
         ))}
 

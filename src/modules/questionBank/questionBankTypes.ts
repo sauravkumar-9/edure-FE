@@ -4,8 +4,8 @@ export interface Question {
   id: string;
   code: string;
   text: string;
-  options: string[];
-  correctIndex: number;
+  options: any[];
+  correctOptionId: number;
   difficulty: string;
   tags: string[];
   createdAt: string;
@@ -20,7 +20,7 @@ export const defaultNewQuestion: Omit<Question, "id"> = {
   code: "",
   text: "",
   options: ["", "", "", ""],
-  correctIndex: 0,
+  correctOptionId: 0,
   difficulty: "easy",
   tags: [],
   createdAt: new Date().toISOString(),

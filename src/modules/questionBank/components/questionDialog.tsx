@@ -47,9 +47,19 @@ export function QuestionDialog({
             rows={3}
             className="w-full border rounded px-2 py-1"
           />
-          <div className="mt-4">
-            <strong>Preview:</strong>
-            <BlockMath math={question2} />
+          <div className="mt-1">
+            <span className="text-sm font-medium">Preview:</span>
+            <div className="p-4 border rounded-md bg-gray-50">
+              {question2 ? (
+                <div className="text-left">
+                  <BlockMath math={question2} />
+                </div>
+              ) : (
+                <p className="text-gray-400 italic">
+                  LaTeX preview will appear here...
+                </p>
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -57,15 +67,15 @@ export function QuestionDialog({
       <div className="space-y-2">
         <Label>Options</Label>
         <div className="grid grid-cols-1 gap-3">
-          {question.options.map((opt, idx) => (
-            <div key={idx} className="flex items-center gap-2">
+          {question.options.map((option, index) => (
+            <div key={option.optionId} className="flex items-center gap-2">
               <div className="flex items-center justify-center w-8 h-8 rounded bg-muted font-medium">
-                {String.fromCharCode(65 + idx)}
+                {String.fromCharCode(65 + index)}
               </div>
               <Input
-                placeholder={`Option ${String.fromCharCode(65 + idx)}`}
-                value={opt}
-                onChange={(e) => handleOptionChange(idx, e.target.value)}
+                placeholder={`Option ${String.fromCharCode(65 + index)}`}
+                value={option.optionLabel}
+                onChange={(e) => handleOptionChange(index, e.target.value)}
                 className="flex-1"
               />
             </div>
@@ -78,16 +88,16 @@ export function QuestionDialog({
           <Label>Correct Answer</Label>
           <select
             className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-            value={question.correctIndex}
+            value={question.correctOptionId}
             onChange={(e) =>
               onQuestionChange({
                 ...question,
-                correctIndex: Number(e.target.value),
+                correctOptionId: Number(e.target.value),
               })
             }
           >
-            {question.options.map((_, idx) => (
-              <option value={idx} key={idx}>
+            {question.options.map((option, idx) => (
+              <option value={option.optionId} key={option.optionId}>
                 {String.fromCharCode(65 + idx)}
               </option>
             ))}

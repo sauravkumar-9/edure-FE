@@ -5,10 +5,12 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { QuestionDialog } from "../components/questionDialog";
 import { Question, defaultNewQuestion, Difficulty } from "../questionBankTypes";
-import QuestionMockResponse from "../mock/getQuestions.json";
 import { QuestionCardList } from "../components/questionCard";
 import ComponentDialog from "@/components/dialog/componentDialog";
 import TabLayout from "@/components/comman/tabLayout";
+
+// Mock data
+import QuestionMockResponse from "../mock/getQuestions.json";
 
 export default function QuestionBank() {
   const [questions, setQuestions] = useState<Question[]>([]);

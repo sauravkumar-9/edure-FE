@@ -5,8 +5,13 @@
       "id": "1",
       "code": "Q1",
       "text": "What is the capital of India?",
-      "options": ["Delhi", "Mumbai", "Kolkata", "Chennai"],
-      "correctIndex": 0,
+      "options": [
+        { "optionId": 1, "optionLabel": "Delhi" },
+        { "optionId": 2, "optionLabel": "Mumbai" },
+        { "optionId": 3, "optionLabel": "Kolkata" },
+        { "optionId": 4, "optionLabel": "Chennai" }
+      ],
+      "correctOptionId": 2,
       "difficulty": "easy",
       "tags": ["geography"],
       "createdAt": "2025-08-10",
@@ -20,8 +25,13 @@
       "id": "2",
       "code": "Q2",
       "text": "What is the capital of France?",
-      "options": ["Paris", "Lyon", "Marseille", "Nice"],
-      "correctIndex": 0,
+      "options": [
+        { "optionId": 1, "optionLabel": "Paris" },
+        { "optionId": 2, "optionLabel": "Lyon" },
+        { "optionId": 3, "optionLabel": "Marseille" },
+        { "optionId": 4, "optionLabel": "Nice" }
+      ],
+      "correctOptionId": 1,
       "difficulty": "easy",
       "tags": ["geography"],
       "createdAt": "2025-08-10",
