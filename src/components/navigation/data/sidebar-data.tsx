@@ -65,12 +65,6 @@ export const sidebarData: SidebarData = {
           icon: FileText,
           className: "text-indigo-500",
         },
-        {
-          title: "Question Bank",
-          url: "/questions/exams",
-          icon: BookOpenCheck,
-          className: "text-indigo-500",
-        },
       ],
     },
     {
