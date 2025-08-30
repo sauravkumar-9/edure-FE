@@ -61,13 +61,13 @@ export const sidebarData: SidebarData = {
         },
         {
           title: "Exam",
-          url: "/teacher/exam",
+          url: "/exam/category",
           icon: BookOpenCheck,
           className: "text-indigo-500",
         },
         {
           title: "Questions",
-          url: "/questions/list",
+          url: "/questions/exams",
           icon: BookOpenCheck,
           className: "text-indigo-500",
         },

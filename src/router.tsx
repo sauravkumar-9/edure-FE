@@ -20,6 +20,7 @@ import QuestionBank from "./modules/questionBank/pages/questionBank";
 import ExamScheduleList from "./modules/examBuilder/pages/examScheduleList";
 import ExamDetails from "./modules/examBuilder/pages/examDetails";
 import ExamCategoryList from "./modules/examBuilder/pages/examCategoryList";
+import QuestionBankExamCategoryList from "./modules/questionBank/pages/examCategoryList";
 
 export const router = createBrowserRouter(
   [
@@ -126,7 +127,8 @@ export const router = createBrowserRouter(
               index: true,
               element: <Navigate to="list" replace />,
             },
-            { path: "list", element: <QuestionBank /> },
+            { path: "exams", element: <QuestionBankExamCategoryList /> },
+            { path: "exams/:categoryId", element: <QuestionBank /> },
           ],
         },
       ],
