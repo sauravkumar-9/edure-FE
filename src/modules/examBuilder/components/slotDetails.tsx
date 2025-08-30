@@ -53,12 +53,6 @@ export default function ExamOverview({ examOverview }: { examOverview: any }) {
       {/* Header */}
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold text-gray-800">Exam Overview</h1>
-        <Badge
-          variant="outline"
-          className="px-3 py-1 bg-blue-50 text-blue-700 border-blue-200"
-        >
-          Active • Semester Finals
-        </Badge>
       </div>
 
       {/* Overview Cards */}
@@ -74,73 +68,96 @@ export default function ExamOverview({ examOverview }: { examOverview: any }) {
         ))}
       </div>
 
-      {/* Status Section */}
-      <Card className="border-0 shadow-md">
-        <CardHeader>
-          <CardTitle className="text-lg">Current Status</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {examOverview.status.map((status: any, idx: number) => (
-              <div key={idx} className="flex justify-between items-center">
-                <span className="text-sm font-medium">{status.label}</span>
-                <Badge
-                  variant="outline"
-                  className="bg-green-50 text-green-700 border-green-200"
-                >
-                  {status.status}
-                </Badge>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+      {/* Status + Actions in Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Status Section */}
+        <Card className="border-0 shadow-md">
+          <CardHeader>
+            <CardTitle className="text-lg">Current Status</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
+              {examOverview.status.map((status: any, idx: number) => (
+                <div key={idx} className="flex justify-between items-center">
+                  <span className="text-sm font-medium">{status.label}</span>
+                  <Badge
+                    variant="outline"
+                    className="bg-green-50 text-green-700 border-green-200"
+                  >
+                    {status.status}
+                  </Badge>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
 
-      {/* Actions */}
-      <Card className="border-0 shadow-md">
-        <CardHeader>
-          <CardTitle className="text-lg">Question Paper Management</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="flex flex-wrap gap-3">
-            <Button
-              variant="outline"
-              className="gap-2 border-gray-300 hover:bg-gray-100"
-            >
-              <FileUp className="w-4 h-4" />
-              Upload Question Paper
-            </Button>
-            <Button
-              className="bg-indigo-600 text-white hover:bg-indigo-700 gap-2"
-              onClick={() => setShowGenerateDialog(true)}
-            >
-              <FileText className="w-4 h-4" />
-              Generate Question Paper
-            </Button>
-            <Button
-              variant="outline"
-              className="gap-2 border-gray-300 hover:bg-gray-100"
-              asChild
-            >
-              <a
-                href="https://dummy-link.com/preview"
-                target="_blank"
-                rel="noopener noreferrer"
+        {/* Actions */}
+        {/* Question Paper Management */}
+        <Card className="border-0 shadow-md">
+          <CardHeader>
+            <CardTitle className="text-lg">Question Paper Management</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            {/* Action Buttons */}
+            <div className="flex flex-wrap gap-3">
+              {!examOverview.paperSet ? (
+                <>
+                  <Button
+                    variant="outline"
+                    className="gap-2 border-gray-300 hover:bg-gray-100"
+                  >
+                    <FileUp className="w-4 h-4" />
+                    Upload Question Paper
+                  </Button>
+                  <Button
+                    className="bg-indigo-600 text-white hover:bg-indigo-700 gap-2"
+                    onClick={() => setShowGenerateDialog(true)}
+                  >
+                    <FileText className="w-4 h-4" />
+                    Generate Question Paper
+                  </Button>
+                </>
+              ) : (
+                <Button
+                  variant="outline"
+                  className="gap-2 border-gray-300 hover:bg-gray-100"
+                >
+                  <RefreshCw className="w-4 h-4" />
+                  Change Question Paper
+                </Button>
+              )}
+            </div>
+
+            {/* Preview Section */}
+            <div className="border-t pt-4">
+              <p className="text-sm text-gray-500 mb-2">
+                Once a question paper is uploaded or generated, you can preview
+                it here.
+              </p>
+              <Button
+                variant="outline"
+                className="gap-2 border-gray-300 hover:bg-gray-100"
+                asChild
+                disabled={!examOverview.paperSet}
               >
-                <Eye className="w-4 h-4" />
-                Preview Question Paper
-              </a>
-            </Button>
-            <Button
-              variant="outline"
-              className="gap-2 border-gray-300 hover:bg-gray-100"
-            >
-              <RefreshCw className="w-4 h-4" />
-              Change Question Paper
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
+                <a
+                  href={
+                    examOverview.paperSet
+                      ? "https://dummy-link.com/preview"
+                      : "#"
+                  }
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Eye className="w-4 h-4" />
+                  Preview Question Paper
+                </a>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
 
       {/* Generate Question Paper Dialog */}
       <Dialog open={showGenerateDialog} onOpenChange={setShowGenerateDialog}>
