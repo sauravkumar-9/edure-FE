@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { ExamListCard } from "../components/examListCard";
 import examCatgoryListMock from "../mock/examCatgory.json";
 import { Button } from "@/components/ui/button";
+import { Plus } from "lucide-react";
 
 export default function ExamCategoryList() {
   return (
@@ -9,8 +10,9 @@ export default function ExamCategoryList() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-semibold">Exams</h1>
-        <Button className="bg-indigo-600 text-white hover:bg-indigo-700">
-          + Add Exam
+        <Button className="bg-indigo-600 text-white hover:bg-indigo-700 flex items-center gap-2">
+          <Plus className="h-4 w-4" />
+          Add Exam
         </Button>
       </div>
 

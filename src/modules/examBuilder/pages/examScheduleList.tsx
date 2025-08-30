@@ -7,6 +7,7 @@ import ComponentDialog from "@/components/dialog/componentDialog";
 import ExamDetailsCard from "../components/examDetaulsCard";
 import ExamDetailsMockResponse from "../mock/examList.json";
 import { Button } from "@/components/ui/button";
+import { BookOpen, CalendarClock } from "lucide-react";
 
 export default function ExamScheduleList() {
   // Exam Config Data
@@ -117,17 +118,20 @@ export default function ExamScheduleList() {
     <div>
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-xl font-bold">{examDetails?.examName}</h2>
-        <div>
+        <div className="flex gap-2">
           <Button
             variant="outline"
             onClick={() => setShowScheduleExamDialog(true)}
+            className="flex items-center gap-2"
           >
+            <BookOpen className="h-4 w-4" />
             Question Bank
           </Button>
           <Button
-            className="bg-indigo-600 text-white hover:bg-indigo-700"
+            className="bg-indigo-600 text-white hover:bg-indigo-700 flex items-center gap-2"
             onClick={() => setShowScheduleExamDialog(true)}
           >
+            <CalendarClock className="h-4 w-4" />
             Schedule Exam
           </Button>
         </div>

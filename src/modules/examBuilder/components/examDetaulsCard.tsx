@@ -1,12 +1,7 @@
 import ComponentDialog from "@/components/dialog/componentDialog";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
-import {
-  AlertTriangle,
-  CalendarIcon,
-  ClockIcon,
-  UsersIcon,
-} from "lucide-react";
+import { AlertTriangle, CalendarIcon, UsersIcon, Eye } from "lucide-react";
 import { useState } from "react";
 import TeacherAvailabilityForm from "./confirmAvailability";
 import { Button } from "@/components/ui/button";
@@ -49,6 +44,10 @@ export default function ExamDetailsCard({
     getConfirmSlots?.(examData);
   };
 
+  const handleViewDetails = () => {
+    console.log("View Exam Details:", examData.examId);
+  };
+
   const confirmSlotsTabDetails = [
     {
       value: "confirm",
@@ -63,30 +62,41 @@ export default function ExamDetailsCard({
   const formattedDates = examData.dates.map((d) => d.date).join(", ");
 
   return (
-    <Card className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
+    <Card className="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
       {/* Header Section */}
       <div className="flex items-start justify-between">
         <div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-1">
+          <h3 className="text-xl font-semibold text-gray-900 flex items-center">
             {examData.title}
             {examData.isDraft && (
               <Badge
                 variant="outline"
-                className="ml-2 text-yellow-600 border-yellow-200"
+                className="ml-2 text-yellow-700 border-yellow-300 bg-yellow-50"
               >
                 Draft
               </Badge>
             )}
           </h3>
-          <div className="flex items-center text-sm text-gray-600">
+          <div className="flex items-center text-sm text-gray-600 mt-1">
             <CalendarIcon className="h-4 w-4 mr-1 text-gray-500" />
             <span>{formattedDates}</span>
           </div>
         </div>
 
-        <Button variant="default" onClick={handleConfirmSlots}>
-          Confirm Slots
-        </Button>
+        <div className="flex gap-2">
+          <Button size="sm" onClick={handleConfirmSlots}>
+            Confirm Slots
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleViewDetails}
+            className="flex items-center"
+          >
+            <Eye className="w-4 h-4 mr-1" />
+            View Details
+          </Button>
+        </div>
 
         <ComponentDialog
           isDialogOpen={showSlotConfirmationDialog}
@@ -102,36 +112,35 @@ export default function ExamDetailsCard({
 
       {/* Section: Exam Details */}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-        <div className="border rounded-md p-4 bg-gray-50">
-          <h4 className="font-medium text-gray-700 mb-2 flex items-center">
-            <AlertTriangle className="h-4 w-4 mr-2 text-gray-500" />
+        {/* Slots */}
+        <div className="rounded-lg border bg-gray-50 p-4 shadow-sm">
+          <h4 className="font-medium text-gray-700 mb-3 flex items-center">
+            <AlertTriangle className="h-4 w-4 mr-2 text-indigo-500" />
             Slots
           </h4>
-          <div>
-            {examData.dates.map((date, index) => (
-              <div key={index} className="mb-4">
-                <h5 className="font-semibold text-sm text-gray-700 mb-2">
-                  {date.day}, {date.date}
-                </h5>
-                <ul className="list-disc list-inside space-y-1 text-sm text-gray-800">
-                  {date.slots.map((slot, slotIndex) => (
-                    <li key={slotIndex}>{slot}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
+          {examData.dates.map((date, index) => (
+            <div key={index} className="mb-3">
+              <h5 className="font-semibold text-sm text-gray-800">
+                {date.day}, {date.date}
+              </h5>
+              <ul className="list-disc list-inside space-y-1 text-sm text-gray-700 ml-2">
+                {date.slots.map((slot, slotIndex) => (
+                  <li key={slotIndex}>{slot}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
 
         {/* Cutoff Dates */}
-        <div className="border rounded-md p-4 bg-gray-50">
-          <h4 className="font-medium text-gray-700 mb-2 flex items-center">
-            <AlertTriangle className="h-4 w-4 mr-2 text-gray-500" />
+        <div className="rounded-lg border bg-gray-50 p-4 shadow-sm">
+          <h4 className="font-medium text-gray-700 mb-3 flex items-center">
+            <CalendarIcon className="h-4 w-4 mr-2 text-red-500" />
             Cutoff Dates
           </h4>
-          <ul className="space-y-1">
+          <ul className="space-y-1 text-sm text-gray-700">
             {examData.cutoffs.map((cutoff, index) => (
-              <li key={index} className="text-sm text-gray-700">
+              <li key={index}>
                 <span className="font-medium">{cutoff.label}:</span>{" "}
                 {cutoff.date}
               </li>
@@ -140,21 +149,21 @@ export default function ExamDetailsCard({
         </div>
 
         {/* Status */}
-        <div className="border rounded-md p-4 bg-gray-50">
-          <h4 className="font-medium text-gray-700 mb-2 flex items-center">
-            <UsersIcon className="h-4 w-4 mr-2 text-gray-500" />
+        <div className="rounded-lg border bg-gray-50 p-4 shadow-sm">
+          <h4 className="font-medium text-gray-700 mb-3 flex items-center">
+            <UsersIcon className="h-4 w-4 mr-2 text-green-500" />
             Registration Status
           </h4>
-          <div className="space-y-1">
-            <div className="flex justify-between text-sm">
+          <div className="space-y-2 text-sm">
+            <div className="flex justify-between">
               <span className="text-gray-600">Students Registered:</span>
-              <span className="font-medium">
+              <span className="font-semibold text-gray-900">
                 {examData.status.studentsRegistered}
               </span>
             </div>
-            <div className="flex justify-between text-sm">
+            <div className="flex justify-between">
               <span className="text-gray-600">Teachers Confirmed:</span>
-              <span className="font-medium">
+              <span className="font-semibold text-gray-900">
                 {examData.status.teachersConfirmed}
               </span>
             </div>
