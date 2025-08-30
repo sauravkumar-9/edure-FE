@@ -19,16 +19,14 @@ export default function ExamCategoryList() {
       {/* Exam List */}
       <div className="grid gap-4">
         {examCatgoryListMock.examCategory.map((examCategory) => (
-          <Link to={examCategory.id} className="block" key={examCategory.id}>
-            <ExamListCard
-              key={examCategory.id}
-              exam={{
-                id: examCategory.id,
-                name: examCategory.name,
-                description: examCategory.description,
-              }}
-            />
-          </Link>
+          <ExamListCard
+            key={examCategory.id}
+            exam={{
+              id: examCategory.id,
+              name: examCategory.name,
+              description: examCategory.description,
+            }}
+          />
         ))}
       </div>
     </div>

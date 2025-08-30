@@ -1,7 +1,9 @@
 import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
-import { ChevronRight, FileText } from "lucide-react"; // using FileText for exam
+import { FileText } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 interface Exam {
   id: string;
@@ -12,13 +14,20 @@ interface Exam {
 
 interface ExamCardProps {
   exam: Exam;
+  onViewDetails?: (id: string) => void;
+  onViewQuestionBank?: (id: string) => void;
 }
 
-export const ExamListCard: React.FC<ExamCardProps> = ({ exam }) => {
+export const ExamListCard: React.FC<ExamCardProps> = ({
+  exam,
+  onViewDetails,
+  onViewQuestionBank,
+}) => {
+  const navigate = useNavigate();
   return (
-    <Card className="w-full bg-white hover:shadow-lg transition-shadow duration-200 relative">
-      <CardContent className="px-4">
-        <div className="flex items-center justify-between">
+    <Card className="w-full bg-white hover:shadow-md transition-all duration-200 relative">
+      <CardContent className="px-4 py-1">
+        <div className="flex items-center justify-between gap-4">
           {/* Left Content */}
           <div className="flex items-start gap-4">
             {/* Exam Icon */}
@@ -46,8 +55,23 @@ export const ExamListCard: React.FC<ExamCardProps> = ({ exam }) => {
             </div>
           </div>
 
-          {/* Right Chevron */}
-          <ChevronRight className="h-5 w-5 text-gray-400 mt-1" />
+          {/* Right Actions */}
+          <div className="flex gap-2 shrink-0">
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={() => navigate(`/questions/exams/${exam.id}`)}
+            >
+              Question Bank
+            </Button>
+            <Button
+              size="sm"
+              className="bg-indigo-600 text-white hover:bg-indigo-700"
+              onClick={() => navigate(exam.id)}
+            >
+              View Details
+            </Button>
+          </div>
         </div>
       </CardContent>
     </Card>
