@@ -1,0 +1,230 @@
+import { ColumnDef } from "@tanstack/react-table";
+import { cn } from "@/lib/utils";
+import { Badge } from "@/components/ui/badge";
+import { Checkbox } from "@/components/ui/checkbox";
+import { DataTableColumnHeader } from "@/components/table/data-table-column-header";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
+import { Button } from "@/components/ui/button";
+import { StatusUpdateDialog } from "@/modules/leads/components/leadStatusUpdateDialog";
+import { ProfileAvatar } from "@/components/comman/profileAvatar";
+
+type LeadStatus = "cold" | "warm" | "hot" | "converted" | "lost";
+type LeadSource = "walkin" | "instagram" | "referral" | "website" | "other";
+
+interface Lead {
+  id: string;
+  leadCode: string;
+  fullName: string;
+  interestedCourse: string;
+  leadStatus: LeadStatus;
+  leadSource: LeadSource;
+  counseller: string;
+  verificationStatus: "Yes" | "No";
+  lastFollowUp: string;
+}
+
+export function generateColumnsFromResponse(response: any) {
+  const columns: ColumnDef<Lead>[] = [
+    {
+      id: "select",
+      header: ({ table }) => (
+        <div className="pr-4">
+          <Checkbox
+            checked={
+              table.getIsAllPageRowsSelected() ||
+              (table.getIsSomePageRowsSelected() && "indeterminate")
+            }
+            onCheckedChange={(value) =>
+              table.toggleAllPageRowsSelected(!!value)
+            }
+            aria-label="Select all"
+            className="translate-y-[2px]"
+          />
+        </div>
+      ),
+      cell: ({ row }) => (
+        <div className="flex items-center justify-center pr-4">
+          <Checkbox
+            checked={row.getIsSelected()}
+            onCheckedChange={(value) => row.toggleSelected(!!value)}
+            aria-label="Select row"
+            className="translate-y-[2px]"
+          />
+        </div>
+      ),
+      enableSorting: false,
+      enableHiding: false,
+      meta: {
+        className: cn("sticky left-0 z-10 bg-background"),
+      },
+    },
+  ];
+
+  response.columns.forEach((config: any) => {
+    const column: ColumnDef<Lead> = {
+      accessorKey: config.key,
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title={config.label} />
+      ),
+      meta: {
+        label: config.label,
+        type: config.dataType,
+        filterConfig: config.filterConfig,
+        ...(config.enumValues && { enum: config.enumValues }),
+      },
+    };
+
+    // Handle cell rendering based on dataType
+    switch (config.dataType) {
+      case "string":
+        if (config.key === "fullName") {
+          column.cell = renderFullNameCell;
+        } else if (config.key === "counseller") {
+          column.cell = renderCounsellorCell;
+        } else {
+          column.cell = ({ row }) => <span>{row.getValue(config.key)}</span>;
+        }
+        break;
+
+      case "enum":
+        if (config.key === "leadStatus") {
+          column.cell = renderStatusCell;
+        } else if (config.key === "leadSource") {
+          column.cell = renderSourceCell;
+        } else if (config.key === "verificationStatus") {
+          column.cell = renderVerificationCell;
+        }
+        break;
+
+      case "date":
+        column.cell = renderDateCell;
+        break;
+
+      case "number":
+        column.cell = renderNumberCell;
+        break;
+
+      default:
+        column.cell = ({ row }) => <span>{row.getValue(config.key)}</span>;
+    }
+
+    columns.push(column);
+  });
+
+  columns.push({
+    id: "actions",
+    cell: ({ row }) => <StatusUpdateDialog lead={row.original} />,
+    enableSorting: false,
+    enableHiding: false,
+    meta: {
+      className: cn("sticky right-0 z-10 bg-background"),
+    },
+  });
+
+  return columns;
+}
+
+// Helper functions for cell rendering
+function renderFullNameCell({ row }: { row: any }) {
+  const fullName = row.getValue("fullName");
+  const email = row.original.email || "";
+  const interestedCourse = row.original.interestedCourse || "";
+  const leadCode = row.original.leadCode || "";
+
+  return (
+    <HoverCard>
+      <div className="flex items-center space-x-3">
+        <ProfileAvatar name={fullName} />
+        <HoverCardTrigger asChild>
+          <span className="hover:underline hover:underline-offset-4 hover:cursor-pointer">
+            {fullName}
+          </span>
+        </HoverCardTrigger>
+      </div>
+      <HoverCardContent className="w-80">
+        <div className="flex justify-between space-x-4">
+          <ProfileAvatar name={fullName} size="lg" />
+          <div className="space-y-1 flex-1">
+            <h4 className="text-sm font-semibold">{fullName}</h4>
+            <p className="text-sm">{interestedCourse}</p>
+            <p className="text-xs text-muted-foreground">Lead ID: {leadCode}</p>
+            {email && <p className="text-xs text-muted-foreground">{email}</p>}
+            <Button
+              variant="outline"
+              size="sm"
+              className="mt-2 w-full"
+              onClick={() => console.log("View lead:", row.original.id)}
+            >
+              View Lead Details
+            </Button>
+          </div>
+        </div>
+      </HoverCardContent>
+    </HoverCard>
+  );
+}
+
+function renderStatusCell({ row }: { row: any }) {
+  const status: LeadStatus = row.getValue("leadStatus");
+  const statusClassMap: Record<LeadStatus, string> = {
+    cold: "badge-gray",
+    warm: "badge-blue",
+    hot: "badge-orange",
+    converted: "badge-green",
+    lost: "badge-red",
+  };
+  return (
+    <Badge className={cn("capitalize", statusClassMap[status])}>
+      {status.charAt(0).toUpperCase() + status.slice(1)}
+    </Badge>
+  );
+}
+
+function renderSourceCell({ row }: { row: any }) {
+  const source = row.getValue("leadSource");
+  return (
+    <Badge variant="outline" className="capitalize">
+      {source.charAt(0).toUpperCase() + source.slice(1)}
+    </Badge>
+  );
+}
+
+function renderCounsellorCell({ row }: { row: any }) {
+  const counseller = row.getValue("counseller");
+  return (
+    <div className="flex items-center space-x-2">
+      <ProfileAvatar name={counseller} size="sm" />
+      <span>{counseller}</span>
+    </div>
+  );
+}
+
+function renderVerificationCell({ row }: { row: any }) {
+  const verified = row.getValue("verificationStatus");
+  return verified === "Yes" ? (
+    <Badge className="badge-green">Verified</Badge>
+  ) : (
+    <Badge className="badge-red">Not Verified</Badge>
+  );
+}
+
+function renderDateCell({ row, column }: { row: any; column: any }) {
+  const dateStr = row.getValue(column.id);
+  if (!dateStr) return null;
+  try {
+    const date = new Date(dateStr);
+    return date.toLocaleDateString();
+  } catch {
+    return dateStr;
+  }
+}
+
+function renderNumberCell({ row, column }: { row: any; column: any }) {
+  const value = row.getValue(column.id);
+  return <span>{value}</span>;
+}

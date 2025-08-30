@@ -4,6 +4,9 @@ import { useEffect, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import examMock from "../mock/examDetails.json";
+import TabLayout from "@/components/comman/tabLayout";
+import ExamOverview from "../components/slotDetails";
+import LeadList from "./examReport";
 
 interface ExamDetailsProps {
   exam: {
@@ -18,9 +21,24 @@ interface ExamDetailsProps {
   };
 }
 
+const tabsDetails: any = [
+  {
+    label: "Report",
+    value: "report",
+    component: LeadList,
+  },
+  ,
+  {
+    label: "Basic Details",
+    value: "basicDetails",
+    component: ExamOverview,
+  },
+];
+
 export default function ExamDetails() {
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [selectedSlot, setSelectedSlot] = useState<string | null>(null);
+  const [tabValue, setTabValue] = useState<string>("report");
   const [examDetails, setExamDetails] =
     useState<ExamDetailsProps["exam"]>(examMock);
 
@@ -144,7 +162,14 @@ export default function ExamDetails() {
           <span className="font-medium text-indigo-600">{selectedSlot}</span>
         </div>
         {/* CONTENT */}
-        <div className=""></div>
+        <div className="">
+          <TabLayout
+            tabs={tabsDetails}
+            mode="content"
+            value={tabValue}
+            onChange={setTabValue}
+          />
+        </div>
       </div>
     </div>
   );
