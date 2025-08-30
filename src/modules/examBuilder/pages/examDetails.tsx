@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import examMock from "../mock/examDetails.json";
 
@@ -25,103 +24,127 @@ export default function ExamDetails() {
   const [examDetails, setExamDetails] =
     useState<ExamDetailsProps["exam"]>(examMock);
 
-  const handleDateSelect = (date: string) => {
-    setSelectedDate(date);
-    setSelectedSlot(null); // reset slots when date changes
-  };
-
+  // Set default selections on component mount
   useEffect(() => {
     setExamDetails(examMock);
+
+    // Set first date as default
+    if (examMock.dates.length > 0) {
+      const firstDate = examMock.dates[0].date;
+      setSelectedDate(firstDate);
+
+      // Set first slot of the first date as default
+      if (examMock.dates[0].slots.length > 0) {
+        setSelectedSlot(examMock.dates[0].slots[0]);
+      }
+    }
   }, []);
 
+  const handleDateSelect = (date: string) => {
+    setSelectedDate(date);
+    // Reset slot selection when date changes and select first slot of new date
+    const dateObj = examDetails.dates.find((d) => d.date === date);
+    if (dateObj && dateObj.slots.length > 0) {
+      setSelectedSlot(dateObj.slots[0]);
+    } else {
+      setSelectedSlot(null);
+    }
+  };
+
+  const handleSlotSelect = (slot: string) => {
+    setSelectedSlot(slot);
+  };
+
   return (
-    <div className="p-6 space-y-6">
-      {/* HEADER */}
-      <Card className="shadow-sm">
-        <CardContent className="p-4">
-          <h1 className="text-2xl font-bold text-indigo-700">
+    <div className="min-h-screen p-1">
+      <div className="w-full mx-auto">
+        {/* HEADER */}
+        <div className=" space-y-4">
+          <h1 className="text-3xl font-bold text-indigo-800">
             {examDetails.name}
           </h1>
-          <div className="mt-2 grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-600">
-            <p>
-              <span className="font-medium">Registration Cutoff:</span>{" "}
-              {examDetails.registrationCutoff}
-            </p>
-            <p>
-              <span className="font-medium">Slot Booking Cutoff:</span>{" "}
-              {examDetails.slotCutoff}
-            </p>
-            <p>
-              <span className="font-medium">Teacher Registration Cutoff:</span>{" "}
-              {examDetails.teacherCutoff}
-            </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-700">
+            <div className="flex flex-col items-center p-3 bg-indigo-50 rounded-md">
+              <span className="font-semibold text-indigo-700">
+                Registration Cutoff
+              </span>
+              <span className="text-indigo-900">
+                {examDetails.registrationCutoff}
+              </span>
+            </div>
+            <div className="flex flex-col items-center p-3 bg-indigo-50 rounded-md">
+              <span className="font-semibold text-indigo-700">
+                Slot Booking Cutoff
+              </span>
+              <span className="text-indigo-900">{examDetails.slotCutoff}</span>
+            </div>
+            <div className="flex flex-col items-center p-3 bg-indigo-50 rounded-md">
+              <span className="font-semibold text-indigo-700">
+                Teacher Registration Cutoff
+              </span>
+              <span className="text-indigo-900">
+                {examDetails.teacherCutoff}
+              </span>
+            </div>
           </div>
-        </CardContent>
-      </Card>
-
-      {/* FILTERS */}
-      <div className="text-center space-y-4">
-        {/* Date Filter */}
-        <div className="flex flex-wrap justify-center gap-2">
-          {examDetails.dates.map((d) => (
-            <Badge
-              key={d.date}
-              variant={selectedDate === d.date ? "default" : "outline"}
-              className={`cursor-pointer ${
-                selectedDate === d.date
-                  ? "bg-indigo-600 text-white hover:bg-indigo-700"
-                  : "hover:bg-indigo-50"
-              }`}
-              onClick={() => handleDateSelect(d.date)}
-            >
-              {d.date}
-            </Badge>
-          ))}
         </div>
 
-        {/* Slot Filter */}
-        {selectedDate && (
-          <div className="flex flex-wrap justify-center gap-2">
-            {examDetails.dates
-              .find((d) => d.date === selectedDate)
-              ?.slots.map((slot) => (
+        {/* FILTERS */}
+        <div className="text-center space-y-4 p-4">
+          {/* Date Filter */}
+          <div className="space-y-4">
+            <div className="flex flex-wrap justify-center gap-3">
+              {examDetails.dates.map((d) => (
                 <Badge
-                  key={slot}
-                  variant={selectedSlot === slot ? "default" : "outline"}
-                  className={`cursor-pointer ${
-                    selectedSlot === slot
-                      ? "bg-indigo-600 text-white hover:bg-indigo-700"
-                      : "hover:bg-indigo-50"
+                  key={d.date}
+                  variant={selectedDate === d.date ? "default" : "outline"}
+                  className={`px-4 py-2 cursor-pointer transition-all ${
+                    selectedDate === d.date
+                      ? "bg-indigo-600 text-white hover:bg-indigo-700 shadow-md scale-105"
+                      : "bg-white text-gray-700 border-indigo-200 hover:bg-indigo-50 hover:text-indigo-700"
                   }`}
-                  onClick={() => setSelectedSlot(slot)}
+                  onClick={() => handleDateSelect(d.date)}
                 >
-                  {slot}
+                  {d.date}
                 </Badge>
               ))}
+            </div>
           </div>
-        )}
-      </div>
 
-      <Separator />
+          {/* Slot Filter */}
+          {selectedDate && (
+            <div className="space-y-4">
+              <div className="flex flex-wrap justify-center gap-3">
+                {examDetails.dates
+                  .find((d) => d.date === selectedDate)
+                  ?.slots.map((slot) => (
+                    <Badge
+                      key={slot}
+                      variant={selectedSlot === slot ? "default" : "outline"}
+                      className={`px-4 py-2 cursor-pointer transition-all ${
+                        selectedSlot === slot
+                          ? "bg-indigo-600 text-white hover:bg-indigo-700 shadow-md scale-105"
+                          : "bg-white text-gray-700 border-indigo-200 hover:bg-indigo-50 hover:text-indigo-700"
+                      }`}
+                      onClick={() => handleSlotSelect(slot)}
+                    >
+                      {slot}
+                    </Badge>
+                  ))}
+              </div>
+            </div>
+          )}
+        </div>
 
-      {/* CONTENT */}
-      <div className="p-4 border rounded-lg bg-white shadow-sm">
-        {selectedDate ? (
-          selectedSlot ? (
-            <p className="text-center text-gray-700">
-              Showing content for <b>{selectedDate}</b> at <b>{selectedSlot}</b>
-              .
-            </p>
-          ) : (
-            <p className="text-center text-gray-500">
-              Please select a slot for <b>{selectedDate}</b>.
-            </p>
-          )
-        ) : (
-          <p className="text-center text-gray-500">
-            Please select a date to view slots and details.
-          </p>
-        )}
+        <Separator className="" />
+        <div className="p-2 bg-gray-100 my-1">
+          Showing data for{" "}
+          <span className="font-medium text-indigo-600">{selectedDate}</span> at{" "}
+          {""}
+          <span className="font-medium text-indigo-600">{selectedSlot}</span>
+        </div>
+        {/* CONTENT */}
+        <div className=""></div>
       </div>
     </div>
   );
