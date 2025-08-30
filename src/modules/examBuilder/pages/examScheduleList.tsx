@@ -117,12 +117,20 @@ export default function ExamScheduleList() {
     <div>
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-xl font-bold">{examDetails?.examName}</h2>
-        <Button
-          variant="default"
-          onClick={() => setShowScheduleExamDialog(true)}
-        >
-          Schedule Exam
-        </Button>
+        <div>
+          <Button
+            variant="outline"
+            onClick={() => setShowScheduleExamDialog(true)}
+          >
+            Question Bank
+          </Button>
+          <Button
+            className="bg-indigo-600 text-white hover:bg-indigo-700"
+            onClick={() => setShowScheduleExamDialog(true)}
+          >
+            Schedule Exam
+          </Button>
+        </div>
 
         <ComponentDialog
           tabsDetails={scheduleExamTabDetails}
