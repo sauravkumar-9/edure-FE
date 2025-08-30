@@ -24,25 +24,29 @@ interface ExamDetailsProps {
 
 const tabsDetails: any = [
   {
-    label: "Report",
-    value: "report",
-    component: LeadList,
-  },
-  ,
-  {
-    label: "Basic Details",
-    value: "basicDetails",
+    label: "Overview",
+    value: "overview",
     component: ExamOverview,
     props: {
       examOverview: ExamExactDetails,
     },
+  },
+  {
+    label: "Candidates",
+    value: "candidates",
+    component: LeadList,
+  },
+  {
+    label: "Proctors",
+    value: "proctors",
+    component: LeadList,
   },
 ];
 
 export default function ExamDetails() {
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [selectedSlot, setSelectedSlot] = useState<string | null>(null);
-  const [tabValue, setTabValue] = useState<string>("report");
+  const [tabValue, setTabValue] = useState<string>("overview");
   const [examDetails, setExamDetails] =
     useState<ExamDetailsProps["exam"]>(examMock);
 
@@ -82,9 +86,7 @@ export default function ExamDetails() {
       <div className="w-full mx-auto">
         {/* HEADER */}
         <div className=" space-y-2">
-          <h1 className="text-2xl font-bold text-indigo-800">
-            {examDetails.name}
-          </h1>
+          <h1 className="text-2xl font-bold">{examDetails.name}</h1>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-700">
             <div className="flex flex-col items-center p-3 bg-indigo-50 rounded-md">
               <span className="font-semibold text-indigo-700">
@@ -122,8 +124,8 @@ export default function ExamDetails() {
                   variant={selectedDate === d.date ? "default" : "outline"}
                   className={`px-4 py-2 cursor-pointer transition-all ${
                     selectedDate === d.date
-                      ? "bg-indigo-600 text-white hover:bg-indigo-700 shadow-md scale-105"
-                      : "bg-white text-gray-700 border-indigo-200 hover:bg-indigo-50 hover:text-indigo-700"
+                      ? "bg-black text-white hover:bg-black-700 scale-105"
+                      : "bg-white text-gray-700 border-black-200 hover:bg-indigo-50 hover:text-indigo-700"
                   }`}
                   onClick={() => handleDateSelect(d.date)}
                 >
@@ -145,8 +147,8 @@ export default function ExamDetails() {
                       variant={selectedSlot === slot ? "default" : "outline"}
                       className={`px-4 py-2 cursor-pointer transition-all ${
                         selectedSlot === slot
-                          ? "bg-indigo-600 text-white hover:bg-indigo-700 shadow-md scale-105"
-                          : "bg-white text-gray-700 border-indigo-200 hover:bg-indigo-50 hover:text-indigo-700"
+                          ? "bg-black text-white hover:bg-black-700 scale-105"
+                          : "bg-white text-gray-700 border-black-200 hover:bg-indigo-50 hover:text-indigo-700"
                       }`}
                       onClick={() => handleSlotSelect(slot)}
                     >
@@ -166,7 +168,7 @@ export default function ExamDetails() {
           <span className="font-medium text-indigo-600">{selectedSlot}</span>
         </div>
         {/* CONTENT */}
-        <div className="">
+        <div className="mt-4">
           <TabLayout
             tabs={tabsDetails}
             mode="content"

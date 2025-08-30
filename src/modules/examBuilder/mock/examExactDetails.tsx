@@ -5,21 +5,21 @@ export default {
   examStatus: "Upcoming",
   stats: [
     {
-      title: "Total Students",
+      title: "Total Candidates",
       value: 120,
-      change: "Students registered for this exam",
+      change: "Candidates registered for this exam",
       icon: <Users className="text-indigo-600 h-5 w-5" />,
     },
     {
-      title: "Total Faculty",
+      title: "Total Proctors",
       value: 8,
-      change: "Faculty members assigned for invigilation",
+      change: "Proctors available for invigilation",
       icon: <UserCog className="text-green-600 h-5 w-5" />,
     },
     {
-      title: "Student-Faculty Ratio",
+      title: "Candidate-Proctor Ratio",
       value: "7:1",
-      change: "Recommended ratio is 4:1(For every 4 student 1 faculty member)",
+      change: "Recommended ratio is 4:1(For every 4 student 1 proctor)",
       icon: <Ratio className="text-orange-600 h-5 w-5" />,
     },
   ],
