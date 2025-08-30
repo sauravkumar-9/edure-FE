@@ -8,7 +8,7 @@ import ExamDetailsCard from "../components/examDetaulsCard";
 import ExamDetailsMockResponse from "../mock/examList.json";
 import { Button } from "@/components/ui/button";
 
-export default function ExamSchedulerPage() {
+export default function ExamScheduleList() {
   // Exam Config Data
   const [showScheduleExamDialog, setShowScheduleExamDialog] = useState(false);
   const [examName, setExamName] = useState("");

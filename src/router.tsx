@@ -16,8 +16,10 @@ import LeadsList from "./modules/leads/pages/leadsList";
 import PublicLayout from "./app/publicLayout";
 import { ExamStepperLayout } from "./modules/exam/pages/registration";
 import { MCQExamPage } from "./modules/exam/pages/MCQExamPage";
-import TeacherSlotAvailability from "./modules/faculty/pages/proctoringSlot";
 import QuestionBank from "./modules/questionBank/pages/questionBank";
+import ExamScheduleList from "./modules/examBuilder/pages/examScheduleList";
+import ExamDetails from "./modules/examBuilder/pages/examDetails";
+import ExamCategoryList from "./modules/examBuilder/pages/examCategoryList";
 
 export const router = createBrowserRouter(
   [
@@ -89,7 +91,18 @@ export const router = createBrowserRouter(
               element: <Navigate to="catchup" replace />,
             },
             { path: "catchup", element: <TeacherDashboard /> },
-            { path: "exam", element: <TeacherSlotAvailability /> },
+          ],
+        },
+        {
+          path: "exam",
+          children: [
+            {
+              index: true,
+              element: <Navigate to="category" replace />,
+            },
+            { path: "category/:categoryId", element: <ExamScheduleList /> },
+            { path: "category/:categoryId/:examId", element: <ExamDetails /> },
+            { path: "category", element: <ExamCategoryList /> },
           ],
         },
         {
