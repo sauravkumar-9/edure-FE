@@ -88,7 +88,7 @@ export default function ExamDetails() {
         <div className=" space-y-2">
           <h1 className="text-2xl font-bold">{examDetails.name}</h1>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-700">
-            <div className="flex flex-col items-center p-3 bg-indigo-50 rounded-md">
+            <div className="flex flex-col items-center p-3 bg-white rounded-md">
               <span className="font-semibold text-indigo-700">
                 Registration Cutoff
               </span>
@@ -96,13 +96,13 @@ export default function ExamDetails() {
                 {examDetails.registrationCutoff}
               </span>
             </div>
-            <div className="flex flex-col items-center p-3 bg-indigo-50 rounded-md">
+            <div className="flex flex-col items-center p-3 bg-white rounded-md">
               <span className="font-semibold text-indigo-700">
                 Slot Booking Cutoff
               </span>
               <span className="text-indigo-900">{examDetails.slotCutoff}</span>
             </div>
-            <div className="flex flex-col items-center p-3 bg-indigo-50 rounded-md">
+            <div className="flex flex-col items-center p-3 bg-white rounded-md">
               <span className="font-semibold text-indigo-700">
                 Teacher Registration Cutoff
               </span>

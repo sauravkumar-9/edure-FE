@@ -1,4 +1,4 @@
-import { Command, PencilRuler } from "lucide-react";
+import { BarChart2, Command, FileText, PencilRuler } from "lucide-react";
 import { type SidebarData } from "../types";
 import {
   LayoutDashboard,
@@ -56,17 +56,17 @@ export const sidebarData: SidebarData = {
         {
           title: "Reports",
           url: "/report/list",
-          icon: FileBarChart,
+          icon: BarChart2,
           className: "text-indigo-500",
         },
         {
-          title: "Exam",
+          title: "Exams",
           url: "/exam/category",
-          icon: BookOpenCheck,
+          icon: FileText,
           className: "text-indigo-500",
         },
         {
-          title: "Questions",
+          title: "Question Bank",
           url: "/questions/exams",
           icon: BookOpenCheck,
           className: "text-indigo-500",
