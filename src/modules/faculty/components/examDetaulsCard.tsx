@@ -102,6 +102,27 @@ export default function ExamDetailsCard({
 
       {/* Section: Exam Details */}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+        <div className="border rounded-md p-4 bg-gray-50">
+          <h4 className="font-medium text-gray-700 mb-2 flex items-center">
+            <AlertTriangle className="h-4 w-4 mr-2 text-gray-500" />
+            Slots
+          </h4>
+          <div>
+            {examData.dates.map((date, index) => (
+              <div key={index} className="mb-4">
+                <h5 className="font-semibold text-sm text-gray-700 mb-2">
+                  {date.day}, {date.date}
+                </h5>
+                <ul className="list-disc list-inside space-y-1 text-sm text-gray-800">
+                  {date.slots.map((slot, slotIndex) => (
+                    <li key={slotIndex}>{slot}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* Cutoff Dates */}
         <div className="border rounded-md p-4 bg-gray-50">
           <h4 className="font-medium text-gray-700 mb-2 flex items-center">
@@ -138,31 +159,6 @@ export default function ExamDetailsCard({
               </span>
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* Section: Exam Slots */}
-      <div>
-        <h4 className="font-medium text-gray-800 mb-4 flex items-center text-base">
-          <ClockIcon className="h-4 w-4 mr-2 text-gray-600" />
-          Exam Slots
-        </h4>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {examData.dates.map((date, index) => (
-            <div
-              key={index}
-              className="border border-gray-200 rounded-md p-4 bg-gray-50"
-            >
-              <h5 className="font-semibold text-sm text-gray-700 mb-2">
-                {date.day}, {date.date}
-              </h5>
-              <ul className="list-disc list-inside space-y-1 text-sm text-gray-800">
-                {date.slots.map((slot, slotIndex) => (
-                  <li key={slotIndex}>{slot}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
         </div>
       </div>
     </Card>
