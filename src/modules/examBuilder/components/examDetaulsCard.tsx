@@ -5,6 +5,7 @@ import { AlertTriangle, CalendarIcon, UsersIcon, Eye } from "lucide-react";
 import { useState } from "react";
 import TeacherAvailabilityForm from "./confirmAvailability";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 interface ExamDetailsCardProps {
   examData: {
@@ -32,6 +33,7 @@ export default function ExamDetailsCard({
   examData,
   getConfirmSlots,
 }: ExamDetailsCardProps) {
+  const navigate = useNavigate();
   const [showSlotConfirmationDialog, setShowSlotConfirmationDialog] =
     useState(false);
 
@@ -90,7 +92,7 @@ export default function ExamDetailsCard({
           <Button
             variant="outline"
             size="sm"
-            onClick={handleViewDetails}
+            onClick={() => navigate("1")}
             className="flex items-center"
           >
             <Eye className="w-4 h-4 mr-1" />

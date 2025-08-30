@@ -8,6 +8,7 @@ import ExamDetailsCard from "../components/examDetaulsCard";
 import ExamDetailsMockResponse from "../mock/examList.json";
 import { Button } from "@/components/ui/button";
 import { BookOpen, CalendarClock } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function ExamScheduleList() {
   // Exam Config Data

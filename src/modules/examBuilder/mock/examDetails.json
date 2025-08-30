@@ -1,0 +1,16 @@
+{
+  "name": "Final Semester Exam",
+  "registrationCutoff": "15 Sept 2025",
+  "slotCutoff": "20 Sept 2025",
+  "teacherCutoff": "18 Sept 2025",
+  "dates": [
+    {
+      "date": "22 Sept 2025",
+      "slots": ["9:00 AM - 12:00 PM", "2:00 PM - 5:00 PM"]
+    },
+    {
+      "date": "23 Sept 2025",
+      "slots": ["10:00 AM - 1:00 PM", "3:00 PM - 6:00 PM"]
+    }
+  ]
+}
