@@ -86,7 +86,7 @@ export const ExamListCard: React.FC<ExamCardProps> = ({
     <>
       {/* Exam Card */}
       <Card className="w-full bg-white hover:shadow-md transition-all duration-200 relative group">
-        <CardContent className="p-4">
+        <CardContent className="px-4 py-2">
           <div className="flex items-center justify-between gap-4">
             {/* Left Content */}
             <div className="flex items-start gap-4 flex-1 min-w-0">
