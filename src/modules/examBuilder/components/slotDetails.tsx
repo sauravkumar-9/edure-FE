@@ -26,8 +26,9 @@ import {
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
+import { StatCard } from "@/components/final/statCard";
 
-export default function ExamOverview() {
+export default function ExamOverview({ examOverview }: { examOverview: any }) {
   const [showGenerateDialog, setShowGenerateDialog] = useState(false);
   const [easyCount, setEasyCount] = useState(5);
   const [mediumCount, setMediumCount] = useState(10);
@@ -62,48 +63,38 @@ export default function ExamOverview() {
 
       {/* Overview Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-        <Card className="border-0 shadow-md hover:shadow-lg transition-shadow">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-gray-600">
-              Students Registered
-            </CardTitle>
-            <Users className="h-5 w-5 text-indigo-500" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-indigo-600">120</div>
-            <p className="text-xs text-gray-500 mt-1">+5 from yesterday</p>
-            <Progress value={80} className="h-2 mt-2 bg-gray-200" />
-          </CardContent>
-        </Card>
-
-        <Card className="border-0 shadow-md hover:shadow-lg transition-shadow">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-gray-600">
-              Faculty Available
-            </CardTitle>
-            <UserCheck className="h-5 w-5 text-green-500" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-green-600">15</div>
-            <p className="text-xs text-gray-500 mt-1">All faculty confirmed</p>
-            <Progress value={100} className="h-2 mt-2 bg-gray-200" />
-          </CardContent>
-        </Card>
-
-        <Card className="border-0 shadow-md hover:shadow-lg transition-shadow">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-gray-600">
-              Student-Faculty Ratio
-            </CardTitle>
-            <Ratio className="h-5 w-5 text-orange-500" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-orange-600">8:1</div>
-            <p className="text-xs text-gray-500 mt-1">Ideal ratio maintained</p>
-            <Progress value={75} className="h-2 mt-2 bg-gray-200" />
-          </CardContent>
-        </Card>
+        {examOverview.stats.map((stat: any, idx: number) => (
+          <StatCard
+            key={idx}
+            title={stat.title}
+            value={stat.value}
+            change={stat.change}
+            icon={stat.icon}
+          />
+        ))}
       </div>
+
+      {/* Status Section */}
+      <Card className="border-0 shadow-md">
+        <CardHeader>
+          <CardTitle className="text-lg">Current Status</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {examOverview.status.map((status: any, idx: number) => (
+              <div key={idx} className="flex justify-between items-center">
+                <span className="text-sm font-medium">{status.label}</span>
+                <Badge
+                  variant="outline"
+                  className="bg-green-50 text-green-700 border-green-200"
+                >
+                  {status.status}
+                </Badge>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Actions */}
       <Card className="border-0 shadow-md">
@@ -147,57 +138,6 @@ export default function ExamOverview() {
               <RefreshCw className="w-4 h-4" />
               Change Question Paper
             </Button>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Status Section */}
-      <Card className="border-0 shadow-md">
-        <CardHeader>
-          <CardTitle className="text-lg">Current Status</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <div className="flex justify-between items-center">
-                <span className="text-sm font-medium">Question Paper</span>
-                <Badge
-                  variant="outline"
-                  className="bg-green-50 text-green-700 border-green-200"
-                >
-                  Uploaded
-                </Badge>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-sm font-medium">Answer Key</span>
-                <Badge
-                  variant="outline"
-                  className="bg-yellow-50 text-yellow-700 border-yellow-200"
-                >
-                  Pending
-                </Badge>
-              </div>
-            </div>
-            <div className="space-y-2">
-              <div className="flex justify-between items-center">
-                <span className="text-sm font-medium">Seating Arrangement</span>
-                <Badge
-                  variant="outline"
-                  className="bg-blue-50 text-blue-700 border-blue-200"
-                >
-                  In Progress
-                </Badge>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-sm font-medium">Hall Tickets</span>
-                <Badge
-                  variant="outline"
-                  className="bg-gray-50 text-gray-700 border-gray-200"
-                >
-                  Not Generated
-                </Badge>
-              </div>
-            </div>
           </div>
         </CardContent>
       </Card>

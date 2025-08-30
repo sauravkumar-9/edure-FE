@@ -7,6 +7,7 @@ import examMock from "../mock/examDetails.json";
 import TabLayout from "@/components/comman/tabLayout";
 import ExamOverview from "../components/slotDetails";
 import LeadList from "./examReport";
+import ExamExactDetails from "../mock/examExactDetails";
 
 interface ExamDetailsProps {
   exam: {
@@ -32,6 +33,9 @@ const tabsDetails: any = [
     label: "Basic Details",
     value: "basicDetails",
     component: ExamOverview,
+    props: {
+      examOverview: ExamExactDetails,
+    },
   },
 ];
 
@@ -77,8 +81,8 @@ export default function ExamDetails() {
     <div className="min-h-screen p-1">
       <div className="w-full mx-auto">
         {/* HEADER */}
-        <div className=" space-y-4">
-          <h1 className="text-3xl font-bold text-indigo-800">
+        <div className=" space-y-2">
+          <h1 className="text-2xl font-bold text-indigo-800">
             {examDetails.name}
           </h1>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-700">
