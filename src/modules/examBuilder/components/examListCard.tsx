@@ -7,6 +7,9 @@ import {
   Edit,
   Eye,
   BookOpen,
+  Info,
+  PanelRightOpen,
+  NotebookText,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -130,7 +133,7 @@ export const ExamListCard: React.FC<ExamCardProps> = ({
                 className="bg-indigo-600 text-white hover:bg-indigo-700 gap-1 hidden sm:flex"
                 onClick={() => navigate(exam.id)}
               >
-                <Eye className="h-4 w-4" />
+                <NotebookText className="h-4 w-4" />
                 View Details
               </Button>
 
