@@ -121,15 +121,16 @@ export default function ExamScheduleList() {
         <h2 className="text-xl font-bold">{examDetails?.examName}</h2>
         <div className="flex gap-2">
           <Button
+            size="lg"
             variant="outline"
             onClick={() => setShowScheduleExamDialog(true)}
-            className="flex items-center gap-2"
           >
             <BookOpen className="h-4 w-4" />
             Question Bank
           </Button>
           <Button
-            className="bg-indigo-600 text-white hover:bg-indigo-700 flex items-center gap-2"
+            size="lg"
+            variant="outline"
             onClick={() => setShowScheduleExamDialog(true)}
           >
             <CalendarClock className="h-4 w-4" />

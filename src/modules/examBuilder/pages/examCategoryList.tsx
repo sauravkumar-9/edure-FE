@@ -34,10 +34,7 @@ export default function ExamCategoryList() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-semibold">Exams</h1>
-        <Button
-          className="bg-indigo-600 text-white hover:bg-indigo-700 flex items-center gap-2"
-          onClick={() => setOpen(true)}
-        >
+        <Button size="lg" variant="outline" onClick={() => setOpen(true)}>
           <Plus className="h-4 w-4" />
           Add Exam
         </Button>

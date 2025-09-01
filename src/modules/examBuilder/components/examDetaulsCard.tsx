@@ -1,7 +1,15 @@
 import ComponentDialog from "@/components/dialog/componentDialog";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
-import { AlertTriangle, CalendarIcon, UsersIcon, Eye } from "lucide-react";
+import {
+  AlertTriangle,
+  CalendarIcon,
+  UsersIcon,
+  Eye,
+  NotebookText,
+  Check,
+  CalendarCheck,
+} from "lucide-react";
 import { useState } from "react";
 import TeacherAvailabilityForm from "./confirmAvailability";
 import { Button } from "@/components/ui/button";
@@ -86,16 +94,16 @@ export default function ExamDetailsCard({
         </div>
 
         <div className="flex gap-2">
-          <Button size="sm" onClick={handleConfirmSlots}>
+          <Button variant="outline" onClick={handleConfirmSlots}>
+            <CalendarCheck className="w-4 h-4 mr-1" />
             Confirm Slots
           </Button>
           <Button
             variant="outline"
-            size="sm"
             onClick={() => navigate("1")}
-            className="flex items-center"
+            className="btn-primary"
           >
-            <Eye className="w-4 h-4 mr-1" />
+            <NotebookText className="w-4 h-4 mr-1" />
             View Details
           </Button>
         </div>

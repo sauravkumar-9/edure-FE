@@ -120,19 +120,13 @@ export const ExamListCard: React.FC<ExamCardProps> = ({
             {/* Right Actions */}
             <div className="flex items-center gap-2 shrink-0">
               <Button
-                size="sm"
                 variant="outline"
-                className="gap-1 hidden sm:flex"
                 onClick={() => navigate(`/questions/exams/${exam.id}`)}
               >
                 <BookOpen className="h-4 w-4" />
                 Question Bank
               </Button>
-              <Button
-                size="sm"
-                className="bg-indigo-600 text-white hover:bg-indigo-700 gap-1 hidden sm:flex"
-                onClick={() => navigate(exam.id)}
-              >
+              <Button className="btn-primary" onClick={() => navigate(exam.id)}>
                 <NotebookText className="h-4 w-4" />
                 View Details
               </Button>

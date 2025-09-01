@@ -11,6 +11,7 @@ import TabLayout from "@/components/comman/tabLayout";
 
 // Mock data
 import QuestionMockResponse from "../mock/getQuestions.json";
+import { Plus } from "lucide-react";
 
 export default function QuestionBank() {
   const [questions, setQuestions] = useState<Question[]>([]);
@@ -89,11 +90,14 @@ export default function QuestionBank() {
       <div className="flex items-center justify-between">
         <h2 className="text-xl font-semibold">Question Bank</h2>
         <Button
+          size="lg"
+          variant="outline"
           onClick={() => {
             setIsDialogOpen(true);
             setEditId(null);
           }}
         >
+          <Plus className="h-4 w-4" />
           Add Question
         </Button>
       </div>
