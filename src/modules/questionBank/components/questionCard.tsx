@@ -51,41 +51,6 @@ export function QuestionCardList({
             <div className="flex-1 text-sm">{option.optionLabel}</div>
           </div>
         ))}
-
-        <div className="flex flex-col gap-2 mt-4">
-          <div className="flex items-center gap-2">
-            <span className="text-sm font-medium text-muted-foreground">
-              Difficulty:
-            </span>
-            <Badge
-              variant="outline"
-              className={`capitalize ${
-                questions.difficulty === "Easy"
-                  ? "bg-green-50 text-green-700 border-green-200"
-                  : questions.difficulty === "Medium"
-                  ? "bg-yellow-50 text-yellow-700 border-yellow-200"
-                  : "bg-red-50 text-red-700 border-red-200"
-              }`}
-            >
-              {questions.difficulty}
-            </Badge>
-          </div>
-
-          {questions.tags.length > 0 && (
-            <div className="flex items-center gap-2">
-              <span className="text-sm font-medium text-muted-foreground">
-                Tags:
-              </span>
-              <div className="flex flex-wrap items-center gap-2">
-                {questions.tags.map((tag) => (
-                  <Badge key={tag} variant="secondary" className="text-xs">
-                    {tag}
-                  </Badge>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
       </CardContent>
 
       <CardFooter className="px-4 border-t">
@@ -93,7 +58,12 @@ export function QuestionCardList({
           <div className="text-xs text-muted-foreground space-y-1">
             <div className="flex items-center gap-1">
               <span className="font-medium">Code:</span>
-              <span className="font-mono">{questions.code}</span>
+              <Badge
+                variant="outline"
+                className="font-mono text-xs bg-blue-50 text-blue-700 border-blue-200 shrink-0"
+              >
+                {questions.code}
+              </Badge>
             </div>
             <div>
               <span className="font-medium">Created:</span>{" "}

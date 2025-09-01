@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { QuestionDialog } from "../components/questionDialog";
 import { Question, defaultNewQuestion, Difficulty } from "../questionBankTypes";
 import { QuestionCardList } from "../components/questionCard";
+import { QuestionCardSkeleton } from "../skeletonComponent/questionCardSkeleton"; // Import the skeleton
 import ComponentDialog from "@/components/dialog/componentDialog";
 import TabLayout from "@/components/comman/tabLayout";
 
@@ -21,9 +22,16 @@ export default function QuestionBank() {
     ...defaultNewQuestion,
   });
   const [editId, setEditId] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true); // Add loading state
 
   useEffect(() => {
-    setQuestions(QuestionMockResponse.questions);
+    // Simulate API loading
+    const timer = setTimeout(() => {
+      setQuestions(QuestionMockResponse.questions);
+      setIsLoading(false);
+    }, 1500);
+
+    return () => clearTimeout(timer);
   }, []);
 
   const confirmSlotsTabDetails = [
@@ -85,6 +93,11 @@ export default function QuestionBank() {
     { value: "hard", label: "Hard" },
   ];
 
+  // Filter questions by difficulty for the active tab
+  const filteredQuestions = questions.filter(
+    (q) => q.difficulty.toLowerCase() === activeTab
+  );
+
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
@@ -109,19 +122,31 @@ export default function QuestionBank() {
         tabs={tabs}
       />
 
-      {(["easy", "medium", "hard"] as Difficulty[]).map((diff) => (
-        <div className="space-y-4">
-          {questions
-            .filter((q) => q.difficulty === diff)
-            .map((q: any) => (
-              <QuestionCardList
-                questions={q}
-                onEdit={handleEdit}
-                onDelete={handleDelete}
-              />
-            ))}
-        </div>
-      ))}
+      <div className="space-y-4">
+        {isLoading ? (
+          // Show skeleton loading while data is loading
+          <>
+            <QuestionCardSkeleton />
+            <QuestionCardSkeleton />
+            <QuestionCardSkeleton />
+          </>
+        ) : filteredQuestions.length > 0 ? (
+          // Show actual questions when data is loaded
+          filteredQuestions.map((q) => (
+            <QuestionCardList
+              key={q.id}
+              questions={q}
+              onEdit={handleEdit}
+              onDelete={handleDelete}
+            />
+          ))
+        ) : (
+          // Show empty state when no questions found
+          <div className="text-center py-8 text-muted-foreground">
+            No {activeTab} questions found.
+          </div>
+        )}
+      </div>
 
       <ComponentDialog
         isDialogOpen={isDialogOpen}

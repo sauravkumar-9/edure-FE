@@ -11,6 +11,7 @@ import { BookOpen, CalendarClock } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getExamBatchList } from "../services/examBuilder";
 import PageInfo from "@/components/comman/pageInfo";
+import { useNavigate } from "react-router-dom";
 
 export default function ExamScheduleList() {
   // Exam Config Data
@@ -121,6 +122,8 @@ export default function ExamScheduleList() {
     console.log(data);
   };
 
+  const navigate = useNavigate();
+
   return (
     <div className="space-y-6">
       <div className="flex flex-col gap-4">
@@ -134,7 +137,7 @@ export default function ExamScheduleList() {
             <Button
               size="lg"
               variant="outline"
-              onClick={() => setShowScheduleExamDialog(true)}
+              onClick={() => navigate(`/questions/exams/1`)}
             >
               <BookOpen className="h-4 w-4" />
               Question Bank
