@@ -5,10 +5,12 @@ import { ExamSlotsTab } from "../components/examSlots";
 import ComponentDialog from "@/components/dialog/componentDialog";
 
 import ExamDetailsCard from "../components/examDetaulsCard";
-import ExamDetailsMockResponse from "../mock/examList.json";
+import { ExamDetailsCardSkeleton } from "../skeletonComponents/examDetailsCardSkeleton"; // Import the skeleton
 import { Button } from "@/components/ui/button";
 import { BookOpen, CalendarClock } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Skeleton } from "@/components/ui/skeleton";
+import { getExamBatchList } from "../services/examBuilder";
+import PageInfo from "@/components/comman/pageInfo";
 
 export default function ExamScheduleList() {
   // Exam Config Data
@@ -24,14 +26,18 @@ export default function ExamScheduleList() {
   const [isScheduleExamSubmissionAllowed, setIsScheduleExamSubmissionAllowed] =
     useState(true);
   const [examDetails, setExamDetails] = useState<any>({});
+  const [isLoading, setIsLoading] = useState(true); // Add loading state
 
-  const getExamDetails = () => {
-    setExamDetails(ExamDetailsMockResponse);
-    console.log(ExamDetailsMockResponse);
+  const getExamBatchDetails = async () => {
+    // Simulate API call
+    setIsLoading(true);
+    const examBatchList = await getExamBatchList();
+    setExamDetails(examBatchList);
+    setIsLoading(false);
   };
 
   useEffect(() => {
-    getExamDetails();
+    getExamBatchDetails();
   }, []);
 
   const addSlot = (dateStr: string) => {
@@ -116,50 +122,71 @@ export default function ExamScheduleList() {
   };
 
   return (
-    <div>
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl font-bold">{examDetails?.examName}</h2>
-        <div className="flex gap-2">
-          <Button
-            size="lg"
-            variant="outline"
-            onClick={() => setShowScheduleExamDialog(true)}
-          >
-            <BookOpen className="h-4 w-4" />
-            Question Bank
-          </Button>
-          <Button
-            size="lg"
-            variant="outline"
-            onClick={() => setShowScheduleExamDialog(true)}
-          >
-            <CalendarClock className="h-4 w-4" />
-            Schedule Exam
-          </Button>
-        </div>
+    <div className="space-y-6">
+      <div className="flex flex-col gap-4">
+        <div className="flex justify-between items-center">
+          {isLoading ? (
+            <Skeleton className="h-7 w-40" />
+          ) : (
+            <h2 className="text-xl font-bold">{examDetails?.examName}</h2>
+          )}
+          <div className="flex gap-2">
+            <Button
+              size="lg"
+              variant="outline"
+              onClick={() => setShowScheduleExamDialog(true)}
+            >
+              <BookOpen className="h-4 w-4" />
+              Question Bank
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              onClick={() => setShowScheduleExamDialog(true)}
+            >
+              <CalendarClock className="h-4 w-4" />
+              Schedule Exam
+            </Button>
+          </div>
 
-        <ComponentDialog
-          tabsDetails={scheduleExamTabDetails}
-          isDialogOpen={showScheduleExamDialog}
-          actionButtonLabel="Schedule Exam"
-          dialogTitle={`Schedule ${examDetails?.examName} Exam`}
-          isDraft={true}
-          isSubmissionAllowed={isScheduleExamSubmissionAllowed}
-          setIsDialogOpen={setShowScheduleExamDialog}
-          handleSaveDraft={saveExamAsDraft}
-          handleActionConfimration={scheduleExam}
-          handleDiscard={() => setShowScheduleExamDialog(false)}
+          <ComponentDialog
+            tabsDetails={scheduleExamTabDetails}
+            isDialogOpen={showScheduleExamDialog}
+            actionButtonLabel="Schedule Exam"
+            dialogTitle={`Schedule ${examDetails?.examName} Exam`}
+            isDraft={true}
+            isSubmissionAllowed={isScheduleExamSubmissionAllowed}
+            setIsDialogOpen={setShowScheduleExamDialog}
+            handleSaveDraft={saveExamAsDraft}
+            handleActionConfimration={scheduleExam}
+            handleDiscard={() => setShowScheduleExamDialog(false)}
+          />
+        </div>
+        <PageInfo
+          title="Manage Your Exams"
+          description="Create and organize exams for your institution. Each exam can have multiple date slots, question banks, and registration settings. Use the status badges to track progress from draft to published and completed exams."
+          variant="blue"
         />
       </div>
 
       <div className="space-y-4">
-        {examDetails.exams?.map((exam: any) => (
-          <ExamDetailsCard
-            key={exam.examId}
-            examData={exam}
-            getConfirmSlots={handleConfirmSlots}
-          />
-        ))}
+        {isLoading ? (
+          // Show skeleton loading while data is loading
+          <>
+            {Array.from({ length: 3 }).map((_, index) => (
+              <ExamDetailsCardSkeleton key={index} />
+            ))}
+          </>
+        ) : (
+          // Show actual exam cards when data is loaded
+          examDetails.exams?.map((exam: any) => (
+            <ExamDetailsCard
+              key={exam.examId}
+              examData={exam}
+              getConfirmSlots={handleConfirmSlots}
+            />
+          ))
+        )}
       </div>
     </div>
   );

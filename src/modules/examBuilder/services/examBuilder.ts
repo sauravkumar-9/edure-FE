@@ -2,6 +2,7 @@ import { LeadData, LeadStatusUpdate } from "@/modules/leads/leadTypes";
 
 import { leadListingResponse, leadDashboardResponse } from "../mock/apiMock";
 import examCatgoryListMock from "../mock/examCatgory.json";
+import examBatchListMock from "../mock/examList.json";
 
 export const addLeadService = async (reqData: LeadData) => {
   try {
@@ -159,6 +160,24 @@ export const getExamCategoryList = async () => {
     console.error("Get exam category list error:", error);
     throw new Error(
       error?.response?.data?.message || "Failed to fetch exam category list"
+    );
+  }
+};
+
+export const getExamBatchList = async () => {
+  try {
+    console.log("getExamBatchList API call");
+
+    // API MOCK
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    return examBatchListMock;
+
+    // const response = await axios.get(`/leads/dashboard`);
+    // return response.data;
+  } catch (error: any) {
+    console.error("Get exam batch list error:", error);
+    throw new Error(
+      error?.response?.data?.message || "Failed to fetch exam batch list"
     );
   }
 };
