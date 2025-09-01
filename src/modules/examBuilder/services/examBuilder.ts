@@ -1,6 +1,7 @@
 import { LeadData, LeadStatusUpdate } from "@/modules/leads/leadTypes";
 
 import { leadListingResponse, leadDashboardResponse } from "../mock/apiMock";
+import examCatgoryListMock from "../mock/examCatgory.json";
 
 export const addLeadService = async (reqData: LeadData) => {
   try {
@@ -139,6 +140,25 @@ export const downloadLeadsReport = async (reqData: any) => {
     console.error("Download leads report error:", error);
     throw new Error(
       error?.response?.data?.message || "Failed to download leads report"
+    );
+  }
+};
+
+// Exam Builder Services
+export const getExamCategoryList = async () => {
+  try {
+    console.log("getExamCategoryList API call");
+
+    // API MOCK
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    return examCatgoryListMock.examCategory;
+
+    // const response = await axios.get(`/leads/dashboard`);
+    // return response.data;
+  } catch (error: any) {
+    console.error("Get exam category list error:", error);
+    throw new Error(
+      error?.response?.data?.message || "Failed to fetch exam category list"
     );
   }
 };
