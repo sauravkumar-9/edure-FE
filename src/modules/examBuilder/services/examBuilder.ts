@@ -1,6 +1,7 @@
 import { LeadData, LeadStatusUpdate } from "@/modules/leads/leadTypes";
 
 import { leadListingResponse, leadDashboardResponse } from "../mock/apiMock";
+import { candidateListingResponse } from "../mock/candidatesList";
 import examCatgoryListMock from "../mock/examCatgory.json";
 import examBatchListMock from "../mock/examList.json";
 
@@ -35,19 +36,21 @@ export const bulkInsertLeads = async (reqData: LeadData[]) => {
   }
 };
 
-export const getAllLeads = async (reqData: any) => {
+export const getCandidates = async (reqData: any) => {
   try {
-    console.log("getAllLeads API call", reqData);
+    console.log("getCandidates API call", reqData);
 
     // API MOCK
     await new Promise((resolve) => setTimeout(resolve, 1000));
-    return leadListingResponse;
+    return candidateListingResponse;
 
     // const response = await axios.get(`/leads?${queryParams}`);
     // return response.data;
   } catch (error: any) {
-    console.error("Get all leads error:", error);
-    throw new Error(error?.response?.data?.message || "Failed to fetch leads");
+    console.error("Get all candidates error:", error);
+    throw new Error(
+      error?.response?.data?.message || "Failed to fetch candidates"
+    );
   }
 };
 

@@ -5,9 +5,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 import { generateColumnsFromResponse } from "../helper/tableBuilder";
 import { LoadType } from "../examBuilderTypes";
-import showToast from "@/components/comman/toast";
-import TabLayout from "@/components/comman/tabLayout";
-import { downloadLeadsReport, getAllLeads } from "../services/examBuilder";
+import { downloadLeadsReport, getCandidates } from "../services/examBuilder";
 
 export default function LeadList() {
   const [tabValue, setTabValue] = useState("all");
@@ -139,7 +137,7 @@ export default function LeadList() {
       const payload: any = {
         queryParams: queryString,
       };
-      const response: any = await getAllLeads(payload);
+      const response: any = await getCandidates(payload);
       if (loadType === "page") {
         leadReportColumnsRef.current = generateColumnsFromResponse(response);
       }
@@ -150,20 +148,6 @@ export default function LeadList() {
       updateLoadingState({ loadType, loadingState: false });
     }
   };
-
-  const tabs = [
-    {
-      value: "all",
-      label: "All Leads",
-      count: response?.stats?.verified + response?.stats?.unverified,
-    },
-    { value: "verified", label: "Verified", count: response?.stats?.verified },
-    {
-      value: "unverified",
-      label: "Unverified",
-      count: response?.stats?.unverified,
-    },
-  ];
 
   return (
     <div className="space-y-4">
