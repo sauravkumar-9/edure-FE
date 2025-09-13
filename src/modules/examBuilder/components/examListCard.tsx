@@ -126,7 +126,10 @@ export const ExamListCard: React.FC<ExamCardProps> = ({
                 <BookOpen className="h-4 w-4" />
                 Question Bank
               </Button>
-              <Button className="btn-primary" onClick={() => navigate(exam.id)}>
+              <Button
+                className="btn-primary"
+                onClick={() => navigate(JSON.stringify(exam.id))}
+              >
                 <NotebookText className="h-4 w-4" />
                 View Details
               </Button>

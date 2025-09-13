@@ -122,7 +122,7 @@ export default function ExamDetailsCard({
       </div>
 
       {/* Section: Exam Details */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5">
         {/* Slots */}
         <div className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition-all hover:shadow-md">
           <h4 className="font-semibold text-gray-800 mb-3 flex items-center gap-2">
@@ -141,10 +141,12 @@ export default function ExamDetailsCard({
                   {date.day}, {date.date}
                 </h5>
                 <ul className="space-y-1.5 text-sm text-gray-700">
-                  {date.slots.map((slot, slotIndex) => (
-                    <li key={slotIndex} className="flex items-center gap-2">
+                  {date.slots.map((slot: any) => (
+                    <li key={slot.id} className="flex items-center gap-2">
                       <div className="w-1.5 h-1.5 rounded-full bg-blue-500"></div>
-                      <span>{slot}</span>
+                      <span>
+                        {slot.label} ({slot.time})
+                      </span>
                     </li>
                   ))}
                 </ul>
@@ -162,14 +164,14 @@ export default function ExamDetailsCard({
             Important Dates
           </h4>
           <ul className="space-y-3">
-            {examData.cutoffs.map((cutoff, index) => (
+            {examData.cutoffs.map((cutoff: any, index) => (
               <li
                 key={index}
                 className="flex justify-between items-center pb-2 border-b border-gray-100 last:border-0 last:pb-0"
               >
                 <span className="text-sm text-gray-600">{cutoff.label}:</span>
                 <span className="text-sm font-medium text-gray-900">
-                  {cutoff.date}
+                  {cutoff.day}, {cutoff.date}
                 </span>
               </li>
             ))}
@@ -177,7 +179,7 @@ export default function ExamDetailsCard({
         </div>
 
         {/* Status */}
-        <div className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition-all hover:shadow-md">
+        {/* <div className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition-all hover:shadow-md">
           <h4 className="font-semibold text-gray-800 mb-3 flex items-center gap-2">
             <div className="p-1.5 bg-emerald-100 rounded-lg">
               <UsersIcon className="h-4 w-4 text-emerald-600" />
@@ -200,7 +202,7 @@ export default function ExamDetailsCard({
               </span>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </Card>
   );

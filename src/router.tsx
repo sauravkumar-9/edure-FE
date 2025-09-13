@@ -17,9 +17,9 @@ import PublicLayout from "./app/publicLayout";
 import { ExamStepperLayout } from "./modules/exam/pages/registration";
 import { MCQExamPage } from "./modules/exam/pages/MCQExamPage";
 import QuestionBank from "./modules/questionBank/pages/questionBank";
-import ExamScheduleList from "./modules/examBuilder/pages/examScheduleList";
+import ExamScheduleList from "./modules/examBuilder/pages/exams";
 import ExamDetails from "./modules/examBuilder/pages/examDetails";
-import ExamCategoryList from "./modules/examBuilder/pages/examCategoryList";
+import ExamCategoryList from "./modules/examBuilder/pages/examCategories";
 
 export const router = createBrowserRouter(
   [

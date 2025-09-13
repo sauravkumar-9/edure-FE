@@ -1,0 +1,168 @@
+{
+  "totalExams": 1,
+  "examId": 1,
+  "examCode": "NUCAT-2025",
+  "examName": "NUCAT Exam",
+  "exams": [
+    {
+      "examId": 1,
+      "examCode": "NUCAT-2025",
+      "title": "Mock Exam",
+      "isDraft": false,
+      "dates": [
+        {
+          "id": 1,
+          "day": "Monday",
+          "date": "10-08-2025",
+          "slots": [
+            {
+              "id": 1,
+              "label": "Slot 1",
+              "time": "9:00 AM - 11:00 AM"
+            },
+            {
+              "id": 2,
+              "label": "Slot 2",
+              "time": "1:00 PM - 3:00 PM"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "day": "Wednesday",
+          "date": "11-08-2025",
+          "slots": [
+            {
+              "id": 1,
+              "label": "Slot 1",
+              "time": "9:00 AM - 11:00 AM"
+            },
+            {
+              "id": 2,
+              "label": "Slot 2",
+              "time": "1:00 PM - 3:00 PM"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "day": "Thursday",
+          "date": "12-08-2025",
+          "slots": [
+            {
+              "id": 1,
+              "label": "Slot 1",
+              "time": "9:00 AM - 11:00 AM"
+            },
+            {
+              "id": 2,
+              "label": "Slot 2",
+              "time": "1:00 PM - 3:00 PM"
+            }
+          ]
+        }
+      ],
+      "cutoffs": [
+        {
+          "label": "Student Registration",
+          "day": "Monday",
+          "date": "10-01-2025"
+        },
+        {
+          "label": "Student Slot Confirmation",
+          "day": "Wednesday",
+          "date": "11-01-2025"
+        },
+        {
+          "label": "Faculty availability Confirmation",
+          "day": "Thursday",
+          "date": "12-01-2025"
+        }
+      ],
+      "status": {
+        "studentsRegistered": "42",
+        "teachersConfirmed": "8"
+      }
+    },
+    {
+      "examId": 1,
+      "examCode": "NUCAT-2025",
+      "title": "Mock Exam",
+      "isDraft": false,
+      "dates": [
+        {
+          "id": 1,
+          "day": "Monday",
+          "date": "10-08-2025",
+          "slots": [
+            {
+              "id": 1,
+              "label": "Slot 1",
+              "time": "9:00 AM - 11:00 AM"
+            },
+            {
+              "id": 2,
+              "label": "Slot 2",
+              "time": "1:00 PM - 3:00 PM"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "day": "Wednesday",
+          "date": "11-08-2025",
+          "slots": [
+            {
+              "id": 1,
+              "label": "Slot 1",
+              "time": "9:00 AM - 11:00 AM"
+            },
+            {
+              "id": 2,
+              "label": "Slot 2",
+              "time": "1:00 PM - 3:00 PM"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "day": "Thursday",
+          "date": "12-08-2025",
+          "slots": [
+            {
+              "id": 1,
+              "label": "Slot 1",
+              "time": "9:00 AM - 11:00 AM"
+            },
+            {
+              "id": 2,
+              "label": "Slot 2",
+              "time": "1:00 PM - 3:00 PM"
+            }
+          ]
+        }
+      ],
+      "cutoffs": [
+        {
+          "label": "Student Registration",
+          "day": "Monday",
+          "date": "10-01-2025"
+        },
+        {
+          "label": "Student Slot Confirmation",
+          "day": "Wednesday",
+          "date": "11-01-2025"
+        },
+        {
+          "label": "Faculty availability Confirmation",
+          "day": "Thursday",
+          "date": "12-01-2025"
+        }
+      ],
+      "status": {
+        "studentsRegistered": "42",
+        "teachersConfirmed": "8"
+      }
+    }
+  ]
+}

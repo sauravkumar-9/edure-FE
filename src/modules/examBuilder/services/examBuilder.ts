@@ -2,8 +2,8 @@ import { LeadData, LeadStatusUpdate } from "@/modules/leads/leadTypes";
 
 import { leadListingResponse, leadDashboardResponse } from "../mock/apiMock";
 import { candidateListingResponse } from "../mock/candidatesList";
-import examCatgoryListMock from "../mock/examCatgory.json";
-import examBatchListMock from "../mock/examList.json";
+import examCategoryListMock from "../mock/examCategories.json";
+import examBatchListMock from "../mock/exams.json";
 
 export const addLeadService = async (reqData: LeadData) => {
   try {
@@ -155,7 +155,7 @@ export const getExamCategoryList = async () => {
 
     // API MOCK
     await new Promise((resolve) => setTimeout(resolve, 1000));
-    return examCatgoryListMock.examCategory;
+    return examCategoryListMock.examCategory;
 
     // const response = await axios.get(`/leads/dashboard`);
     // return response.data;
