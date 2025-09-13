@@ -6,15 +6,48 @@
   "dates": [
     {
       "date": "22 Sept 2025",
-      "slots": ["9:00 AM - 12:00 PM", "2:00 PM - 5:00 PM"]
+      "slots": [
+        {
+          "id": 1,
+          "label": "Slot 1",
+          "time": "9:00 AM - 12:00 PM"
+        },
+        {
+          "id": 2,
+          "label": "Slot 2",
+          "time": "2:00 PM - 5:00 PM"
+        }
+      ]
     },
     {
       "date": "23 Sept 2025",
-      "slots": ["10:00 AM - 1:00 PM", "3:00 PM - 6:00 PM"]
+      "slots": [
+        {
+          "id": 1,
+          "label": "Slot 1",
+          "time": "10:00 AM - 1:00 PM"
+        },
+        {
+          "id": 2,
+          "label": "Slot 2",
+          "time": "3:00 PM - 6:00 PM"
+        }
+      ]
     },
     {
-      "date": "23 Sept 2025",
-      "slots": ["10:00 AM - 1:00 PM", "3:00 PM - 6:00 PM"]
+      "date": "24 Sept 2025",
+      "slots": [
+        {
+          "id": 1,
+          "label": "Slot 1",
+          "time": "10:00 AM - 1:00 PM"
+        },
+        {
+          "id": 2,
+          "label": "Slot 2",
+          "time": "3:00 PM - 6:00 PM"
+        }
+      ]
     }
   ]
 }

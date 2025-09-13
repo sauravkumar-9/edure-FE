@@ -17,7 +17,11 @@ interface ExamDetailsProps {
     teacherCutoff: string;
     dates: {
       date: string;
-      slots: string[];
+      slots: {
+        id: number;
+        label: string;
+        time: string;
+      }[];
     }[];
   };
 }
@@ -45,7 +49,7 @@ const tabsDetails: any = [
 
 export default function ExamDetails() {
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
-  const [selectedSlot, setSelectedSlot] = useState<string | null>(null);
+  const [selectedSlot, setSelectedSlot] = useState<any>(null);
   const [tabValue, setTabValue] = useState<string>("overview");
   const [examDetails, setExamDetails] =
     useState<ExamDetailsProps["exam"]>(examMock);
@@ -70,6 +74,7 @@ export default function ExamDetails() {
     setSelectedDate(date);
     // Reset slot selection when date changes and select first slot of new date
     const dateObj = examDetails.dates.find((d) => d.date === date);
+    console.log(dateObj);
     if (dateObj && dateObj.slots.length > 0) {
       setSelectedSlot(dateObj.slots[0]);
     } else {
@@ -77,7 +82,7 @@ export default function ExamDetails() {
     }
   };
 
-  const handleSlotSelect = (slot: string) => {
+  const handleSlotSelect = (slot: any) => {
     setSelectedSlot(slot);
   };
 
@@ -141,9 +146,9 @@ export default function ExamDetails() {
               <div className="flex flex-wrap justify-center gap-3">
                 {examDetails.dates
                   .find((d) => d.date === selectedDate)
-                  ?.slots.map((slot) => (
+                  ?.slots.map((slot: any) => (
                     <Badge
-                      key={slot}
+                      key={slot.id}
                       variant={selectedSlot === slot ? "default" : "outline"}
                       className={`px-4 py-2 cursor-pointer transition-all ${
                         selectedSlot === slot
@@ -152,7 +157,7 @@ export default function ExamDetails() {
                       }`}
                       onClick={() => handleSlotSelect(slot)}
                     >
-                      {slot}
+                      {slot.label} ({slot.time})
                     </Badge>
                   ))}
               </div>
@@ -163,9 +168,12 @@ export default function ExamDetails() {
         <Separator className="" />
         <div className="p-2 bg-gray-100 my-1">
           Showing data for{" "}
-          <span className="font-medium text-indigo-600">{selectedDate}</span> at{" "}
+          <span className="font-medium text-indigo-600">{selectedDate}</span>
+          {" - "}
           {""}
-          <span className="font-medium text-indigo-600">{selectedSlot}</span>
+          <span className="font-medium text-indigo-600">
+            {selectedSlot?.label} ({selectedSlot?.time})
+          </span>
         </div>
         {/* CONTENT */}
         <div className="mt-4">

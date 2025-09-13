@@ -13,7 +13,7 @@
         {
           "id": 1,
           "day": "Monday",
-          "date": "10-08-2025",
+          "date": "23 Sept 2025",
           "slots": [
             {
               "id": 1,
@@ -30,7 +30,7 @@
         {
           "id": 2,
           "day": "Wednesday",
-          "date": "11-08-2025",
+          "date": "24 Sept 2025",
           "slots": [
             {
               "id": 1,
@@ -47,7 +47,7 @@
         {
           "id": 3,
           "day": "Thursday",
-          "date": "12-08-2025",
+          "date": "25 Sept 2025",
           "slots": [
             {
               "id": 1,
@@ -66,17 +66,17 @@
         {
           "label": "Student Registration",
           "day": "Monday",
-          "date": "10-01-2025"
+          "date": "23 Sept 2025"
         },
         {
           "label": "Student Slot Confirmation",
           "day": "Wednesday",
-          "date": "11-01-2025"
+          "date": "24 Sept 2025"
         },
         {
           "label": "Faculty availability Confirmation",
           "day": "Thursday",
-          "date": "12-01-2025"
+          "date": "25 Sept 2025"
         }
       ],
       "status": {
@@ -93,7 +93,7 @@
         {
           "id": 1,
           "day": "Monday",
-          "date": "10-08-2025",
+          "date": "23 Sept 2025",
           "slots": [
             {
               "id": 1,
@@ -110,7 +110,7 @@
         {
           "id": 2,
           "day": "Wednesday",
-          "date": "11-08-2025",
+          "date": "24 Sept 2025",
           "slots": [
             {
               "id": 1,
@@ -127,7 +127,7 @@
         {
           "id": 3,
           "day": "Thursday",
-          "date": "12-08-2025",
+          "date": "25 Sept 2025",
           "slots": [
             {
               "id": 1,
@@ -146,17 +146,17 @@
         {
           "label": "Student Registration",
           "day": "Monday",
-          "date": "10-01-2025"
+          "date": "23 Sept 2025"
         },
         {
           "label": "Student Slot Confirmation",
           "day": "Wednesday",
-          "date": "11-01-2025"
+          "date": "24 Sept 2025"
         },
         {
           "label": "Faculty availability Confirmation",
           "day": "Thursday",
-          "date": "12-01-2025"
+          "date": "25 Sept 2025"
         }
       ],
       "status": {
