@@ -5,6 +5,7 @@ import { format } from "date-fns";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
+import PageInfo from "@/components/comman/pageInfo";
 
 type ExamSlot = {
   date: string; // ISO date string
@@ -34,6 +35,11 @@ export default function TeacherAvailabilityForm({ examSchedule }: Props) {
 
   return (
     <div className="space-y-6">
+      <PageInfo
+        variant="red"
+        title=""
+        description="Select the exam slots you are available to conduct the exam. Please confirm your availability carefully — once confirmed, it cannot be changed. For any updates, you will need to contact the administrator."
+      />
       {examSchedule.map(({ date, slots }) => (
         <div
           key={date}

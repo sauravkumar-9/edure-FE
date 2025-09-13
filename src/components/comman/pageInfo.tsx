@@ -5,7 +5,7 @@ interface PageInfoProps {
   title: string;
   description: string;
   icon?: ReactNode;
-  variant?: "blue" | "gray" | "green" | "yellow" | "purple";
+  variant?: "blue" | "gray" | "green" | "yellow" | "purple" | "red";
   className?: string;
 }
 
@@ -23,6 +23,12 @@ export default function PageInfo({
       iconContainer: "bg-blue-100 text-blue-600",
       title: "text-blue-800",
       description: "text-blue-700",
+    },
+    red: {
+      container: "bg-red-50 border-red-200",
+      iconContainer: "bg-red-100 text-red-600",
+      title: "text-red-800",
+      description: "text-red-700",
     },
     gray: {
       container: "bg-gray-50 border-gray-200",
