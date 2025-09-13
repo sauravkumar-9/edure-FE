@@ -45,12 +45,12 @@ export default function TeacherAvailabilityForm({ examSchedule }: Props) {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-            {slots.map((slot) => {
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-3">
+            {slots.map((slot: any) => {
               const selected = availability[date]?.includes(slot);
               return (
                 <label
-                  key={slot}
+                  key={slot.id}
                   className={cn(
                     "flex items-center gap-2 px-4 py-2 border rounded-md text-sm cursor-pointer",
                     selected
@@ -62,7 +62,10 @@ export default function TeacherAvailabilityForm({ examSchedule }: Props) {
                     checked={selected}
                     onCheckedChange={() => toggleSlot(date, slot)}
                   />
-                  {slot}
+                  <div>
+                    <p className="font-medium">{slot.label}</p>
+                    <p className="text-sm text-gray-500">{slot.time}</p>
+                  </div>
                 </label>
               );
             })}
