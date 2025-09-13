@@ -1,7 +1,7 @@
 import { LeadData, LeadStatusUpdate } from "@/modules/leads/leadTypes";
 
 import { leadListingResponse, leadDashboardResponse } from "../mock/apiMock";
-import { candidateListingResponse } from "../mock/candidatesList";
+import { candidateListingResponse } from "../mock/candidatesforSlot";
 import examCategoryListMock from "../mock/examCategories.json";
 import examBatchListMock from "../mock/exams.json";
 
