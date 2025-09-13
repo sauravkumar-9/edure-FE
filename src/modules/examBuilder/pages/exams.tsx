@@ -131,7 +131,7 @@ export default function ExamScheduleList() {
           {isLoading ? (
             <Skeleton className="h-7 w-40" />
           ) : (
-            <h2 className="text-xl font-bold">{examDetails?.examName}</h2>
+            <h2 className="text-xl font-bold">{examDetails?.name}</h2>
           )}
           <div className="flex gap-2">
             <Button

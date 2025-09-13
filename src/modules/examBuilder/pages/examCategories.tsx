@@ -22,7 +22,7 @@ export default function ExamCategoryList() {
   const getExamCategory = async () => {
     setIsExamCategoriesLoading(true);
     const examCategory: any = await getExamCategoryList();
-    setExams(examCategory);
+    setExams(examCategory.examCategories);
     setIsExamCategoriesLoading(false);
   };
 

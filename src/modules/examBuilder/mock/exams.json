@@ -1,12 +1,12 @@
 {
   "totalExams": 1,
-  "examId": 1,
-  "examCode": "NUCAT-2025",
-  "examName": "NUCAT Exam",
+  "id": 1,
+  "code": "NUCAT-2025",
+  "name": "NUCAT Exam",
   "exams": [
     {
-      "examId": 1,
-      "examCode": "NUCAT-2025",
+      "id": 1,
+      "code": "NUCAT-2025",
       "title": "Mock Exam",
       "isDraft": false,
       "dates": [
@@ -85,8 +85,8 @@
       }
     },
     {
-      "examId": 1,
-      "examCode": "NUCAT-2025",
+      "id": 1,
+      "code": "NUCAT-2025",
       "title": "Mock Exam",
       "isDraft": false,
       "dates": [

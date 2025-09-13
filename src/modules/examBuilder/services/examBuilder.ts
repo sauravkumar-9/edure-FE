@@ -155,7 +155,7 @@ export const getExamCategoryList = async () => {
 
     // API MOCK
     await new Promise((resolve) => setTimeout(resolve, 1000));
-    return examCategoryListMock.examCategory;
+    return examCategoryListMock;
 
     // const response = await axios.get(`/leads/dashboard`);
     // return response.data;

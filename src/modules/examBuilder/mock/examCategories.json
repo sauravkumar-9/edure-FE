@@ -1,18 +1,21 @@
 {
   "count": 3,
-  "examCategory": [
+  "examCategories": [
     {
       "id": 1,
+      "code": "ENG",
       "name": "NUCAT Engineering",
       "description": "Entrance exam for students aspiring to pursue Engineering programs. Focuses on Physics, Chemistry, and Mathematics."
     },
     {
       "id": 2,
+      "code": "SCI",
       "name": "NUCAT Science",
       "description": "Entrance exam designed for students aiming for Science and allied degree programs. Covers core concepts in Physics, Chemistry, and Biology."
     },
     {
       "id": 3,
+      "code": "HUM",
       "name": "NUCAT Humanities",
       "description": "Entrance exam for students seeking admission into Humanities and Social Science programs. Assesses aptitude, critical thinking, and subject fundamentals."
     }
